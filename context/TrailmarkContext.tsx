@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import {
   LearnerProfile,
   RoleMatch,
@@ -24,6 +24,16 @@ import {
   initialLeaderboardEntries,
   sampleCertificate,
 } from "@/services/mockData";
+import {
+  profileApi,
+  rolesApi,
+  roadmapApi,
+  assessmentApi,
+  communityApi,
+  gamificationApi,
+  certificatesApi,
+  aiGuideApi,
+} from "@/services/apiClient";
 
 interface TrailmarkContextType {
   profile: LearnerProfile;
@@ -83,14 +93,14 @@ const TrailmarkContext = createContext<TrailmarkContextType | undefined>(undefin
 
 export function TrailmarkProvider({ children }: { children: React.ReactNode }) {
   const [profile, setProfile] = useState<LearnerProfile>(initialLearnerProfile);
-  const [roles] = useState<RoleMatch[]>(initialRoleMatches);
+  const [roles, setRoles] = useState<RoleMatch[]>(initialRoleMatches);
   const [selectedRole, setSelectedRole] = useState<RoleMatch | null>(initialRoleMatches[0]);
   const [learningMode, setLearningModeState] = useState<LearningPersona>("digger");
   const [roadmap, setRoadmap] = useState<RoadmapMilestone[]>(initialRoadmapMilestones);
   const [isRoadmapApproved, setIsRoadmapApproved] = useState<boolean>(true);
 
   // Assessment
-  const [assessmentQuestions] = useState<AssessmentQuestion[]>(adaptiveAssessmentQuestions);
+  const [assessmentQuestions, setAssessmentQuestions] = useState<AssessmentQuestion[]>(adaptiveAssessmentQuestions);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string>>({
     "q-01": "opt-3", // default answered to show realistic feedback screen
@@ -107,7 +117,7 @@ export function TrailmarkProvider({ children }: { children: React.ReactNode }) {
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>(initialLeaderboardEntries);
 
   // Certificate
-  const [certificate] = useState<CertificateData>(sampleCertificate);
+  const [certificate, setCertificate] = useState<CertificateData>(sampleCertificate);
 
   // Trail Guide Drawer
   const [isAiGuideOpen, setIsAiGuideOpen] = useState<boolean>(false);
@@ -129,23 +139,85 @@ export function TrailmarkProvider({ children }: { children: React.ReactNode }) {
     },
   ]);
 
-  const updateProfile = (updates: Partial<LearnerProfile>) => {
+  // Sync initial data from backend if available
+  useEffect(() => {
+    async function loadBackendData() {
+      const [backendProfile, backendRoles, backendRoadmap, backendQuestions, backendPosts, backendRewards, backendLeaderboard, backendCert] =
+        await Promise.all([
+          profileApi.getMe(),
+          rolesApi.getRecommendations(),
+          roadmapApi.getCurrent(learningMode),
+          assessmentApi.getQuestions(),
+          communityApi.getPosts(),
+          gamificationApi.getRewards(),
+          gamificationApi.getLeaderboard(),
+          certificatesApi.getMe(),
+        ]);
+
+      if (backendProfile) {
+        setProfile(backendProfile);
+        if (backendProfile.persona) {
+          setLearningModeState(backendProfile.persona);
+        }
+      }
+      if (backendRoles && backendRoles.length > 0) {
+        setRoles(backendRoles);
+        setSelectedRole(backendRoles[0]);
+      }
+      if (backendRoadmap && backendRoadmap.milestones) {
+        setRoadmap(backendRoadmap.milestones);
+        setIsRoadmapApproved(backendRoadmap.isApproved);
+      }
+      if (backendQuestions && backendQuestions.length > 0) {
+        setAssessmentQuestions(backendQuestions);
+      }
+      if (backendPosts && backendPosts.length > 0) {
+        setCommunityPosts(backendPosts);
+      }
+      if (backendRewards && backendRewards.length > 0) {
+        setRewards(backendRewards);
+      }
+      if (backendLeaderboard && backendLeaderboard.length > 0) {
+        setLeaderboard(backendLeaderboard);
+      }
+      if (backendCert) {
+        setCertificate(backendCert);
+      }
+    }
+    loadBackendData();
+  }, []);
+
+  const updateProfile = useCallback((updates: Partial<LearnerProfile>) => {
     setProfile((prev) => ({ ...prev, ...updates }));
-  };
+    profileApi.updateMe(updates).catch(() => {});
+  }, []);
 
   const selectRole = (roleId: string) => {
     const found = roles.find((r) => r.id === roleId) || roles[0];
     setSelectedRole(found);
     updateProfile({ targetRole: found.title });
+    // Trigger roadmap generation on backend
+    roadmapApi.generate(roleId, learningMode).then((res) => {
+      if (res && res.milestones) {
+        setRoadmap(res.milestones);
+      }
+    }).catch(() => {});
   };
 
   const setLearningMode = (mode: LearningPersona) => {
     setLearningModeState(mode);
     updateProfile({ persona: mode });
+    // Refresh roadmap adapted for this mode
+    roadmapApi.getCurrent(mode).then((res) => {
+      if (res && res.milestones) {
+        setRoadmap(res.milestones);
+      }
+    }).catch(() => {});
   };
 
   const approveRoadmap = () => {
     setIsRoadmapApproved(true);
+    roadmapApi.approve().catch(() => {});
   };
 
   const toggleModuleCompletion = (milestoneId: string, moduleId: string) => {
@@ -158,6 +230,11 @@ export function TrailmarkProvider({ children }: { children: React.ReactNode }) {
         return { ...ms, modules: updatedModules };
       })
     );
+    roadmapApi.toggleModule(moduleId).then((res) => {
+      if (res && res.updatedTotalPoints) {
+        setProfile((prev) => ({ ...prev, totalPoints: res.updatedTotalPoints }));
+      }
+    }).catch(() => {});
   };
 
   const selectAnswer = (questionId: string, optionId: string) => {
@@ -176,7 +253,16 @@ export function TrailmarkProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const submitAssessment = () => {
+  const submitAssessment = async () => {
+    const topic = "Deep Learning Fundamentals";
+    const res = await assessmentApi.submit(topic, selectedAnswers, 240);
+    if (res) {
+      setAssessmentResult(res);
+      setProfile((prev) => ({ ...prev, totalPoints: prev.totalPoints + res.awardedPoints }));
+      return;
+    }
+
+    // Local fallback
     let correct = 0;
     assessmentQuestions.forEach((q) => {
       if (selectedAnswers[q.id] === q.correctOptionId) {
@@ -193,7 +279,6 @@ export function TrailmarkProvider({ children }: { children: React.ReactNode }) {
       awardedPoints: correct * 50,
     };
     setAssessmentResult(result);
-    // Add awarded points to profile
     updateProfile({ totalPoints: profile.totalPoints + result.awardedPoints });
   };
 
@@ -207,9 +292,10 @@ export function TrailmarkProvider({ children }: { children: React.ReactNode }) {
     setCommunityPosts((prev) =>
       prev.map((p) => (p.id === postId ? { ...p, upvotes: p.upvotes + 1 } : p))
     );
+    communityApi.upvotePost(postId).catch(() => {});
   };
 
-  const addPost = (title: string, content: string, domainTag: string, codeSnippet?: string) => {
+  const addPost = async (title: string, content: string, domainTag: string, codeSnippet?: string) => {
     const newPost: CommunityPost = {
       id: `post-${Date.now()}`,
       author: {
@@ -229,25 +315,30 @@ export function TrailmarkProvider({ children }: { children: React.ReactNode }) {
     };
     setCommunityPosts((prev) => [newPost, ...prev]);
     updateProfile({ totalPoints: profile.totalPoints + 20 });
+
+    const serverPost = await communityApi.createPost(title, content, domainTag, codeSnippet);
+    if (serverPost) {
+      setCommunityPosts((prev) => [serverPost, ...prev.filter((p) => p.id !== newPost.id)]);
+    }
   };
 
-  const addAnswer = (postId: string, content: string) => {
+  const addAnswer = async (postId: string, content: string) => {
+    const newAns = {
+      id: `ans-${Date.now()}`,
+      author: {
+        name: profile.name,
+        avatar: profile.avatar,
+        role: profile.targetRole,
+        badge: "Peer Reviewer",
+      },
+      timestamp: "Just now",
+      content,
+      upvotes: 1,
+      isAccepted: false,
+    };
     setCommunityPosts((prev) =>
       prev.map((p) => {
         if (p.id !== postId) return p;
-        const newAns = {
-          id: `ans-${Date.now()}`,
-          author: {
-            name: profile.name,
-            avatar: profile.avatar,
-            role: profile.targetRole,
-            badge: "Peer Reviewer",
-          },
-          timestamp: "Just now",
-          content,
-          upvotes: 1,
-          isAccepted: false,
-        };
         return {
           ...p,
           repliesCount: p.repliesCount + 1,
@@ -256,6 +347,7 @@ export function TrailmarkProvider({ children }: { children: React.ReactNode }) {
       })
     );
     updateProfile({ totalPoints: profile.totalPoints + 35 });
+    communityApi.addAnswer(postId, content).catch(() => {});
   };
 
   const redeemReward = (rewardId: string): boolean => {
@@ -267,6 +359,7 @@ export function TrailmarkProvider({ children }: { children: React.ReactNode }) {
       prev.map((r) => (r.id === rewardId ? { ...r, redeemed: true } : r))
     );
     updateProfile({ totalPoints: profile.totalPoints - item.pointCost });
+    gamificationApi.redeem(rewardId).catch(() => {});
     return true;
   };
 
@@ -283,7 +376,20 @@ export function TrailmarkProvider({ children }: { children: React.ReactNode }) {
     };
     setAiGuideMessages((prev) => [...prev, userMsg]);
 
-    // Simulate AI response
+    const apiRes = await aiGuideApi.chat(text, "Deep Learning Fundamentals", learningMode);
+    if (apiRes) {
+      const guideMsg = {
+        id: `msg-${Date.now() + 1}`,
+        sender: "guide" as const,
+        text: apiRes.reply,
+        citations: apiRes.citations,
+        timestamp: "Just now",
+      };
+      setAiGuideMessages((prev) => [...prev, guideMsg]);
+      return;
+    }
+
+    // Fallback simulation
     setTimeout(() => {
       const guideMsg = {
         id: `msg-${Date.now() + 1}`,

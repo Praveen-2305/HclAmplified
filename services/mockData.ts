@@ -532,3 +532,52 @@ export const sampleCertificate: CertificateData = {
   verificationHash: "0x7F8B2C4E9A1D6E3F...892A",
   honorsDistinction: "Highest Distinction for Exceptional Theoretical Rigor",
 };
+
+export const initialStudyGroups = [
+  {
+    id: "group-01",
+    name: "Cohort Alpha: Deep Learning Fundamentals",
+    domain: "Deep Learning",
+    description: "Weekly rigorous proof dissection and code reviews for scholars enrolled in the AI Engineering track.",
+    activeMembersCount: 24,
+    currentTopic: "Multi-Head Attention Vectorization & FlashAttention Proofs",
+    nextSyncTime: "Thursday 18:00 UTC",
+    isLive: true,
+    roomUrl: "https://meet.trailmark.ai/cohort-alpha",
+  },
+  {
+    id: "group-02",
+    name: "Transformer Architecture Reading Group",
+    domain: "Natural Language Processing",
+    description: "Analyzing arXiv preprints on Rotary Embeddings, State Space Models (Mamba), and MoE routing.",
+    activeMembersCount: 42,
+    currentTopic: "Mamba-2 State Space Duality with Attention",
+    nextSyncTime: "Saturday 15:00 UTC",
+    isLive: false,
+    roomUrl: "https://meet.trailmark.ai/transformer-readers",
+  },
+];
+
+export const initialPartnerLabs = [
+  {
+    id: "lab-stanford",
+    name: "Stanford AI & Robotics Collaborative Facility",
+    location: "Palo Alto, CA",
+    address: "450 Serra Mall, Stanford, CA 94305",
+    facilities: ["NVIDIA H100 GPU Pods", "Robotics Manipulation Benches", "Edge TPU Testbeds"],
+    availableSlots: [
+      { id: "slot-01", labId: "lab-stanford", date: "2026-09-12", startTime: "10:00 AM", endTime: "01:00 PM", capacity: 12, bookedCount: 4, isAvailable: true },
+      { id: "slot-02", labId: "lab-stanford", date: "2026-09-19", startTime: "02:00 PM", endTime: "05:00 PM", capacity: 12, bookedCount: 9, isAvailable: true },
+    ],
+  },
+  {
+    id: "lab-mit",
+    name: "MIT Lincoln Edge AI & Hardware Center",
+    location: "Cambridge, MA",
+    address: "77 Massachusetts Ave, Cambridge, MA 02139",
+    facilities: ["FPGA Synthesis Rigs", "Neuromorphic Computing Lab", "RF Signal Analyzers"],
+    availableSlots: [
+      { id: "slot-03", labId: "lab-mit", date: "2026-09-15", startTime: "09:00 AM", endTime: "12:00 PM", capacity: 15, bookedCount: 6, isAvailable: true },
+    ],
+  },
+];

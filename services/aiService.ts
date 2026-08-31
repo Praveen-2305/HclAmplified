@@ -4,6 +4,7 @@ import {
   LearnerProfile,
   RoleMatch,
   RoadmapMilestone,
+  LearningPersona,
 } from "@/types/trailmark";
 import {
   initialRoleMatches,
@@ -11,22 +12,31 @@ import {
   adaptiveAssessmentQuestions,
   sampleAssessmentResult,
 } from "./mockData";
-
-// Artificial delay helper for realistic async AI experience
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+import {
+  profileApi,
+  rolesApi,
+  roadmapApi,
+  assessmentApi,
+  aiGuideApi,
+} from "./apiClient";
 
 export async function generateOnboardingResponse(
   userMessage: string,
-  turnCount: number
+  turnCount: number,
+  personaHint?: LearningPersona
 ): Promise<{
   reply: string;
   suggestedOptions?: string[];
   isBlueprintReady?: boolean;
+  detectedPersona?: LearningPersona;
 }> {
-  await delay(700);
+  const apiRes = await profileApi.onboardingChat(userMessage, turnCount, personaHint);
+  if (apiRes) {
+    return apiRes;
+  }
 
+  // Fallback
   const lower = userMessage.toLowerCase();
-
   if (turnCount === 0 || lower.includes("machine learning") || lower.includes("pivot") || lower.includes("analytics")) {
     return {
       reply:
@@ -60,15 +70,23 @@ export async function generateOnboardingResponse(
 export async function fetchRoleRecommendations(
   _profile?: LearnerProfile
 ): Promise<RoleMatch[]> {
-  await delay(600);
+  const apiRes = await rolesApi.getRecommendations();
+  if (apiRes && apiRes.length > 0) {
+    return apiRes;
+  }
   return initialRoleMatches;
 }
 
 export async function generateRoadmapForRole(
   roleId: string,
-  persona: "digger" | "surface" = "digger"
+  persona: "digger" | "surface" | "motivation" = "digger",
+  weeklyHours?: number
 ): Promise<RoadmapMilestone[]> {
-  await delay(800);
+  const apiRes = await roadmapApi.generate(roleId, persona, weeklyHours);
+  if (apiRes && apiRes.milestones) {
+    return apiRes.milestones;
+  }
+
   return initialRoadmapMilestones.map((ms) => ({
     ...ms,
     description:
@@ -79,17 +97,24 @@ export async function generateRoadmapForRole(
 }
 
 export async function fetchAssessmentQuestions(
-  _topic: string = "Deep Learning Fundamentals"
+  topic: string = "Deep Learning Fundamentals"
 ): Promise<AssessmentQuestion[]> {
-  await delay(500);
+  const apiRes = await assessmentApi.getQuestions(topic);
+  if (apiRes && apiRes.length > 0) {
+    return apiRes;
+  }
   return adaptiveAssessmentQuestions;
 }
 
 export async function evaluateAssessmentSubmission(
   answers: Record<string, string>,
-  timeSpentSeconds: number
+  timeSpentSeconds: number,
+  topic: string = "Deep Learning Fundamentals"
 ): Promise<AssessmentResult> {
-  await delay(900);
+  const apiRes = await assessmentApi.submit(topic, answers, timeSpentSeconds);
+  if (apiRes) {
+    return apiRes;
+  }
 
   let correctCount = 0;
   adaptiveAssessmentQuestions.forEach((q) => {
@@ -113,13 +138,16 @@ export async function evaluateAssessmentSubmission(
 
 export async function askTrailGuideAssistant(
   prompt: string,
-  context?: { topic?: string; mode?: string }
+  context?: { topic?: string; mode?: LearningPersona; currentMilestone?: string }
 ): Promise<{
   reply: string;
   citations?: string[];
   suggestedFollowUps?: string[];
 }> {
-  await delay(800);
+  const apiRes = await aiGuideApi.chat(prompt, context?.topic, context?.mode, context?.currentMilestone);
+  if (apiRes) {
+    return apiRes;
+  }
 
   const lower = prompt.toLowerCase();
 
