@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trailmark - Rewards</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#535e7a",
+                      "background": "#fbf8fb",
+                      "surface-container-high": "#eae7ea",
+                      "on-error": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "outline-variant": "#c6c6ce",
+                      "on-surface": "#1b1b1d",
+                      "on-error-container": "#93000a",
+                      "tertiary-container": "#2e1f00",
+                      "on-primary": "#ffffff",
+                      "surface-container-highest": "#e4e2e4",
+                      "inverse-on-surface": "#f3f0f2",
+                      "on-primary-fixed-variant": "#3c4661",
+                      "primary-fixed-dim": "#bbc6e7",
+                      "surface-container": "#f0edf0",
+                      "on-secondary-fixed-variant": "#005144",
+                      "on-secondary-fixed": "#00201a",
+                      "secondary": "#1a6a5b",
+                      "on-surface-variant": "#45464d",
+                      "surface-dim": "#dcd9dc",
+                      "surface-variant": "#e4e2e4",
+                      "outline": "#76777e",
+                      "error": "#ba1a1a",
+                      "primary-container": "#16213a",
+                      "tertiary": "#110a00",
+                      "on-tertiary-fixed": "#261900",
+                      "primary": "#010a22",
+                      "secondary-fixed": "#a7f1de",
+                      "on-primary-fixed": "#101b34",
+                      "secondary-container": "#a7f1de",
+                      "surface": "#fbf8fb",
+                      "on-tertiary-container": "#ac8225",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#303032",
+                      "secondary-fixed-dim": "#8bd4c3",
+                      "on-primary-container": "#7e88a7",
+                      "on-secondary-container": "#237061",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-fixed": "#ffdea4",
+                      "primary-fixed": "#d9e2ff",
+                      "surface-bright": "#fbf8fb",
+                      "inverse-primary": "#bbc6e7",
+                      "on-tertiary-fixed-variant": "#5d4200",
+                      "on-background": "#1b1b1d",
+                      "tertiary-fixed-dim": "#f0bf5c",
+                      "surface-container-low": "#f5f3f5",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "trail-width": "4px",
+                      "container-max-width": "1280px",
+                      "gutter": "24px",
+                      "margin-desktop": "40px",
+                      "unit": "8px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "inter"
+                      ],
+                      "headline-md": [
+                              "sourceSerif4"
+                      ],
+                      "headline-sm": [
+                              "sourceSerif4"
+                      ],
+                      "headline-lg-mobile": [
+                              "sourceSerif4"
+                      ],
+                      "display-lg": [
+                              "sourceSerif4"
+                      ],
+                      "headline-lg": [
+                              "sourceSerif4"
+                      ],
+                      "label-md": [
+                              "inter"
+                      ],
+                      "body-sm": [
+                              "inter"
+                      ],
+                      "body-md": [
+                              "inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            },
+          }
+        }
+      </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .font-headline-md, .font-headline-sm, .font-display-lg, .font-headline-lg, .font-headline-lg-mobile {
+            font-family: 'Source Serif 4', serif;
+        }
+        .font-body-lg, .font-label-md, .font-body-sm, .font-body-md {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .card-hover:hover {
+            box-shadow: 0 4px 12px rgba(22, 33, 58, 0.08);
+            transform: translateY(-2px);
+            transition: all 0.2s ease;
+        }
+        
+        .trail-node {
+            position: relative;
+        }
+        
+        .trail-node::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 24px;
+            bottom: -24px;
+            width: 4px;
+            background-color: theme('colors.secondary');
+            z-index: 0;
+        }
+        
+        .trail-node:last-child::before {
+            display: none;
+        }
+        
+        .trail-dot {
+            position: absolute;
+            left: -28px;
+            top: 24px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: theme('colors.secondary');
+            border: 2px solid theme('colors.surface');
+            z-index: 1;
+        }
+
+        .animated-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(26, 106, 91, 0.4); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(26, 106, 91, 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(26, 106, 91, 0); }
+        }
+    </style>
+</head>
+<body class="bg-[#F3F4EE] text-on-surface flex flex-col md:flex-row min-h-screen">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full py-gutter px-4 bg-primary-container dark:bg-primary border-r border-outline-variant/10 fixed left-0 top-0 h-full w-[280px] z-50">
+<div class="mb-8 px-4 flex items-center space-x-3">
+<img alt="User profile avatar" class="w-8 h-8 rounded-full bg-surface" data-alt="A small, stylized circular emblem featuring an open book and a quill, rendered in a crisp, academic ink-wash style on a pure white background. Minimalist and scholarly." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcQA3oKFJ3nzuUk1E91SefL04DqvPw8e1NnHunhjmZUUaREUtNPFrMJ0CRn--TQvR-E3rSpZcbTytbQSeHrnLGQTz3ilKubQVe8Om4TUcqRKzk_D6KWjEiuVRgxc9wbXGzFv40_69SvkZrxqI7HDDqnB_BJlWyQ2qSWYW5m0-DowNklNzddzV2w0RHxywxEVzcexm0cIUmipHHcDify8emY2Nf3qhCWGPilSODw_w1ILvVfiZZdeSu"/>
+<div>
+<h1 class="font-headline-md text-headline-md text-surface-bright tracking-tight">Trailmark</h1>
+<p class="font-body-sm text-body-sm text-on-primary-container">Academic Scholar</p>
+</div>
+</div>
+<button class="mb-8 bg-secondary text-on-secondary font-label-md text-label-md py-3 px-4 rounded hover:bg-secondary/90 transition-colors w-full text-center flex items-center justify-center">
+<span class="material-symbols-outlined mr-2" style="font-variation-settings: 'FILL' 1;">add</span>
+            New Study Session
+        </button>
+<ul class="flex-1 space-y-2">
+<li>
+<a class="flex items-center text-on-primary-container/70 hover:text-on-primary-container pl-5 py-3 rounded hover:bg-surface-tint/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">timeline</span>
+<span class="font-label-md text-label-md">Roadmap</span>
+</a>
+</li>
+<li>
+<a class="flex items-center text-on-primary-container/70 hover:text-on-primary-container pl-5 py-3 rounded hover:bg-surface-tint/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">assignment_ind</span>
+<span class="font-label-md text-label-md">Onboarding</span>
+</a>
+</li>
+<li>
+<a class="flex items-center text-on-primary-container/70 hover:text-on-primary-container pl-5 py-3 rounded hover:bg-surface-tint/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">quiz</span>
+<span class="font-label-md text-label-md">Assessments</span>
+</a>
+</li>
+<li>
+<a class="flex items-center text-on-primary-container/70 hover:text-on-primary-container pl-5 py-3 rounded hover:bg-surface-tint/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center text-on-primary-container/70 hover:text-on-primary-container pl-5 py-3 rounded hover:bg-surface-tint/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+<span class="font-label-md text-label-md">Community</span>
+</a>
+</li>
+<li>
+<a class="flex items-center text-secondary-fixed font-bold border-l-trail-width border-secondary-fixed pl-4 py-3 bg-surface-tint/20 opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined mr-3" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-label-md text-label-md text-secondary-fixed">Rewards</span>
+</a>
+</li>
+<li>
+<a class="flex items-center text-on-primary-container/70 hover:text-on-primary-container pl-5 py-3 rounded hover:bg-surface-tint/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">leaderboard</span>
+<span class="font-label-md text-label-md">Leaderboard</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto border-t border-outline-variant/10 pt-4">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center text-on-primary-container/70 hover:text-on-primary-container pl-5 py-2 rounded hover:bg-surface-tint/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center text-on-primary-container/70 hover:text-on-primary-container pl-5 py-2 rounded hover:bg-surface-tint/20 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">help_outline</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 md:ml-[280px] flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim border-b border-surface-container-high docked full-width top-0 sticky z-40 flex justify-between items-center h-16 px-gutter w-auto">
+<div class="flex items-center space-x-6">
+<!-- Mobile Menu Trigger -->
+<button class="md:hidden text-on-surface-variant p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant/30 rounded font-body-sm text-body-sm focus:ring-1 focus:ring-outline-variant focus:outline-none w-64 placeholder:text-on-surface-variant/70 text-primary" placeholder="Search resources..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<button class="text-on-surface-variant hover:text-primary transition-all p-2 rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-all p-2 rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</button>
+</div>
+</header>
+<main class="flex-1 p-margin-mobile md:p-margin-desktop overflow-y-auto">
+<div class="max-w-container-max-width mx-auto">
+<!-- Header & Balance -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-[#E2E3D9] pb-6">
+<div>
+<h2 class="font-display-lg text-display-lg text-primary mb-2 hidden md:block">Scholar Rewards</h2>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2 md:hidden">Scholar Rewards</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Exchange contribution points for academic perks and resources.</p>
+</div>
+<div class="mt-6 md:mt-0 bg-surface border border-[#E2E3D9] p-4 rounded text-right flex items-center space-x-4 md:block shadow-sm">
+<div class="flex-1 md:flex-none">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider block mb-1">Available Balance</span>
+<div class="flex items-center justify-end space-x-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-headline-lg text-headline-lg text-primary">1,240</span>
+<span class="font-body-md text-body-md text-on-surface-variant">pts</span>
+</div>
+</div>
+<a class="font-label-md text-label-md text-secondary hover:underline flex items-center justify-end mt-2" href="#">
+                            History <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Featured Hero -->
+<div class="mb-16 relative overflow-hidden rounded-lg bg-primary-container text-surface-bright flex flex-col md:flex-row shadow-sm">
+<div class="p-8 md:w-1/2 flex flex-col justify-center relative z-10">
+<span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md px-3 py-1 rounded-full mb-4 w-max border border-tertiary-fixed-dim">Featured Opportunity</span>
+<h3 class="font-headline-lg text-headline-lg mb-4">Researcher Spotlight</h3>
+<p class="font-body-md text-body-md text-primary-fixed-dim mb-8">Secure a featured spot in the next institutional newsletter. Highlight your recent findings, study group contributions, and academic journey to the wider community.</p>
+<div class="flex items-center justify-between bg-primary/50 p-4 rounded border border-on-primary-container/20">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">stars</span>
+<span class="font-headline-sm text-headline-sm">2,500 pts</span>
+</div>
+<button class="bg-surface text-primary font-label-md text-label-md py-2 px-6 rounded hover:bg-surface-variant transition-colors">
+                                Redeem Now
+                            </button>
+</div>
+</div>
+<div class="md:w-1/2 h-64 md:h-auto relative">
+<div class="absolute inset-0 bg-cover bg-center opacity-80 mix-blend-luminosity" data-alt="A vintage-style illustration of a classic leather-bound journal and a glowing fountain pen resting on an oak desk, bathed in warm, directional library lighting. The scene evokes a sense of deep academic focus and prestigious scholarship, rendered in a crisp, modern ink-wash aesthetic with subtle gold accents." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhNCmuPYFMRn1-z-1GPA72zS9A5JLCpvSJJPmEbLEddUr74dQHxyDa83pijAk5DxmDjUKSCyizfGEpIFCu5LOMY178KYLYvG8x8gk3TLrKwX-SchQlkxPKp4JqJd6vkDdnfEN6cu46aDeGQRHNXkdcS2v7VLk25eih4zJzcGYm1HeDloFXVQEn7RbkpJuU8Xsnsr8FgAeJFLkbkPpgSvQ3tGb0A8lLHsjFJ8PNjJOnB-EKIpf2JCQo')"></div>
+<!-- Gradient overlay for text legibility on mobile -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container to-transparent md:bg-gradient-to-l md:from-transparent md:to-primary-container"></div>
+</div>
+</div>
+<!-- Shop Layout: Trail spine -->
+<div class="pl-8 md:pl-12 relative">
+<!-- Academic Perks -->
+<div class="trail-node mb-16">
+<div class="trail-dot animated-pulse"></div>
+<h4 class="font-headline-md text-headline-md text-primary mb-6 flex items-center">
+<span class="material-symbols-outlined mr-3 text-secondary">local_library</span>
+                            Academic Perks
+                        </h4>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface border border-[#E2E3D9] rounded p-6 flex flex-col card-hover">
+<div class="mb-4 h-32 bg-surface-container-low rounded border border-outline-variant/20 flex items-center justify-center overflow-hidden">
+<img alt="Early Course Access" class="w-full h-full object-cover mix-blend-multiply opacity-90" data-alt="A clean, minimalist 3D icon of a golden key unlocking a thick, antique textbook. The background is a soft, warm paper texture. The lighting is soft and studio-like, emphasizing the prestige of the academic key." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFkIrgzzoD6H9x4_1gWg2BB8i8C-RIlltXp-iAnKs7vfSqpcPPp9MpmQbedZ8Iyq_0n3gAsngnRT3Hj5AbY3lbMd5YrImLbLwQ_dFMLRarKL781WUhnxQmcQzaAeMVVQGIrkH41PcfHkZkdRjBF_p4Nymvcx1JLjwgybt6pfL-sJy6mFrYRggS68L8HfV1qrUozr9inR_ruhF7pkEVzL1z7x3F0CpvpxKJWcc4wteT62GMdR-5Mid6"/>
+</div>
+<h5 class="font-headline-sm text-headline-sm text-primary mb-2">Early Course Access</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 flex-1">Gain 48-hour advanced registration access to next semester's high-demand seminars.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-surface-container-high">
+<span class="font-label-md text-label-md text-secondary font-bold flex items-center"><span class="material-symbols-outlined text-[16px] mr-1">stars</span> 800 pts</span>
+<button class="border border-primary text-primary font-label-md text-label-md py-1.5 px-4 rounded hover:bg-primary hover:text-surface transition-colors">Redeem</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface border border-[#E2E3D9] rounded p-6 flex flex-col card-hover">
+<div class="mb-4 h-32 bg-surface-container-low rounded border border-outline-variant/20 flex items-center justify-center overflow-hidden">
+<img alt="1-on-1 Mentor Session" class="w-full h-full object-cover mix-blend-multiply opacity-90" data-alt="A stylized illustration of two armchairs facing each other in a cozy, sunlit study room with bookshelves in the background. The style is modern editorial illustration with a muted, scholarly color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvDmfJ0hS3Fuu-HZV5oIHzB6UkfP-S6MGlBCxg5HYviS3S4zAIDbruyPylhyVTMdpMIMphb-6OuFnEUEaF_YwuQrOae01KSyQUo4SIhVQ86LSovDTb1npbps9F928y1M_whql7TfQFBSOWKQwc3Hi721OT6-iOZCJcYoXyIsL2bfM2QtGYa3un4Xdoc1JxqLGnRjMAp6LuUxWVw1Qi5QDKyVIbV8UfWHBXkfMJGOx2Bxb_Ov3mi9H9"/>
+</div>
+<h5 class="font-headline-sm text-headline-sm text-primary mb-2">1-on-1 Mentor Session</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 flex-1">Book a 30-minute private consultation with a senior faculty member in your discipline.</p>
+<div class="flex items-center justify-between mt-auto pt-4 border-t border-surface-container-high">
+<span class="font-label-md text-label-md text-secondary font-bold flex items-center"><span class="material-symbols-outlined text-[16px] mr-1">stars</span> 1,200 pts</span>
+<button class="bg-secondary text-on-secondary font-label-md text-label-md py-1.5 px-4 rounded hover:bg-secondary/90 transition-colors">Redeem</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Specialized Badges -->
+<div class="trail-node mb-16">
+<div class="trail-dot"></div>
+<h4 class="font-headline-md text-headline-md text-primary mb-6 flex items-center">
+<span class="material-symbols-outlined mr-3 text-secondary">workspace_premium</span>
+                            Specialized Badges
+                        </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 -mt-4 max-w-2xl">Customize your scholar profile with unique ink-wash insignia denoting your specific areas of expertise.</p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Badge 1 -->
+<div class="bg-surface border border-[#E2E3D9] rounded p-4 text-center card-hover flex flex-col items-center">
+<div class="w-16 h-16 mb-3 rounded-full bg-[#F3F4EE] border border-outline-variant/30 flex items-center justify-center p-2">
+<img alt="Methodology Expert Badge" class="w-full h-full object-contain mix-blend-multiply" data-alt="A detailed ink-wash style drawing of a vintage microscope, rendered in deep navy blue on a textured off-white background. The lines are delicate and scholarly, resembling a 19th-century botanical illustration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnRnfUEfcJRtohUGCVsshnRwnHAGhxbODRXYg3CljM8lRCq4ZkV6VkqFRd6yOXJn_KDcgGzDpQjalg66EC9zNoqU7Kh0Fdkz2EImDzw__3txeehLfm4APTOCJcm-W0h6fYU0WC3lh0lhadad1DlXmrVJMnsva2gqxbV5NVbsuzsB__Uh3NE4LPceJVppO0kZ_1fhqF7jul4J3RYfnNiSYklMuGOrixVWPrZP7hB3chq8FutZM4qGR2"/>
+</div>
+<h6 class="font-label-md text-label-md text-primary mb-1">Methodologist</h6>
+<span class="font-body-sm text-body-sm text-secondary block mb-3">150 pts</span>
+<button class="w-full border border-outline-variant text-on-surface-variant font-label-md text-label-md py-1 rounded hover:border-primary hover:text-primary transition-colors text-xs">Unlock</button>
+</div>
+<!-- Badge 2 -->
+<div class="bg-surface border border-[#E2E3D9] rounded p-4 text-center card-hover flex flex-col items-center">
+<div class="w-16 h-16 mb-3 rounded-full bg-[#F3F4EE] border border-outline-variant/30 flex items-center justify-center p-2">
+<img alt="Historian Badge" class="w-full h-full object-contain mix-blend-multiply" data-alt="A delicate ink-wash illustration of an ancient Greek column, rendered in deep charcoal grey on a textured parchment background. Clean, classical, and minimalist academic style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvP856J6ZG1l78EPhlomntYl-_kgdLmLLiQmJTdYX5TpfaXoOpqJYATwq7UHI9mU2ouSA28vadRtdlUD7Yl2M6IzfpCpALA3WaoA5-xoVTvuLHQ-CwjCkbvbASTTWUpJIkeWX0mQXFjgikRhka654iL21O1tf5y_3ATWspg_qZqGhFGjgRdq5IHmOJBYf3SWMqzyokAJn1f4b8SJNW2qiF_aRH7cff3X3gvGRJTCJ5KOx_jE3udg7g"/>
+</div>
+<h6 class="font-label-md text-label-md text-primary mb-1">Archivist</h6>
+<span class="font-body-sm text-body-sm text-secondary block mb-3">150 pts</span>
+<button class="w-full border border-outline-variant text-on-surface-variant font-label-md text-label-md py-1 rounded hover:border-primary hover:text-primary transition-colors text-xs">Unlock</button>
+</div>
+<!-- Badge 3 -->
+<div class="bg-surface border border-[#E2E3D9] rounded p-4 text-center card-hover flex flex-col items-center opacity-70">
+<div class="w-16 h-16 mb-3 rounded-full bg-[#F3F4EE] border border-outline-variant/30 flex items-center justify-center p-2 relative">
+<span class="material-symbols-outlined absolute text-on-surface-variant">lock</span>
+</div>
+<h6 class="font-label-md text-label-md text-on-surface-variant mb-1">Theorist</h6>
+<span class="font-body-sm text-body-sm text-on-surface-variant block mb-3">Lvl 5 Req.</span>
+<button class="w-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md py-1 rounded cursor-not-allowed text-xs" disabled="">Locked</button>
+</div>
+</div>
+</div>
+<!-- Resource Library -->
+<div class="trail-node">
+<div class="trail-dot"></div>
+<h4 class="font-headline-md text-headline-md text-primary mb-6 flex items-center">
+<span class="material-symbols-outlined mr-3 text-secondary">menu_book</span>
+                            Resource Library
+                        </h4>
+<div class="bg-surface border border-[#E2E3D9] rounded overflow-hidden">
+<!-- List Item 1 -->
+<div class="p-4 border-b border-surface-container-high flex items-center justify-between hover:bg-[#F3F4EE] transition-colors group">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 bg-primary-container text-surface-bright rounded flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined">data_object</span>
+</div>
+<div>
+<h6 class="font-label-md text-label-md text-primary group-hover:underline">Global Macroeconomic Dataset (2010-2023)</h6>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cleaned CSV • 1.2MB • Verified Sources</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 ml-4">
+<span class="font-label-md text-label-md text-secondary whitespace-nowrap">300 pts</span>
+<button class="hidden md:flex border border-outline-variant text-on-surface-variant p-1.5 rounded hover:border-primary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="p-4 flex items-center justify-between hover:bg-[#F3F4EE] transition-colors group">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 bg-tertiary-container text-tertiary-fixed rounded flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div>
+<h6 class="font-label-md text-label-md text-primary group-hover:underline">Advanced Citation Guide: Chicago Style</h6>
+<p class="font-body-sm text-body-sm text-on-surface-variant">PDF Guide • 24 Pages • Trailmark Exclusive</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 ml-4">
+<span class="font-label-md text-label-md text-secondary whitespace-nowrap">150 pts</span>
+<button class="hidden md:flex border border-outline-variant text-on-surface-variant p-1.5 rounded hover:border-primary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trailmark - Role Recommendations</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: IBM Plex Sans & Fraunces for fallback (though using config names for class application) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config injected via system prompt guidelines -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "tertiary-fixed-dim": "#f0bf5c",
+                "surface-tint": "#535e7a",
+                "surface-container-lowest": "#ffffff",
+                "inverse-primary": "#bbc6e7",
+                "on-secondary-fixed-variant": "#005144",
+                "surface-bright": "#fbf8fb",
+                "on-tertiary-container": "#ac8225",
+                "secondary-fixed-dim": "#8bd4c3",
+                "primary": "#010a22",
+                "surface-dim": "#dcd9dc",
+                "on-surface-variant": "#45464d",
+                "primary-container": "#16213a",
+                "secondary-fixed": "#a7f1de",
+                "on-tertiary": "#ffffff",
+                "tertiary-container": "#2e1f00",
+                "outline-variant": "#c6c6ce",
+                "on-secondary-fixed": "#00201a",
+                "on-primary-fixed": "#101b34",
+                "on-tertiary-fixed": "#261900",
+                "surface-container-low": "#f5f3f5",
+                "error-container": "#ffdad6",
+                "on-error-container": "#93000a",
+                "surface": "#fbf8fb",
+                "on-primary-fixed-variant": "#3c4661",
+                "tertiary-fixed": "#ffdea4",
+                "on-primary": "#ffffff",
+                "surface-container": "#f0edf0",
+                "outline": "#76777e",
+                "error": "#ba1a1a",
+                "inverse-on-surface": "#f3f0f2",
+                "background": "#f3f4ee", /* Modified to match Canvas Level 0 */
+                "secondary-container": "#a7f1de",
+                "primary-fixed-dim": "#bbc6e7",
+                "on-primary-container": "#7e88a7",
+                "surface-container-highest": "#e4e2e4",
+                "surface-container-high": "#eae7ea",
+                "secondary": "#1a6a5b", /* Pine Teal approximation */
+                "on-tertiary-fixed-variant": "#5d4200",
+                "on-secondary": "#ffffff",
+                "inverse-surface": "#303032",
+                "on-secondary-container": "#237061",
+                "tertiary": "#110a00",
+                "surface-variant": "#e4e2e4",
+                "on-error": "#ffffff",
+                "on-surface": "#1b1b1d",
+                "primary-fixed": "#d9e2ff",
+                "on-background": "#1b1b1d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max-width": "1280px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px",
+                    "trail-width": "4px",
+                    "unit": "8px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Fraunces", "serif"],
+                    "label-md": ["IBM Plex Sans", "sans-serif"],
+                    "body-md": ["IBM Plex Sans", "sans-serif"],
+                    "headline-sm": ["Fraunces", "serif"],
+                    "headline-md": ["Fraunces", "serif"],
+                    "body-sm": ["IBM Plex Sans", "sans-serif"],
+                    "display-lg": ["Fraunces", "serif"],
+                    "headline-lg-mobile": ["Fraunces", "serif"],
+                    "body-lg": ["IBM Plex Sans", "sans-serif"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Shared Styles for interactions and specific overrides */
+        .card-level-1 {
+            background-color: #ffffff;
+            border: 1px solid #e2e3d9;
+        }
+        .card-level-1:hover {
+            box-shadow: 0 0 12px rgba(0,0,0,0.08);
+            border-color: #c6c6ce;
+        }
+        .text-ink {
+            color: #16213a;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- Shell Suppression: Based on rules, if this is Onboarding result, Nav Shell might be suppressed. 
+         However, the JSON provides SideNav and TopApp bar. I will include SideNav for desktop, 
+         assuming this is the first step into the 'Roadmap' post-onboarding. 
+         Active tab: 'Roadmap' as it's setting the goal. -->
+<!-- Side Navigation (Desktop) -->
+<nav class="hidden md:flex bg-primary-container dark:bg-primary-container fixed left-0 top-0 h-full w-[280px] flex-col p-6 z-50 overflow-y-auto">
+<div class="flex items-center gap-4 mb-12">
+<div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-on-secondary font-headline-sm">T</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-on-primary dark:text-on-primary-fixed">Trailmark</h1>
+<p class="font-label-md text-label-md text-on-primary-container">Learning Trail</p>
+</div>
+</div>
+<button class="w-full bg-secondary text-on-secondary font-label-md text-label-md py-3 rounded-lg mb-8 hover:opacity-90 transition-opacity">
+            New Goal
+        </button>
+<ul class="flex-1 space-y-2">
+<!-- Active: Roadmap -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary text-on-secondary rounded-lg font-label-md text-label-md transition-all hover:bg-on-primary-fixed-variant/20" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">route</span>
+                    Roadmap
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant/10 rounded-lg font-label-md text-label-md transition-all hover:bg-on-primary-fixed-variant/20" href="#">
+<span class="material-symbols-outlined">chat</span>
+                    Onboarding
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant/10 rounded-lg font-label-md text-label-md transition-all hover:bg-on-primary-fixed-variant/20" href="#">
+<span class="material-symbols-outlined">quiz</span>
+                    Assessments
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant/10 rounded-lg font-label-md text-label-md transition-all hover:bg-on-primary-fixed-variant/20" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant/10 rounded-lg font-label-md text-label-md transition-all hover:bg-on-primary-fixed-variant/20" href="#">
+<span class="material-symbols-outlined">groups</span>
+                    Community
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant/10 rounded-lg font-label-md text-label-md transition-all hover:bg-on-primary-fixed-variant/20" href="#">
+<span class="material-symbols-outlined">workspace_premium</span>
+                    Rewards
+                </a>
+</li>
+</ul>
+<div class="mt-auto border-t border-on-primary-container/20 pt-4 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant/10 rounded-lg font-label-md text-label-md transition-all hover:bg-on-primary-fixed-variant/20" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+                AI Assistant
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant/10 rounded-lg font-label-md text-label-md transition-all hover:bg-on-primary-fixed-variant/20" href="#">
+<span class="material-symbols-outlined">help</span>
+                Help
+            </a>
+</div>
+</nav>
+<!-- Top App Bar (Mobile) -->
+<header class="md:hidden flex justify-between items-center px-margin-mobile h-16 w-full sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-outline-variant dark:border-outline">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim tracking-tight">Trailmark</h1>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">settings</span></button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-[280px] p-margin-mobile md:p-margin-desktop max-w-container-max-width mx-auto w-full">
+<header class="mb-12 max-w-3xl">
+<h2 class="font-headline-lg-mobile md:font-display-lg text-headline-lg-mobile md:text-display-lg text-primary mb-4">Your Recommended Roles</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Based on your onboarding assessment, we've identified paths where your current skills intersect with high-growth opportunities. Select a target role to generate your custom learning trail.</p>
+</header>
+<!-- Bento Grid Layout for Roles -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Top Match - Takes up more space -->
+<article class="col-span-1 lg:col-span-8 card-level-1 rounded-xl p-8 flex flex-col md:flex-row gap-8 relative overflow-hidden transition-all duration-300 group">
+<!-- Subtle background accent for top match -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-tertiary-fixed-dim/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+<div class="flex-1 z-10 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<span class="bg-secondary/10 text-secondary font-label-md text-label-md px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">star</span> Top Match
+                            </span>
+<span class="font-headline-sm text-headline-sm text-tertiary-container">89% Match</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-3">AI Engineer</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Your strong foundation in statistical modeling perfectly aligns with the analytical demands of machine learning architecture.</p>
+<div class="space-y-3 mb-8">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary mt-1">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Leverages your existing Python proficiency.</span>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary mt-1">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">High demand in your target location.</span>
+</div>
+</div>
+</div>
+<button class="w-full md:w-auto bg-secondary hover:bg-secondary/90 text-on-secondary font-label-md text-label-md py-3 px-8 rounded-lg transition-colors flex items-center justify-center gap-2">
+                        Select Target Role
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<!-- Abstract representation area (could be a chart or thematic image placeholder) -->
+<div class="w-full md:w-1/3 bg-surface-container-low rounded-lg border border-outline-variant/30 flex items-center justify-center min-h-[200px] z-10 relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A clean, minimalist 3D rendering of interconnected neural network nodes glowing softly with a teal light against a very light, almost white paper-textured background. The aesthetic is modern academic, emphasizing clarity, structural elegance, and safe, focused learning environments without harsh neon colors. Subtle shadows create a tactile feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdWFLfq0K2Vek8KbHZ0tOpi7on-8auLSRg2SYC7SPxi6zxV7_QuaI6lWZubmWHL5reKYZXEUqLRXHpuca4vuOChgMwT2-PJIZMlbLayw5Idx9HdPMoqJ7O2S2BIrFgraDhh2ED-DJt77jEhUQzwzpQ9dQC8bmjzYWHxlNv6tTlakvG0NBp-Kc4VnmEgZscEV6vCPC1gXTEfhNYay5HZHSIw0O3CxJYbFduYxC4J6quUm7JC4bbu0Ap"/>
+</div>
+</article>
+<!-- Secondary Matches -->
+<div class="col-span-1 lg:col-span-4 flex flex-col gap-gutter">
+<article class="card-level-1 rounded-xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline-sm text-headline-sm text-primary">Data Scientist</h3>
+<span class="font-label-md text-label-md text-tertiary-container bg-tertiary-fixed-dim/20 px-2 py-1 rounded">82%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 flex-1">Builds naturally on your data visualization skills, requiring focused upskilling in advanced algorithms.</p>
+<button class="w-full border border-primary text-primary hover:bg-primary/5 font-label-md text-label-md py-2 px-4 rounded-lg transition-colors">
+                        Select Role
+                    </button>
+</article>
+<article class="card-level-1 rounded-xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-3">
+<h3 class="font-headline-sm text-headline-sm text-primary">ML Ops Engineer</h3>
+<span class="font-label-md text-label-md text-tertiary-container bg-tertiary-fixed-dim/20 px-2 py-1 rounded">75%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 flex-1">Fits your operational mindset, combining your coding ability with systems architecture.</p>
+<button class="w-full border border-primary text-primary hover:bg-primary/5 font-label-md text-label-md py-2 px-4 rounded-lg transition-colors">
+                        Select Role
+                    </button>
+</article>
+</div>
+<!-- Tertiary Matches row -->
+<article class="col-span-1 lg:col-span-6 card-level-1 rounded-xl p-6 flex flex-col sm:flex-row items-center gap-6 transition-all duration-300 hover:shadow-sm">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center shrink-0 border border-outline-variant/50">
+<span class="material-symbols-outlined text-primary text-3xl">psychology</span>
+</div>
+<div class="flex-1 text-center sm:text-left">
+<div class="flex items-center justify-center sm:justify-start gap-3 mb-1">
+<h3 class="font-headline-sm text-headline-sm text-primary">NLP Specialist</h3>
+<span class="font-label-md text-label-md text-on-surface-variant">68% Match</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Combines linguistic analysis with your technical foundation.</p>
+</div>
+<button class="w-full sm:w-auto border border-primary text-primary hover:bg-primary/5 font-label-md text-label-md py-2 px-6 rounded-lg transition-colors whitespace-nowrap">
+                    Select
+                </button>
+</article>
+<article class="col-span-1 lg:col-span-6 card-level-1 rounded-xl p-6 flex flex-col sm:flex-row items-center gap-6 transition-all duration-300 hover:shadow-sm">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center shrink-0 border border-outline-variant/50">
+<span class="material-symbols-outlined text-primary text-3xl">insights</span>
+</div>
+<div class="flex-1 text-center sm:text-left">
+<div class="flex items-center justify-center sm:justify-start gap-3 mb-1">
+<h3 class="font-headline-sm text-headline-sm text-primary">Analytics Engineer</h3>
+<span class="font-label-md text-label-md text-on-surface-variant">65% Match</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Bridges the gap between raw data pipelines and business insights.</p>
+</div>
+<button class="w-full sm:w-auto border border-primary text-primary hover:bg-primary/5 font-label-md text-label-md py-2 px-6 rounded-lg transition-colors whitespace-nowrap">
+                    Select
+                </button>
+</article>
+</div>
+</main>
+</body></html>

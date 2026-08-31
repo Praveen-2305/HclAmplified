@@ -1,0 +1,466 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Trailmark - Leaderboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=inter:wght@100..900&amp;family=sourceSerif4:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#261900",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#fbf8fb",
+                        "secondary-fixed": "#a7f1de",
+                        "inverse-surface": "#303032",
+                        "secondary": "#1a6a5b",
+                        "tertiary-fixed": "#ffdea4",
+                        "on-tertiary-container": "#ac8225",
+                        "on-secondary-container": "#237061",
+                        "background": "#fbf8fb",
+                        "primary": "#010a22",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "surface-container-high": "#eae7ea",
+                        "on-secondary-fixed": "#00201a",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#fbf8fb",
+                        "tertiary-container": "#2e1f00",
+                        "primary-container": "#16213a",
+                        "secondary-container": "#a7f1de",
+                        "on-background": "#1b1b1d",
+                        "surface-dim": "#dcd9dc",
+                        "on-primary-fixed": "#101b34",
+                        "error-container": "#ffdad6",
+                        "inverse-primary": "#bbc6e7",
+                        "outline": "#76777e",
+                        "secondary-fixed-dim": "#8bd4c3",
+                        "inverse-on-surface": "#f3f0f2",
+                        "outline-variant": "#c6c6ce",
+                        "surface-variant": "#e4e2e4",
+                        "on-primary-container": "#7e88a7",
+                        "surface-container-highest": "#e4e2e4",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#45464d",
+                        "surface-container": "#f0edf0",
+                        "surface-tint": "#535e7a",
+                        "on-surface": "#1b1b1d",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#005144",
+                        "primary-fixed-dim": "#bbc6e7",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#d9e2ff",
+                        "on-primary-fixed-variant": "#3c4661",
+                        "surface-container-low": "#f5f3f5",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#110a00",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max-width": "1280px",
+                        "trail-width": "4px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["inter"],
+                        "headline-lg": ["sourceSerif4"],
+                        "label-md": ["inter"],
+                        "display-lg": ["sourceSerif4"],
+                        "headline-lg-mobile": ["sourceSerif4"],
+                        "headline-sm": ["sourceSerif4"],
+                        "body-md": ["inter"],
+                        "body-lg": ["inter"],
+                        "headline-md": ["sourceSerif4"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Subtle paper texture overlay for the Canvas */
+        .bg-canvas-texture {
+            background-color: #F3F4EE; /* Level 0 Canvas from guidance */
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+        
+        /* Level 1 Surface */
+        .surface-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E2E3D9;
+        }
+        
+        /* Level 2 Hover */
+        .surface-card-interactive:hover {
+            box-shadow: 0 0 12px rgba(0,0,0,0.08);
+            transform: translateY(-1px);
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body class="bg-canvas-texture text-on-surface min-h-screen flex antialiased">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex flex-col py-8 px-4 h-full bg-primary dark:bg-primary-container fixed left-0 top-0 h-screen w-[280px] z-50">
+<!-- Header -->
+<div class="mb-12 px-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-outline-variant">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A small, professional avatar placeholder image, minimalist style, suitable for a dark academic application sidebar header, high quality, well lit." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPKU2XDfzKV5FfooMgE4218pO-64Z4T4SkZRknGeDRpBsC6mrCMERFVqjlvXpnldkNBowI1EDQNOEpVG44r1TTiYufNKRCC7WbVtvHuyqaPYgpQKU0xwKIxfxDdOGa2sQMWvd-EF6cFgiDa257FP_pgsPTlk5XJAB0qo-p1H4soj9xb7-YGThB3hVUGLsmtMTJ1vxQE5aSyx0tsN0uB8a_9tkvUakbJoAOxfLRr2jF-0-M_3S-GDPR">
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-on-primary font-bold">Trailmark</h1>
+<p class="font-label-md text-label-md text-on-primary-container opacity-70">Modern Academic Learning</p>
+</div>
+</div>
+<!-- Main Nav -->
+<ul class="space-y-2 flex-grow">
+<li class="">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">map</span>
+                    Roadmap
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">rocket_launch</span>
+                    Onboarding
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">quiz</span>
+                    Assessments
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+                    Community
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">military_tech</span>
+                    Rewards
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 px-4 py-3 text-on-primary bg-on-primary-fixed-variant rounded-lg font-bold font-label-md text-label-md transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined icon-fill text-[20px]">leaderboard</span>
+                    Leaderboard
+                </a>
+</li>
+</ul>
+<!-- CTA -->
+<div class="mt-8 mb-6 px-4">
+<button class="w-full py-2.5 bg-secondary text-on-secondary rounded font-label-md text-label-md hover:opacity-90 transition-opacity">
+                New Goal
+            </button>
+</div>
+<!-- Footer Nav -->
+<ul class="space-y-2 mt-auto border-t border-on-primary-fixed-variant pt-4">
+<li class="">
+<a class="flex items-center gap-4 px-4 py-2 rounded-lg font-label-md text-label-md text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+                    Settings
+                </a>
+</li>
+<li class="">
+<a class="flex items-center gap-4 px-4 py-2 rounded-lg font-label-md text-label-md text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+                    Help
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-[280px] w-full min-h-screen pb-20 md:pb-0">
+<!-- TopAppBar (Mobile Only - Simplified for Leaderboard Context) -->
+<header class="md:hidden flex justify-between items-center px-margin-mobile w-full h-16 bg-surface dark:bg-inverse-surface border-b border-outline-variant sticky top-0 z-40">
+<span class="font-headline-md text-headline-md text-primary font-bold tracking-tight">Trailmark</span>
+<div class="flex gap-4 text-primary">
+<button><span class="material-symbols-outlined">search</span></button>
+<button><span class="material-symbols-outlined">account_circle</span></button>
+</div>
+</header>
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-12">
+<!-- Page Header -->
+<div class="mb-10 text-center md:text-left">
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Community Leaderboard</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Celebrating academic growth, peer contributions, and the relentless pursuit of knowledge across our community network.</p>
+</div>
+<!-- Main Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Leaderboard Core (Podium & List) -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- Filters & Tabs -->
+<div class="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-outline-variant pb-2">
+<!-- Tabs -->
+<div class="flex gap-6">
+<button class="font-label-md text-label-md text-primary font-bold border-b-2 border-primary pb-2 -mb-[3px]">Global</button>
+<button class="font-label-md text-label-md text-on-surface-variant pb-2 -mb-[3px] hover:text-primary transition-colors">Study Pod</button>
+<div class="relative group">
+    <button class="flex items-center gap-1 font-label-md text-label-md text-on-surface-variant pb-2 -mb-[3px] hover:text-primary transition-colors">
+        Domain
+        <span class="material-symbols-outlined text-[18px]">expand_more</span>
+    </button>
+    <div class="hidden group-hover:block absolute top-full left-0 mt-1 w-48 bg-surface border border-outline-variant rounded-lg shadow-md z-50 overflow-hidden">
+        <button class="w-full text-left px-4 py-2 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">AI Engineering</button>
+        <button class="w-full text-left px-4 py-2 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">Physics</button>
+        <button class="w-full text-left px-4 py-2 font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">History</button>
+    </div>
+</div></div>
+<!-- Time Filters -->
+<div class="flex gap-2 bg-surface-container rounded-lg p-1"><button class="px-3 py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant transition-colors">This Week</button>
+<button class="px-3 py-1.5 rounded font-label-md text-label-md bg-primary text-on-primary shadow-sm">This Month</button>
+<button class="px-3 py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant transition-colors">Last Quarter</button>
+<button class="px-3 py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant transition-colors">All Time</button></div>
+<div class="relative flex items-center w-full sm:w-auto">
+    <span class="material-symbols-outlined absolute left-3 text-on-surface-variant/60 text-[20px]">search</span>
+    <input type="text" placeholder="Search Scholar..." class="pl-10 pr-4 py-1.5 bg-surface-container-low border border-outline-variant/30 rounded-lg font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary/50 w-full sm:w-64 transition-all">
+</div></div>
+<!-- Top 3 Podium (Bento/Card Style) -->
+<div class="surface-card rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-end justify-center gap-6 md:gap-8 min-h-[320px]">
+<!-- Rank 2 (Silver) -->
+<div class="flex flex-col items-center order-2 md:order-1 w-full md:w-1/3 mt-8 md:mt-0">
+<div class="relative mb-4">
+<div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-[#E2E8F0] border-2 border-white flex items-center justify-center font-label-md text-label-md text-slate-700 shadow-sm z-10">2</div>
+<div class="w-20 h-20 rounded-full bg-surface-container overflow-hidden border-4 border-[#E2E8F0] shadow-sm">
+<img alt="Rank 2 User" class="w-full h-full object-cover" data-alt="A professional headshot of a young woman in an academic setting, natural lighting, soft silver-grey border accent, minimalist background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq6RHAyqa3qVX9ew2r4JnzQzyf6bwEJyXe2Aq6jJ5ADwvN43f-2dL9IojS_QfhXRKIxiHMtKx5PNJJhzF9L7k227aekSMs_S29CHafTVLhXyzH4btSznoPlU-4rK0ZpAc-cg99QH207ApzwNYaT8yq7FrfS5jlS432jGgalrcgieNKWPo5NBFjr9DoQWNTm7sGnFX2-8tQKT06zODlFkTZNBVbwSa2Ta4_bHrKaHK3G55lOW-xZ-DL">
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary text-center">Elena Rostova</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-2">Applied Physics</p>
+<div class="px-3 py-1 rounded bg-[#F1F5F9] border border-[#CBD5E1] text-[#334155] font-label-md text-label-md">
+                                2,140 pts
+                            </div>
+<div class="w-full h-24 bg-[#F8FAFC] border-t border-l border-r border-[#E2E8F0] mt-6 rounded-t-lg relative">
+<div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, #CBD5E1 10px, #CBD5E1 11px);"></div>
+</div>
+</div>
+<!-- Rank 1 (Gold) -->
+<div class="flex flex-col items-center order-1 md:order-2 w-full md:w-1/3 -mt-4">
+<div class="relative mb-4">
+<div class="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-[#FEF08A] border-2 border-white flex items-center justify-center font-headline-sm text-headline-sm text-yellow-800 shadow-md z-10"><span class="material-symbols-outlined text-[20px] icon-fill">stars</span></div>
+<div class="w-28 h-28 rounded-full bg-surface-container overflow-hidden border-4 border-[#FEF08A] shadow-md relative">
+<img alt="Rank 1 User" class="w-full h-full object-cover" data-alt="A high-quality portrait of a male student looking confident in a library setting, warm lighting, subtle gold accents, scholarly aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSuvK76431NEoBO11UOvMbdf-7bFNJtNdUnDb1uCNM8Qz-8WKfb6JuR0yLveDMJBchOh06SFXxX0B8Wjt3TCpJMDUtW0o6GbOHgPcvSMQ5HyI40J2bwNFcYRakn6dKrcR7isCFzRqUouWIT31qFhAIfP9vVS35xDj150oOuFsjcbyLITBAP5rx83Cc82cXAPddfeweZqVRQjT3D0XKDllBG67Q0L6BTF3RfkaOTpLmPFYLeSxy9AQX">
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary text-center">Julian Thorne</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-2">Data Science Fellow</p>
+<div class="px-4 py-1.5 rounded bg-[#FEF9C3] border border-[#FDE047] text-[#854D0E] font-label-md text-label-md font-bold shadow-sm">
+                                3,450 pts
+                            </div>
+<div class="w-full h-32 bg-[#FEFCE8] border-t border-l border-r border-[#FEF08A] mt-6 rounded-t-lg relative">
+<div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, #FDE047 10px, #FDE047 11px);"></div>
+</div>
+</div>
+<!-- Rank 3 (Bronze) -->
+<div class="flex flex-col items-center order-3 md:order-3 w-full md:w-1/3 mt-12 md:mt-0">
+<div class="relative mb-4">
+<div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-[#FED7AA] border-2 border-white flex items-center justify-center font-label-md text-label-md text-orange-800 shadow-sm z-10">3</div>
+<div class="w-16 h-16 rounded-full bg-surface-container overflow-hidden border-4 border-[#FED7AA] shadow-sm">
+<img alt="Rank 3 User" class="w-full h-full object-cover" data-alt="A portrait of a non-binary student reading a book outdoors, soft autumn lighting, bronze and warm orange hues, academic campus setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVB5H2k7S_gThJduvQD6qZ3CbSibbercNk5GpufqKUZkoAYAO2EtiK-eV3VNFdgGNtDsitRdwIsGi0317sleomc_gGD4kamPKI8CyO7p-_utrzFuSc7eO3oU0RjTGy4adJcLh1AoRlt7_DfJ8uxaJaMCG8nfUTuRWBxwNGtwVebuBKFY_oijX0mY58W3qZCp88C48abRc0wuzgbiq1x0JkZ8-hjSwjSPuHGsJ68S3CrneS9yJon3Ym">
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary text-center text-[18px]">Sarah Chen</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-2">Bioinformatics</p>
+<div class="px-3 py-1 rounded bg-[#FFF7ED] border border-[#FDBA74] text-[#9A3412] font-label-md text-label-md">
+                                1,980 pts
+                            </div>
+<div class="w-full h-16 bg-[#FFEDD5] border-t border-l border-r border-[#FED7AA] mt-6 rounded-t-lg relative">
+<div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, #FDBA74 10px, #FDBA74 11px);"></div>
+</div>
+</div>
+</div>
+<!-- Ranked List (4-50) -->
+<div class="surface-card rounded-xl overflow-hidden">
+<div class="px-6 py-4 bg-surface-container-low border-b border-outline-variant/50 grid grid-cols-12 gap-4 items-center">
+<div class="col-span-2 md:col-span-1 font-label-md text-label-md text-on-surface-variant">Rank</div>
+<div class="col-span-7 md:col-span-8 font-label-md text-label-md text-on-surface-variant">Scholar</div>
+<div class="col-span-3 text-right font-label-md text-label-md text-on-surface-variant">Points</div>
+</div>
+<div class="flex flex-col divide-y divide-outline-variant/30">
+<!-- List Item 4 -->
+<div class="px-6 py-4 grid grid-cols-12 gap-4 items-center surface-card-interactive bg-white cursor-default">
+<div class="col-span-2 md:col-span-1 font-headline-sm text-headline-sm text-on-surface-variant/60">4</div>
+<div class="col-span-7 md:col-span-8 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-outline-variant/50 hidden sm:block">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A small avatar of a male researcher with glasses, minimalist academic style, soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDysqJUWgMbkXOVn6dsaPq-jbo1bkH-Fwx2rLdBxcYFPVRnLXgjb9hGF9aKIpdgEDvo_NP8CNnoXE-W46yULARtJw7E4VyNFRWB0q4tS8QECPndbFf9hFW6-Eo_kE8a1D3elc_Gi4Q5l9mm5AZYri4jkA1SrEfqgvLYjqIOno2SMcm0LS-73OXfccXcVvK04V3xHU2_6AVybx-sQMjiR9L3YyROuHjloH1BBQGeiSACiW-beIs1Z8th">
+</div>
+<div>
+<div class="font-body-md text-body-md font-semibold text-primary">Dr. Marcus Vance</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Senior ML Researcher</div>
+</div>
+</div>
+<div class="col-span-3 text-right font-body-md text-body-md text-secondary font-semibold">1,850</div>
+</div>
+<!-- List Item 5 -->
+<div class="px-6 py-4 grid grid-cols-12 gap-4 items-center surface-card-interactive bg-white cursor-default">
+<div class="col-span-2 md:col-span-1 font-headline-sm text-headline-sm text-on-surface-variant/60">5</div>
+<div class="col-span-7 md:col-span-8 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-outline-variant/50 hidden sm:block">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A small avatar of a female student looking focused, minimalist academic style, soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmyJtllUin-MqPrMWryyMgPOsOAJN4fPQcA0qx4GLAlx_OIEOD4f-tJCTfk9bR8IGD_vUbto9GKk4t8zPXXMtoTz_mE_XK9SdqnkjU96KVhE0qvIaUgL3DkL3M4MVg_GW_toZZRNG_aYxeA06hL7x8RRvfc4AaZ5CqQC2-Eas6oIyf0Cq5j_E2O3jkl4-7y1-9a_aDrKjQk7UIcEBliaHhXdsweKPTvm5iY3RNTi_sFkolGfv0Y4_W">
+</div>
+<div>
+<div class="font-body-md text-body-md font-semibold text-primary">Chloe Aris</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Cognitive Science</div>
+</div>
+</div>
+<div class="col-span-3 text-right font-body-md text-body-md text-secondary font-semibold">1,720</div>
+</div>
+<!-- List Item 6 -->
+<div class="px-6 py-4 grid grid-cols-12 gap-4 items-center surface-card-interactive bg-white cursor-default">
+<div class="col-span-2 md:col-span-1 font-headline-sm text-headline-sm text-on-surface-variant/60">6</div>
+<div class="col-span-7 md:col-span-8 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-outline-variant/50 hidden sm:block">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A small avatar of a person with short hair, minimalist academic style, soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZKhPotbASTRnHT9SVWnJR-nIbhDUC8k923vHU2PLL0-x2jHIPbQb77iiSfVNxv-tjlu9nUwuH-cfG-UPBvptDYyrPx1rE-0MOUuFLn79GIWAF2OsJtieCyJSNxvHoUB1_jSa7Z1Ta-kIQViUBTyEr4Q256jHjHpF2D5Qmvt5lmfnpUAiC9YbV8om5ce58c0OBsYRcba8_yU3xv20mBqvahbckaKh4tUuSySdRKIzjS7ViF39jz9-e">
+</div>
+<div>
+<div class="font-body-md text-body-md font-semibold text-primary">Alex Mercer</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Literature Fellow</div>
+</div>
+</div>
+<div class="col-span-3 text-right font-body-md text-body-md text-secondary font-semibold">1,680</div>
+</div>
+<!-- Current User (Highlighted) -->
+<div class="px-6 py-4 grid grid-cols-12 gap-4 items-center bg-surface-container border-l-4 border-secondary shadow-inner my-2">
+<div class="col-span-2 md:col-span-1 font-headline-sm text-headline-sm text-primary font-bold">12</div>
+<div class="col-span-7 md:col-span-8 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-secondary hidden sm:block">
+<img alt="Your Avatar" class="w-full h-full object-cover" data-alt="The current user's profile picture, high quality, professional academic setting, soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIQm3F3IWp8dKgxRXlda__qkdCUhyYAV0t6bKZEyJTiZmX3RCjt99Au2YwQXLz-IHW8tGPoPn4LIoZIUGpLc6CPLte_ciQJaX6emhg9hwKOc73CHXBKguh_Lkx5Vuuiw-wZ2SIK9QehT3_FoOoGaBzO2tZ8x433m3h2tz6Da9eaI3H8ODksukfhv2TURzg95D3sBMKUwT3CmFvgmy8RksQcBT03qrLqw773xK5fJmu4CoisgomrBmq">
+</div>
+<div>
+<div class="font-body-md text-body-md font-bold text-primary">You</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Learning Enthusiast</div>
+</div>
+</div>
+<div class="col-span-3 text-right">
+<div class="font-body-md text-body-md text-secondary font-bold">1,240</div>
+<div class="font-label-md text-label-md text-on-surface-variant mt-1">120 pts to Rank 11</div>
+</div>
+</div>
+<!-- List Item 7 -->
+<div class="px-6 py-4 grid grid-cols-12 gap-4 items-center surface-card-interactive bg-white cursor-default">
+<div class="col-span-2 md:col-span-1 font-headline-sm text-headline-sm text-on-surface-variant/60">13</div>
+<div class="col-span-7 md:col-span-8 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-outline-variant/50 hidden sm:block">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A small avatar of a person, minimalist academic style, soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9NBQ_GYK0tBVuwiB5JWvbvAgbpojvjipJwfbtedxJgfwnGtLqkARA4KNpczv2f3aopNKawwvpno5WmVcI5FC5z8L87NyBCKB1pSvAb2E7fZiP6uWDZzknowxqqYByputAGNjlQe7PuPP15869Fq5QrXiCGtBRiXwCu8v17HdhN6jqNLALBloEFPDs9G6RJxw2JTsEVsREbwEAiXzYYBCnLpe7jitf57pJzs2Hrwkw72c7lmYZPuT8">
+</div>
+<div>
+<div class="font-body-md text-body-md font-semibold text-primary">Samira Khan</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">History Major</div>
+</div>
+</div>
+<div class="col-span-3 text-right font-body-md text-body-md text-secondary font-semibold">1,190</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low text-center border-t border-outline-variant/50">
+<button class="font-label-md text-label-md text-primary hover:underline">View More Ranks</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Contextual Sidebars -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Spotlight Card -->
+<div class="surface-card rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-tertiary-fixed opacity-10 rounded-bl-full -mr-10 -mt-10 group-hover:scale-110 transition-transform duration-500"></div>
+<h4 class="font-headline-sm text-headline-sm text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed-dim icon-fill">workspace_premium</span>
+                            Monthly Spotlight
+                        </h4>
+<div class="flex items-center gap-4 mb-4">
+<div class="w-14 h-14 rounded bg-surface-container overflow-hidden border border-outline-variant">
+<img alt="Spotlight User" class="w-full h-full object-cover" data-alt="Portrait of a prominent contributor, academic aesthetic, warm study environment, high-quality, professional lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_PQcY1VE0HCdZoxxgAZ3q5sZuis0Pmweim8ldkI2myax4GLbVWwfG16CxGjuJQt90vdzsaf-ri554_Yjf4dR5ttmhyVJLPkxmMhLYbOjVyTukNx135EZ1lVZIMYCW9zLdlXHQmu00JNfHcOck875dOF9fx3e5ysHYJb4OuD5HPUfoRejJ4yUqCz8QWpQ8wM25hLdRRhl9iCCVX_OVoGCexMKI1feRToTawEcjRKxKjWDTM2SQ_Vxi">
+</div>
+<div>
+<div class="font-body-md text-body-md font-bold text-primary">Dr. Aria Lin</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Most Helpful Answers (54)</div>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic border-l-2 border-tertiary-fixed-dim pl-3 ml-1">
+                            "The pursuit of knowledge is best when shared. Thank you to the pod for the incredible discussions this month."
+                        </p>
+</div>
+<!-- How to Earn Points Guide (Ink aesthetic) -->
+<div class="bg-primary-container text-on-primary-container rounded-xl p-6 border border-primary">
+<h4 class="font-headline-sm text-headline-sm text-on-primary mb-4 border-b border-on-primary/20 pb-2">The Scholar's Path</h4>
+<p class="font-body-sm text-body-sm mb-6 opacity-90">Contribute to the Trailmark community to earn points and advance your rank.</p>
+<ul class="space-y-4">
+<li class="flex gap-3 items-start">
+<span class="material-symbols-outlined text-secondary-container text-[20px] mt-0.5">forum</span>
+<div>
+<div class="font-label-md text-label-md text-on-primary">Helpful Answers</div>
+<div class="font-body-sm text-body-sm opacity-70">+15 pts per accepted answer</div>
+</div>
+</li>
+<li class="flex gap-3 items-start">
+<span class="material-symbols-outlined text-secondary-container text-[20px] mt-0.5">check_circle</span>
+<div>
+<div class="font-label-md text-label-md text-on-primary">Milestone Completion</div>
+<div class="font-body-sm text-body-sm opacity-70">+50 pts per trail completed</div>
+</div>
+</li>
+<li class="flex gap-3 items-start">
+<span class="material-symbols-outlined text-secondary-container text-[20px] mt-0.5">swords</span>
+<div>
+<div class="font-label-md text-label-md text-on-primary">Quiz Battles</div>
+<div class="font-body-sm text-body-sm opacity-70">+20 pts for top 3 placement</div>
+</div>
+</li>
+<li class="flex gap-3 items-start">
+<span class="material-symbols-outlined text-secondary-container text-[20px] mt-0.5">rate_review</span>
+<div>
+<div class="font-label-md text-label-md text-on-primary">Peer Review</div>
+<div class="font-body-sm text-body-sm opacity-70">+10 pts per quality review</div>
+</div>
+</li>
+</ul>
+<button class="mt-8 w-full py-2 bg-on-primary-fixed-variant/30 text-on-primary rounded border border-on-primary/20 hover:bg-on-primary-fixed-variant/50 transition-colors font-label-md text-label-md">
+                            View Full Rubric
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+
+</body></html>

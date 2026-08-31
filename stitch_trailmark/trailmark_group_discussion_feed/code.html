@@ -1,0 +1,524 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Group Discussion - Trailmark</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#8bd4c3",
+                      "on-error-container": "#93000a",
+                      "on-surface": "#1b1b1d",
+                      "on-tertiary-container": "#ac8225",
+                      "secondary": "#1a6a5b",
+                      "surface-bright": "#fbf8fb",
+                      "surface-dim": "#dcd9dc",
+                      "on-secondary-fixed-variant": "#005144",
+                      "on-secondary-container": "#237061",
+                      "surface-variant": "#e4e2e4",
+                      "surface-container-low": "#f5f3f5",
+                      "primary-fixed-dim": "#bbc6e7",
+                      "secondary-fixed": "#a7f1de",
+                      "on-primary-fixed-variant": "#3c4661",
+                      "on-primary-container": "#7e88a7",
+                      "inverse-primary": "#bbc6e7",
+                      "surface-tint": "#535e7a",
+                      "error": "#ba1a1a",
+                      "inverse-on-surface": "#f3f0f2",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#16213a",
+                      "surface": "#fbf8fb",
+                      "surface-container-high": "#eae7ea",
+                      "background": "#fbf8fb",
+                      "secondary-container": "#a7f1de",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-fixed": "#ffdea4",
+                      "on-tertiary-fixed-variant": "#5d4200",
+                      "tertiary-fixed-dim": "#f0bf5c",
+                      "outline": "#76777e",
+                      "on-secondary": "#ffffff",
+                      "outline-variant": "#c6c6ce",
+                      "on-tertiary-fixed": "#261900",
+                      "primary": "#010a22",
+                      "tertiary-container": "#2e1f00",
+                      "inverse-surface": "#303032",
+                      "tertiary": "#110a00",
+                      "surface-container": "#f0edf0",
+                      "primary-fixed": "#d9e2ff",
+                      "on-surface-variant": "#45464d",
+                      "surface-container-highest": "#e4e2e4",
+                      "on-secondary-fixed": "#00201a",
+                      "on-error": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-primary-fixed": "#101b34",
+                      "on-background": "#1b1b1d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "trail-width": "4px",
+                      "container-max-width": "1280px",
+                      "margin-desktop": "40px",
+                      "gutter": "24px",
+                      "unit": "8px"
+              },
+              "fontFamily": {
+                      "body-sm": [
+                              "inter"
+                      ],
+                      "headline-sm": [
+                              "sourceSerif4"
+                      ],
+                      "body-md": [
+                              "inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "sourceSerif4"
+                      ],
+                      "label-md": [
+                              "inter"
+                      ],
+                      "body-lg": [
+                              "inter"
+                      ],
+                      "headline-lg": [
+                              "sourceSerif4"
+                      ],
+                      "headline-md": [
+                              "sourceSerif4"
+                      ],
+                      "display-lg": [
+                              "sourceSerif4"
+                      ]
+              },
+              "fontSize": {
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Modern Academic Aesthetic Additions */
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        /* Subtle paper texture */
+        .paper-texture {
+            position: relative;
+        }
+        .paper-texture::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Ink wash effects */
+        .ink-border {
+            border: 1px solid theme('colors.outline-variant');
+        }
+        .ink-border-heavy {
+            border: 2px solid theme('colors.primary-container');
+        }
+        
+        /* Trail connector line */
+        .trail-spine {
+            width: theme('spacing.trail-width');
+            background-color: theme('colors.secondary-fixed-dim');
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            z-index: 0;
+        }
+
+        .content-card {
+            background-color: theme('colors.surface-container-lowest');
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden paper-texture">
+<!-- TopNavBar (Mobile Only) -->
+<nav class="md:hidden flex justify-between items-center px-margin-mobile py-4 w-full bg-surface/80 backdrop-blur-md sticky top-0 z-40 border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A minimalist logo for a scholarly app, featuring a stylized open book turning into abstract geometric lines, rendered in deep navy ink against a pristine white background. The aesthetic is clean, academic, and highly professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOMzcK9UJjEoyT8LP3dFEfAZqsz9EMF7Oz0qTXMKmwjuQW8kIMHPHa-HHx-4zu8IZE-F21J87MhRujNCWBJ8fQmnz5w0CiISnIX0rGq3j5AgOk4bbV9QKkWTRk6ITdUQb0ye4Wqrwz492rUWjBigxFq60xQ_jJ2EUUb1O3k4Ag5pYmmbNIVN_nWXuG8t_UZZ1yITIno-OxF9eY4UgnRM23SQpQ_2SS5TJIPGwzXJD4bbyjvk7_St2y">
+<span class="text-headline-md font-headline-md font-bold text-primary">Trailmark</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:text-secondary-fixed transition-colors">notifications</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:text-secondary-fixed transition-colors">settings</span>
+</div>
+</nav>
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex flex-col h-full p-6 space-y-2 bg-primary-container text-on-primary-container fixed left-0 top-0 w-[280px] z-50">
+<div class="flex flex-col mb-8 gap-1">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A minimalist logo for a scholarly app, featuring a stylized open book turning into abstract geometric lines, rendered in soft white ink against a deep navy blue background. The aesthetic is clean, academic, and highly professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFTZB14vKKUOd1HeSMtS3G4QmzWc3Py7LRDxsNP-K2G-J2kiAYRc8RjNMBPQ-Me3wRrQXuqlOjZw3G0uu0CeJQ13uODZoeAvg1BDebt3leyOKYX-mhEoBY81wq_Rw82ZmHnRYPnDQlg2gH3AAT_loqd0oiZSyC7K1cgG3Qu5qrvFXiIsTgncD3M1q3CPBFZaIBL3JWI2yjHJxww97G02zUHI27oRvDxGt5UiX5oDgYGbiqGM8scvoH">
+<div class="flex flex-col">
+<span class="text-headline-sm font-headline-sm text-secondary-fixed">Trailmark</span>
+<span class="font-label-md text-label-md text-on-primary-container/80">Academic Workspace</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md py-3 px-4 rounded-lg flex items-center justify-center gap-2 mb-6 hover:bg-secondary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+            New Study Session
+        </button>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-4 text-on-primary-container/70 px-4 py-3 hover:bg-primary/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 bg-primary text-secondary-fixed rounded-lg px-4 py-3 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-md text-label-md">Study Groups</span>
+</a>
+<a class="flex items-center gap-4 text-on-primary-container/70 px-4 py-3 hover:bg-primary/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">timeline</span>
+<span class="font-label-md text-label-md">Learning Trails</span>
+</a>
+<a class="flex items-center gap-4 text-on-primary-container/70 px-4 py-3 hover:bg-primary/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">book</span>
+<span class="font-label-md text-label-md">Library</span>
+</a>
+<a class="flex items-center gap-4 text-on-primary-container/70 px-4 py-3 hover:bg-primary/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 space-y-1 border-t border-primary">
+<a class="flex items-center gap-4 text-on-primary-container/70 px-4 py-3 hover:bg-primary/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-4 text-on-primary-container/70 px-4 py-3 hover:bg-primary/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Account</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-[280px] flex h-full overflow-hidden">
+<!-- Center Feed -->
+<div class="flex-1 h-full overflow-y-auto px-margin-mobile md:px-margin-desktop py-8 relative">
+<div class="max-w-3xl mx-auto relative">
+<!-- The Learning Trail Spine -->
+<div class="hidden md:block trail-spine -ml-12"></div>
+<!-- Header -->
+<header class="mb-12 relative z-10 pl-0 md:pl-0">
+<div class="flex items-start justify-between flex-wrap gap-4">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-secondary text-sm">auto_awesome</span>
+<span class="font-label-md text-label-md text-secondary">Active Discussion</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Deep Learning Fundamentals</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Exploring neural architectures, optimization, and advanced implementations.</p>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-3 rounded-lg flex items-center gap-2 hover:bg-primary-fixed-dim hover:text-on-primary-fixed-variant transition-colors border border-primary">
+<span class="material-symbols-outlined text-sm">edit</span>
+                            Start New Discussion
+                        </button>
+</div>
+</header>
+<!-- Threaded Discussions -->
+<div class="space-y-8 relative z-10">
+<!-- Post 1: Technical Question -->
+<article class="content-card ink-border rounded-xl p-6 transition-all hover:shadow-[0_0_12px_rgba(0,0,0,0.08)]">
+<div class="flex items-start gap-4 mb-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A soft, ink-wash style portrait avatar of an academic scholar, painted with minimalist strokes in deep navy and muted greys, against a soft white background. The aesthetic is reminiscent of a digital academic journal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADKVG6ymHtK3jKs07Y-H97RTUvaERZoniuv4ZEf_vpkN8cU5w0-nfGaYaCXhcy5ste3SiFNVAPCrttcoJCAdYi8Guw9l3p-R4NktIDyz2qMDxdR--snaYS3caoHtfpPBxQ9vwMVQ9qJ70cuq1S6e5-Wn5qhDs6OdxF5wcJL2C4CU2jslJnjezTE4n4fKFCmKTKLoF1Jb2FMSF_14jSGP047DUwN9EDJ-Du418b6B2faI4iUWGMiJUI">
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-primary">Elena Rostova</h3>
+<span class="font-label-md text-label-md text-on-surface-variant">2h ago</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Module 4: Backpropagation Basics</span>
+</div>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary mb-3">Intuition behind Vanishing Gradients in deep networks?</h2>
+<!-- AI Summary Chip -->
+<div class="bg-primary-fixed/20 border border-primary-fixed-dim rounded-lg p-3 mb-4 flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary text-sm mt-0.5">psychology</span>
+<p class="font-body-sm text-body-sm text-primary m-0"><strong class="font-semibold">AI Summary:</strong> Elena is struggling to conceptualize why gradients diminish exponentially as they propagate backward through many layers, specifically seeking an intuitive explanation beyond the mathematical chain rule.</p>
+</div>
+<p class="font-body-md text-body-md text-on-surface mb-6 leading-relaxed">
+                            I understand the math (chain rule multiplying small numbers), but I'm struggling with the intuition. Why does the network "forget" the error signal the deeper it goes? Is it purely a structural issue with the architecture, or is it fundamentally tied to the choice of activation function (like Sigmoid squashing)?
+                        </p>
+<div class="flex items-center gap-6 border-t border-surface-variant pt-4">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-secondary transition-colors group">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">thumb_up</span>
+<span class="font-label-md text-label-md">12 Helpful</span>
+</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors group">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">chat_bubble</span>
+<span class="font-label-md text-label-md">5 Replies</span>
+</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors group">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">library_books</span>
+<span class="font-label-md text-label-md">Cite</span>
+</button>
+<button class="ml-auto text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+</button>
+</div>
+</article>
+<!-- Post 2: Resource Share -->
+<article class="content-card ink-border rounded-xl p-6 transition-all hover:shadow-[0_0_12px_rgba(0,0,0,0.08)]">
+<div class="flex items-start gap-4 mb-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimal, elegant ink-wash portrait of a researcher, using sophisticated monochrome tones on a textured paper-like background. The look is professional, understated, and academic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPmQ4JorztK1iZXnaadZOOIu0dGg0OkGUbC6rPV4WjPA-k-motG7X5okQgR8HrEB-QyqXYmi1VW-HOUHZyKDvOqcshuaD8HsEIUFlxzu41AJyj8jsjjQlaNJFdoulNsm-duWLAdUss831_wnt_1-CsCyjiOmTqd0Zcuyd9jifMS10qyu-q2EYl_iL9_uVvzP2JD0jrczxZkKS81jNIv-ObdijD8ge2BXjt-nBdAR04zGdAAXiFf1PK">
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-primary">Dr. Aris Thorne <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-secondary-fixed text-on-secondary-fixed-variant uppercase tracking-wider">Trail Guide</span></h3>
+<span class="font-label-md text-label-md text-on-surface-variant">5h ago</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">Supplemental Reading</span>
+</div>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary mb-3">Must Read: "Attention Is All You Need" Contextualized</h2>
+<p class="font-body-md text-body-md text-on-surface mb-4 leading-relaxed">
+                            Before we dive into Transformers next week, I highly recommend reviewing this foundational paper. I've highlighted the specific sections on self-attention mechanisms that we'll be implementing in our lab. Pay special attention to Section 3.2 on Multi-Head Attention.
+                        </p>
+<!-- PDF Preview Inline -->
+<div class="border border-outline-variant rounded-lg p-4 mb-6 bg-surface-container-low flex items-start gap-4">
+<div class="w-12 h-16 bg-surface-container-lowest border border-outline flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">picture_as_pdf</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-body-md text-primary">Attention Is All You Need.pdf</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-2">Vaswani et al., 2017 • 15 pages</p>
+<button class="text-secondary font-label-md text-label-md hover:underline">Read Inline Preview</button>
+</div>
+</div>
+<div class="flex items-center gap-6 border-t border-surface-variant pt-4">
+<button class="flex items-center gap-2 text-secondary hover:text-secondary-fixed-dim transition-colors group">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<span class="font-label-md text-label-md">34 Helpful</span>
+</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors group">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">chat_bubble</span>
+<span class="font-label-md text-label-md">18 Replies</span>
+</button>
+<button class="ml-auto text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+</button>
+</div>
+</article>
+<!-- Post 3: Peer Review -->
+<article class="content-card ink-border rounded-xl p-6 transition-all hover:shadow-[0_0_12px_rgba(0,0,0,0.08)]">
+<div class="absolute -left-1 top-6 w-1 h-12 bg-tertiary-fixed-dim rounded-r"></div>
+<div class="flex items-start gap-4 mb-4 pl-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A stylized, minimalist avatar for a student, featuring abstract watercolor-like shapes in muted blues and greys, evoking a sense of quiet study and focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmM-96pc_N2_xZcVAYFGsMw45R72A7pNOjxX9FFuEbvNi7Lsz16BOqrY0-XWIJ4SJaJ0porwZTX7ncEBAjO9ZnqnnE6F9A9zeDtp-53aKLJ7yVBayPI0-JZWW2ZvhPD5Nx_gyxfVBh5NaO3FTwOYSHwCvwfibsINa_SvUxZhXWPhIbsYFAD1Kh8bZfAZcL5y8eZMUm-3ZBE0XSM9lR_0QseBA8HlaIPcgr-oP7zXIWj01C5_Vg3cRa">
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-primary">Marcus Vance</h3>
+<span class="font-label-md text-label-md text-on-surface-variant">Yesterday</span>
+</div>
+<span class="font-label-md text-label-md text-tertiary-container font-semibold">Peer Review Request</span>
+</div>
+</div>
+<div class="pl-2">
+<h2 class="font-headline-md text-headline-md text-primary mb-3">Feedback needed: PyTorch CNN Implementation (Lab 2)</h2>
+<p class="font-body-md text-body-md text-on-surface mb-4 leading-relaxed">
+                                I'm getting a shape mismatch error in the fully connected layer after my second MaxPool2d. I suspect my stride calculation is off. Could someone review my forward pass logic?
+                            </p>
+<!-- Code Snippet -->
+<div class="bg-[#1e1e2e] text-[#cdd6f4] p-4 rounded-lg font-mono text-[13px] overflow-x-auto mb-6 ink-border">
+<pre><code>def forward(self, x):
+    x = self.pool1(F.relu(self.conv1(x)))
+    x = self.pool2(F.relu(self.conv2(x)))
+    x = x.view(-1, 16 * 5 * 5) # Error occurs here
+    x = F.relu(self.fc1(x))
+    return x</code></pre>
+</div>
+<div class="flex items-center gap-6 border-t border-surface-variant pt-4">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-secondary transition-colors group">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">thumb_up</span>
+<span class="font-label-md text-label-md">2 Helpful</span>
+</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors group">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">chat_bubble</span>
+<span class="font-label-md text-label-md">8 Replies</span>
+</button>
+<button class="ml-auto text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Bottom spacing for scrolling -->
+<div class="h-32"></div>
+</div>
+</div>
+<!-- Right Sidebar: Context & Insights (Desktop Only) -->
+<aside class="hidden lg:block w-[320px] bg-surface border-l border-outline-variant p-6 overflow-y-auto">
+<div class="mb-8 space-y-6">
+  <h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-4">Trail Guide Insights</h3>
+  
+  <!-- Current Mastery -->
+  <div class="ink-border rounded-lg p-4 bg-surface-container-lowest">
+    <div class="flex justify-between items-center mb-2">
+      <span class="font-label-md text-label-md text-on-surface-variant">Current Mastery</span>
+      <span class="font-label-md text-label-md text-secondary font-bold">68%</span>
+    </div>
+    <div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+      <div class="bg-secondary h-full rounded-full" style="width: 68%"></div>
+    </div>
+    <p class="font-body-sm text-[12px] text-on-surface-variant mt-2 italic">"You're excelling in Gradient Descent; focus on Chain Rule applications next."</p>
+  </div>
+
+  <!-- Recommended Next Step -->
+  <div class="bg-primary-container text-on-primary-container rounded-lg p-4 border border-primary">
+    <div class="flex items-center gap-2 mb-2">
+      <span class="material-symbols-outlined text-secondary-fixed text-sm">bolt</span>
+      <span class="font-label-md text-label-md text-secondary-fixed uppercase tracking-wider">Next Step</span>
+    </div>
+    <h4 class="font-headline-sm text-body-md text-surface-bright mb-3">Take the Backpropagation Quiz</h4>
+    <button class="w-full py-2 bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md rounded hover:bg-secondary transition-colors">Start Assessment</button>
+  </div>
+
+  <!-- Cohort Pulse -->
+  <div class="px-1">
+    <div class="flex items-center justify-between mb-2">
+      <h4 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Cohort Pulse</h4>
+      <span class="flex h-2 w-2 rounded-full bg-secondary"></span>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="flex -space-x-2">
+        <div class="w-6 h-6 rounded-full border border-surface bg-surface-container-high flex items-center justify-center text-[10px] font-bold">82%</div>
+      </div>
+      <p class="font-body-sm text-[12px] text-on-surface-variant">Most scholars are currently reviewing <span class="text-primary font-semibold">Module 4</span>.</p>
+    </div>
+  </div>
+</div>
+<div class="mb-8">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-4">Pinned Topics</h3>
+<ul class="space-y-3">
+<li class="">
+<a class="flex items-start gap-3 group" href="#">
+<span class="material-symbols-outlined text-secondary text-sm mt-0.5">push_pin</span>
+<div>
+<h4 class="font-body-sm text-body-sm text-primary group-hover:underline">Lab 3 Setup Guide (Updated)</h4>
+<span class="font-label-md text-[10px] text-on-surface-variant">Pinned by Guide</span>
+</div>
+</a>
+</li>
+<li class="">
+<a class="flex items-start gap-3 group" href="#">
+<span class="material-symbols-outlined text-secondary text-sm mt-0.5">push_pin</span>
+<div>
+<h4 class="font-body-sm text-body-sm text-primary group-hover:underline">Office Hours Schedule (Week 4)</h4>
+<span class="font-label-md text-[10px] text-on-surface-variant">Pinned by Guide</span>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-4">Active Scholars</h3>
+<div class="flex flex-wrap gap-2">
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover hover:border-secondary transition-colors cursor-pointer" data-alt="A small, circular profile avatar showing a minimalist ink sketch of a person reading, using dark navy lines on white paper background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAE5CsgZPHRbkFxTOtf9U5Sz5kzN4GUvjl_z-p7bJDY6vrgxg1nLuola8ZCSfearIhrrk6eAw_-3vbrAr0t5DqSoOL5pPrMu53XyREfXLuP-iCFGfWgUNxWU8f2qpwAlXYwxbcgPE_nxptHeulFuY2Tx_wENh-SVZw5ixYUdNx6AlfEnFaKHuznMdqdzD_tICCn_RWQ2dvamuBjCz_8ev9msCf8JEgkhRxCFwWSAyDJp77Fm-NndMFy" title="Elena Rostova">
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover hover:border-secondary transition-colors cursor-pointer" data-alt="A small, circular profile avatar showing an abstract geometric pattern resembling an open book, rendered in muted academic tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqWUZUpWUlvz9qUeDv1q_kGA4fmVrB6u6tSCQX9wslQ26N2gboK-qjN5fM7yOILs2Xg1hPQUPxAaS0FbPA1S3P4T6Tw0_0CPuzgq3oGklIbQVTrJ62YH73huRBj7rfWRwWN1PEU0iaYnfectKy3cAxX_v3EEGbD4TL_KSsUGEGerLq3_LCMZqoZazEebG64Grjnr4LecV-cMiliNpWT2zH_0zHM6Jsa5kLZ_2gUdh64_ruvL9uujE2" title="Marcus Vance">
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover hover:border-secondary transition-colors cursor-pointer" data-alt="A small, circular profile avatar of a scholarly looking individual, rendered in a sophisticated, minimalist line-art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClbs_QViB71k3gatWj8u_fsY1sIRB3Hs_7Z0LWmzvhVoTxEiLa0FrYbOguHj5og-JpW7OGLG2LjRuLvBSubIm2NRMBTmLRpvR5rZIf2ze_-M9xeSgUbbFaNt3QiZ-AXe1DcfDVCwT41UWTZ-PCnxcAoiZeYhfeLZQIhbqvEVGYjqJV2lG19ztW8VzP8bSpmZMdusB1pk72dscJ5H2QTDthqUA6jZICvdNproJezhO5qeZix-iZOLg0" title="Sarah Chen">
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover hover:border-secondary transition-colors cursor-pointer" data-alt="A small, circular profile avatar featuring a subtle watercolor wash in deep blue and grey, typical of a professional academic profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJN4vIXEDCcuDePD9UBczekL1WLZhaxnbRNJSK5gztxPPeymQFKqII7HQYJ_UYVWR-dzaicanv5HAcGY-rxGDSx2BGvdPRcQdEqQv7oknxGQGLbT-izmJFsvslpYN_YDBfAUdRZjdsMWDIJZfs7BvpWDAf5Y4jMFpQBYQ5pgTwxcxVIGdIDFeIf7gHBfnMQl0d7bIKaNv97NI6xOFccR4jd7SgMQv3EFDLFc_NCcIQH2TLolZBNLQm" title="James Doe">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center cursor-pointer hover:bg-surface-variant transition-colors">
+<span class="font-label-md text-label-md text-on-surface-variant">+12</span>
+</div>
+</div>
+</div>
+</aside>
+</main>
+
+
+</body></html>

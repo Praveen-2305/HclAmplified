@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trailmark | Final Assessment Review</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f5f3f5",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e4e2e4",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#a7f1de",
+                        "on-primary-fixed": "#101b34",
+                        "secondary": "#1a6a5b",
+                        "error-container": "#ffdad6",
+                        "surface": "#fbf8fb",
+                        "tertiary-container": "#2e1f00",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#ac8225",
+                        "on-tertiary-fixed": "#261900",
+                        "on-background": "#1b1b1d",
+                        "tertiary-fixed": "#ffdea4",
+                        "outline-variant": "#c6c6ce",
+                        "on-secondary-fixed-variant": "#005144",
+                        "surface-bright": "#fbf8fb",
+                        "on-primary-container": "#7e88a7",
+                        "inverse-on-surface": "#f3f0f2",
+                        "inverse-surface": "#303032",
+                        "primary": "#010a22",
+                        "outline": "#76777e",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1b1b1d",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#16213a",
+                        "surface-tint": "#535e7a",
+                        "surface-variant": "#e4e2e4",
+                        "secondary-fixed": "#a7f1de",
+                        "secondary-fixed-dim": "#8bd4c3",
+                        "inverse-primary": "#bbc6e7",
+                        "on-primary-fixed-variant": "#3c4661",
+                        "primary-fixed": "#d9e2ff",
+                        "on-surface-variant": "#45464d",
+                        "on-secondary-fixed": "#00201a",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "primary-fixed-dim": "#bbc6e7",
+                        "surface-container-high": "#eae7ea",
+                        "surface-dim": "#dcd9dc",
+                        "on-secondary-container": "#237061",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "on-secondary": "#ffffff",
+                        "background": "#fbf8fb",
+                        "tertiary": "#110a00",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f0edf0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "trail-width": "4px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "container-max-width": "1280px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["sourceSerif4"],
+                        "headline-lg-mobile": ["sourceSerif4"],
+                        "headline-sm": ["sourceSerif4"],
+                        "body-sm": ["inter"],
+                        "body-md": ["inter"],
+                        "label-md": ["inter"],
+                        "body-lg": ["inter"],
+                        "headline-lg": ["sourceSerif4"],
+                        "display-lg": ["sourceSerif4"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Fallback fonts if custom ones fail to load immediately */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
+        
+        .font-headline-md, .font-headline-lg, .font-headline-sm, .font-display-lg, .font-headline-lg-mobile {
+            font-family: 'Source Serif 4', serif;
+        }
+        .font-body-md, .font-body-sm, .font-label-md, .font-body-lg {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- 
+        Navigation Shell Supression:
+        Per rules, transactional/success screens (like this final review before cert) 
+        must suppress TopAppBar and Side/Bottom navs to prioritize the canvas.
+    -->
+<main class="max-w-3xl mx-auto px-margin-mobile sm:px-margin-desktop py-16 flex-grow w-full flex flex-col gap-12 relative z-10">
+<!-- Header -->
+<header class="text-center space-y-4">
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight">Final Review</h1>
+<p class="font-headline-sm text-headline-sm text-on-surface-variant">Deep Learning Fundamentals</p>
+</header>
+<!-- Performance Overview (Radial Chart) -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 md:p-12 flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Subtle background texture hint -->
+<div class="absolute inset-0 opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIi8+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMwMDAiLz4KPC9zdmc+')]"></div>
+<div class="relative z-10 w-48 h-48 sm:w-56 sm:h-56">
+<!-- CSS Based Radial Progress -->
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<!-- Background Circle -->
+<circle class="text-surface-container-high" cx="50" cy="50" fill="none" r="46" stroke="currentColor" stroke-width="4"></circle>
+<!-- Progress Circle (92%) : Circumference ~289. 92% of 289 = ~265. Offset = 289-265 = 24 -->
+<circle class="text-secondary drop-shadow-sm transition-all duration-1000 ease-out" cx="50" cy="50" fill="none" r="46" stroke="currentColor" stroke-dasharray="289" stroke-dashoffset="24" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline-lg text-headline-lg text-primary">92%</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mt-1">Mastery</span>
+</div>
+</div>
+<p class="mt-8 text-center font-body-md text-body-md text-on-surface max-w-lg relative z-10">
+                Outstanding performance. You have demonstrated a comprehensive understanding of core neural network architectures and optimization strategies.
+            </p>
+</section>
+<!-- Detailed Feedback Loops (Bento-style Cards) -->
+<section class="grid md:grid-cols-2 gap-6">
+<!-- Strengths -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 flex flex-col gap-6 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+<header class="flex items-center gap-3 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Key Strengths</h3>
+</header>
+<div class="bg-secondary-container/10 rounded border border-secondary-container p-4">
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+<strong class="font-label-md text-label-md text-on-secondary-container uppercase tracking-wider block mb-1">Trail Guide Note</strong>
+                        Your grasp on Backpropagation algorithms was flawless, completing complex chain-rule calculations 15% faster than average cohort times.
+                    </p>
+</div>
+<ul class="space-y-3 font-body-sm text-body-sm text-on-surface-variant border-t border-surface-dim pt-4">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-sm mt-0.5 text-secondary">check</span>
+                        Loss Functions &amp; Optimization
+                    </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-sm mt-0.5 text-secondary">check</span>
+                        CNN Feature Extraction
+                    </li>
+</ul>
+</div>
+<!-- Growth Areas -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 flex flex-col gap-6 relative overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+<div class="absolute top-0 left-0 w-1 h-full bg-on-tertiary-container"></div>
+<header class="flex items-center gap-3 text-on-tertiary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Growth Areas</h3>
+</header>
+<div class="bg-tertiary-fixed/30 rounded border border-tertiary-fixed p-4">
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+<strong class="font-label-md text-label-md text-on-tertiary-fixed-variant uppercase tracking-wider block mb-1">Trail Guide Note</strong>
+                        Review regularization techniques. You exhibited slight hesitation distinguishing when to apply L1 versus L2 penalties in sparse datasets.
+                    </p>
+</div>
+<ul class="space-y-3 font-body-sm text-body-sm text-on-surface-variant border-t border-surface-dim pt-4">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-sm mt-0.5 text-on-tertiary-container">arrow_right</span>
+                        Dropout Layer Placement
+                    </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-sm mt-0.5 text-on-tertiary-container">arrow_right</span>
+                        Hyperparameter Tuning Heuristics
+                    </li>
+</ul>
+</div>
+</section>
+<!-- Interactive Review Section -->
+<section class="flex flex-col gap-4">
+<!-- Toggle Header -->
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-sm">
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-sm text-headline-sm text-primary">Review Incorrect Answers</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Deep dive into the 4 questions you missed.</p>
+</div>
+<!-- Custom Tailwind Toggle -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<!-- Expanded Question Breakdown (Visible State) -->
+<div class="p-6 md:p-8 bg-surface-container-lowest border border-surface-dim border-l-4 border-l-error rounded-r-lg shadow-sm">
+<header class="flex justify-between items-start mb-6">
+<span class="font-label-md text-label-md text-error uppercase tracking-widest bg-error-container/50 px-2 py-1 rounded">Question 14</span>
+<span class="material-symbols-outlined text-error text-lg" style="font-variation-settings: 'FILL' 1;">close</span>
+</header>
+<h4 class="font-headline-md text-headline-md text-primary mb-8 max-w-2xl">
+                    Which regularization technique is most effective for feature selection by driving some weights exactly to zero?
+                </h4>
+<div class="space-y-4">
+<!-- User's Incorrect Selection -->
+<div class="flex items-center gap-4 p-4 rounded bg-error-container/30 border border-error-container text-on-error-container relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error opacity-50"></div>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">radio_button_checked</span>
+<span class="font-body-md text-body-md">L2 Regularization (Ridge)</span>
+<span class="ml-auto font-label-md text-label-md uppercase tracking-wider opacity-70">Your Answer</span>
+</div>
+<!-- Correct Answer -->
+<div class="flex items-center gap-4 p-4 rounded border border-secondary text-on-secondary-container bg-secondary-container/10 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md font-medium">L1 Regularization (Lasso)</span>
+<span class="ml-auto font-label-md text-label-md uppercase tracking-wider text-secondary">Correct Answer</span>
+</div>
+</div>
+<!-- Trail Guide Commentary -->
+<div class="mt-8 pt-6 border-t border-surface-dim flex gap-5 items-start">
+<div class="bg-primary-container p-2 rounded-full shrink-0">
+<span class="material-symbols-outlined text-on-primary-container text-xl" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<div>
+<h5 class="font-label-md text-label-md text-primary uppercase tracking-widest mb-2">Trail Guide Insight</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                            L2 shrinks weights evenly but rarely to exactly zero, meaning all features are kept. L1 (Lasso) acts as a feature selector by aggressively zeroing out less important features. Think of L1 as an editor crossing out entire sentences, while L2 is just turning down the volume of the whole paragraph.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Final Action Area -->
+<footer class="pt-8 border-t border-surface-dim mt-4 flex justify-center pb-8">
+<button class="bg-primary hover:bg-on-primary-fixed-variant text-on-primary font-label-md text-label-md uppercase tracking-widest px-10 py-5 rounded transition-all flex items-center gap-3 group shadow-sm hover:shadow-md">
+                Proceed to Certification
+                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</footer>
+</main>
+</body></html>

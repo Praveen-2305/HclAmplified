@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trailmark | Path Certification</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=inter:wght@100..900&family=sourceSerif4:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f5f3f5",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e4e2e4",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#a7f1de",
+                        "on-primary-fixed": "#101b34",
+                        "secondary": "#1a6a5b",
+                        "error-container": "#ffdad6",
+                        "surface": "#fbf8fb",
+                        "tertiary-container": "#2e1f00",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#ac8225",
+                        "on-tertiary-fixed": "#261900",
+                        "on-background": "#1b1b1d",
+                        "tertiary-fixed": "#ffdea4",
+                        "outline-variant": "#c6c6ce",
+                        "on-secondary-fixed-variant": "#005144",
+                        "surface-bright": "#fbf8fb",
+                        "on-primary-container": "#7e88a7",
+                        "inverse-on-surface": "#f3f0f2",
+                        "inverse-surface": "#303032",
+                        "primary": "#010a22",
+                        "outline": "#76777e",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1b1b1d",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#16213a",
+                        "surface-tint": "#535e7a",
+                        "surface-variant": "#e4e2e4",
+                        "secondary-fixed": "#a7f1de",
+                        "secondary-fixed-dim": "#8bd4c3",
+                        "inverse-primary": "#bbc6e7",
+                        "on-primary-fixed-variant": "#3c4661",
+                        "primary-fixed": "#d9e2ff",
+                        "on-surface-variant": "#45464d",
+                        "on-secondary-fixed": "#00201a",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "primary-fixed-dim": "#bbc6e7",
+                        "surface-container-high": "#eae7ea",
+                        "surface-dim": "#dcd9dc",
+                        "on-secondary-container": "#237061",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "on-secondary": "#ffffff",
+                        "background": "#fbf8fb",
+                        "tertiary": "#110a00",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f0edf0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "trail-width": "4px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "container-max-width": "1280px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["sourceSerif4"],
+                        "headline-lg-mobile": ["sourceSerif4"],
+                        "headline-sm": ["sourceSerif4"],
+                        "body-sm": ["inter"],
+                        "body-md": ["inter"],
+                        "label-md": ["inter"],
+                        "body-lg": ["inter"],
+                        "headline-lg": ["sourceSerif4"],
+                        "display-lg": ["sourceSerif4"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Minimalist scrollbar for a cleaner canvas */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-container-low');
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.outline-variant');
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline');
+        }
+        
+        .paper-texture {
+            background-image: radial-gradient(theme('colors.outline-variant') 0.5px, transparent 0.5px);
+            background-size: 8px 8px;
+            background-color: theme('colors.surface-container-lowest');
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- App Shell: SideNavBar (Web Only) -->
+<nav class="fixed left-0 top-0 h-full w-[280px] bg-primary-container dark:bg-primary-container border-r border-primary flex flex-col py-8 px-4 hidden md:flex z-40">
+<!-- Header -->
+<div class="flex items-center gap-4 mb-12 px-2">
+<div class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center overflow-hidden shrink-0">
+<span class="material-symbols-outlined text-primary text-[24px]">person</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-primary-container">Learning Path</h2>
+<p class="font-body-sm text-body-sm text-on-primary-container opacity-80">Digger Mode Active</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 flex flex-col gap-2">
+<!-- Active Tab: Current Trail (Contextual Match for completion) -->
+<a class="flex items-center gap-4 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-transform scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">map</span>
+<span class="font-body-md text-body-md">Current Trail</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex items-center gap-4 px-4 py-3 text-on-primary-fixed-variant hover:text-on-primary-container hover:bg-on-primary-fixed-variant/10 transition-all rounded-lg scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-body-md text-body-md">Resources</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-primary-fixed-variant hover:text-on-primary-container hover:bg-on-primary-fixed-variant/10 transition-all rounded-lg scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">dictionary</span>
+<span class="font-body-md text-body-md">Glossary</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-primary-fixed-variant hover:text-on-primary-container hover:bg-on-primary-fixed-variant/10 transition-all rounded-lg scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-body-md text-body-md">Trail Guide</span>
+</a>
+</div>
+<!-- CTA -->
+<div class="mb-8 px-2">
+<button class="w-full py-3 px-4 border border-outline-variant text-on-primary-container rounded-lg font-label-md text-label-md uppercase tracking-wider hover:bg-on-primary-fixed-variant/10 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+                Ask Trail Guide
+            </button>
+</div>
+<!-- Footer Links -->
+<div class="flex flex-col gap-2 mt-auto border-t border-primary/20 pt-4">
+<a class="flex items-center gap-4 px-4 py-3 text-on-primary-fixed-variant hover:text-on-primary-container hover:bg-on-primary-fixed-variant/10 transition-all rounded-lg scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-primary-fixed-variant hover:text-on-primary-container hover:bg-on-primary-fixed-variant/10 transition-all rounded-lg scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Support</span>
+</a>
+</div>
+</nav>
+<!-- App Shell: TopAppBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-container-low border-b border-outline-variant dark:border-outline flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 fixed top-0 z-30 md:left-[280px] md:w-[calc(100%-280px)]">
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-full flex items-center justify-center opacity-80 hover:opacity-100 duration-150">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed">Adaptive Assessment</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-full flex items-center justify-center opacity-80 hover:opacity-100 duration-150">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-high transition-colors p-2 rounded-full flex items-center justify-center opacity-80 hover:opacity-100 duration-150">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[80px] md:pt-[104px] pb-24 md:ml-[280px] min-h-screen px-margin-mobile md:px-margin-desktop flex flex-col items-center">
+<div class="w-full max-w-container-max-width flex flex-col items-center">
+<!-- Milestone Header -->
+<div class="text-center mb-12 animate-[fadeIn_0.5s_ease-out]">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-[0.1em] mb-2">Final Milestone Reached</p>
+<h1 class="font-display-lg text-display-lg text-primary mb-4 hidden md:block">Path Certification</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-4 md:hidden">Path Certification</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">You have successfully mastered the curriculum. Your academic record has been permanently updated.</p>
+</div>
+<!-- Certificate of Mastery Preview (Hero Component) -->
+<div class="w-full max-w-4xl bg-surface-container-lowest border border-outline-variant shadow-[0_4px_24px_rgba(0,0,0,0.02)] p-8 md:p-16 mb-12 relative overflow-hidden group hover:shadow-[0_8px_32px_rgba(0,0,0,0.04)] transition-shadow duration-500">
+<!-- Subtle Texture Layer -->
+<div class="absolute inset-0 opacity-40 pointer-events-none paper-texture mix-blend-multiply" data-alt="A subtle, high-resolution digital paper texture with a sophisticated off-white, light warm gray tone. The texture should resemble premium, heavyweight cotton archival paper often used for official academic certificates or fine art printing. Lighting should be flat and even, avoiding harsh shadows, creating a pristine light-mode aesthetic. The overall mood is institutional, clean, and elegant, serving as a perfect blank canvas for typography." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAlOLZZ0V2K6dWWciLeYWlD3X_0ArnaXmV1LgDufOqFF-pwk7VzeYifo6crvUjMZLd3F_vg-D6v7LFj_fBS8GWu10QNJedYDPRrdtTCNTWzYLHUG9llhvtK4HqOuNrhybntRGkSanP0P-Z3Sxp69UUIh8EnOllyPxgbuInIAb2J3WF33OZ7azggOb8Sf-CoHW7yYihl4tuiKX7wyFQ6fY7fmTTpPfDGrq0pusFMNVSD0ozmYiHuJTYj')"></div>
+<!-- Inner Border (Skeuomorphic Touch) -->
+<div class="absolute inset-4 border border-outline-variant/30 pointer-events-none"></div>
+<div class="absolute inset-5 border border-outline-variant/10 pointer-events-none"></div>
+<div class="relative z-10 flex flex-col items-center text-center">
+<!-- Wax Seal Graphic -->
+<div class="w-20 h-20 md:w-24 md:h-24 rounded-full border border-secondary bg-surface-container-lowest flex items-center justify-center mb-8 relative">
+<div class="absolute inset-1 rounded-full border border-secondary/30 border-dashed"></div>
+<span class="material-symbols-outlined text-secondary text-[40px] md:text-[48px]" style="font-variation-settings: 'FILL' 1, 'wght' 300;">stars</span>
+<div class="absolute -bottom-2 bg-surface-container-lowest px-2">
+<span class="font-label-md text-label-md text-secondary text-[10px] tracking-widest">TRAILMARK</span>
+</div>
+</div>
+<h2 class="font-display-lg text-display-lg text-primary mb-6 leading-tight">Certificate<br/><span class="font-headline-md text-headline-md italic font-normal text-on-surface-variant">of</span> Mastery</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto mb-8 leading-relaxed">
+                        This acknowledges that the learner has demonstrated exceptional proficiency and has successfully completed all academic requirements for the designated learning path.
+                    </p>
+<h3 class="font-headline-lg text-headline-lg text-primary mb-12 border-b border-outline-variant/50 pb-4 inline-block px-8">Deep Learning Fundamentals</h3>
+<div class="flex flex-col md:flex-row justify-between w-full max-w-2xl px-4 mt-8 gap-8">
+<div class="flex flex-col items-center">
+<div class="w-48 border-b border-outline-variant mb-2 h-8 flex items-end justify-center pb-1">
+<span class="font-headline-sm text-headline-sm text-primary opacity-80" style="font-family: cursive;">Dr. E. Turing</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Lead Architect</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-48 border-b border-outline-variant mb-2 h-8 flex items-end justify-center pb-1">
+<span class="font-body-md text-body-md text-primary">October 24, 2023</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Date of Issuance</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Primary Actions -->
+<div class="flex flex-col sm:flex-row gap-4 mb-20">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-lg font-body-md text-body-md font-medium hover:bg-primary/90 transition-colors flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">download</span>
+                    Download Official Certificate
+                </button>
+<button class="border border-outline bg-surface-container-lowest text-primary px-8 py-4 rounded-lg font-body-md text-body-md font-medium hover:bg-surface-container-low transition-colors flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">share</span>
+                    Share to LinkedIn
+                </button>
+</div>
+<!-- Grid Layout for Stats & Skills -->
+<div class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-8 mb-24">
+<!-- Mastery Summary (Left Col) -->
+<div class="lg:col-span-5 flex flex-col gap-4">
+<h4 class="font-headline-sm text-headline-sm text-primary mb-2">Mastery Summary</h4>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 flex flex-col gap-6">
+<div class="flex justify-between items-center border-b border-surface-container-high pb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">analytics</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Final Score</span>
+</div>
+<span class="font-headline-md text-headline-md text-primary">94%</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-container-high pb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">social_leaderboard</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Peer Rank</span>
+</div>
+<span class="font-headline-md text-headline-md text-primary">Top 5%</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">workspace_premium</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Mastery Level</span>
+</div>
+<span class="font-headline-md text-headline-md text-secondary">Expert</span>
+</div>
+</div>
+</div>
+<!-- Skill Breakdown (Right Col) -->
+<div class="lg:col-span-7 flex flex-col gap-4">
+<h4 class="font-headline-sm text-headline-sm text-primary mb-2">Competencies Earned</h4>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 relative overflow-hidden">
+<!-- Vertical Trail Line Background -->
+<div class="absolute left-10 top-8 bottom-8 w-[2px] bg-surface-container-highest"></div>
+<div class="flex flex-col gap-8 relative z-10">
+<!-- Skill Node 1 -->
+<div class="flex items-start gap-6">
+<div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center shrink-0 border-[4px] border-surface-container-lowest outline outline-1 outline-secondary">
+<span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h5 class="font-headline-sm text-headline-sm text-primary text-[18px]">Neural Architecture</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Mastery in designing and evaluating deep multi-layer perceptrons.</p>
+</div>
+</div>
+<!-- Skill Node 2 -->
+<div class="flex items-start gap-6">
+<div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center shrink-0 border-[4px] border-surface-container-lowest outline outline-1 outline-secondary">
+<span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h5 class="font-headline-sm text-headline-sm text-primary text-[18px]">Backpropagation Optimization</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Advanced understanding of gradient descent and weight updates.</p>
+</div>
+</div>
+<!-- Skill Node 3 -->
+<div class="flex items-start gap-6">
+<div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center shrink-0 border-[4px] border-surface-container-lowest outline outline-1 outline-secondary">
+<span class="material-symbols-outlined text-on-primary text-[16px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div>
+<h5 class="font-headline-sm text-headline-sm text-primary text-[18px]">Convolutional Networks</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Applied image processing and feature extraction methodologies.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Next Trails Section -->
+<div class="w-full max-w-5xl">
+<div class="flex justify-between items-end border-b border-outline-variant pb-4 mb-8">
+<div>
+<h4 class="font-headline-md text-headline-md text-primary">Next Trails</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Advanced paths recommended based on your recent mastery.</p>
+</div>
+<button class="font-label-md text-label-md text-primary hover:text-primary/70 transition-colors uppercase tracking-wider hidden sm:block">View Catalog</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Trail Card 1 -->
+<a class="group flex gap-4 bg-surface-container-lowest border border-outline-variant p-4 hover:bg-surface-container-low transition-colors duration-200" href="#">
+<div class="w-24 h-24 shrink-0 bg-surface-container border border-outline-variant/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-300" data-alt="A minimalist, abstract conceptual illustration representing advanced neural networks and artificial intelligence. The composition features delicate, precise geometric lines and nodes connecting over a soft, light-toned background. The color palette incorporates deep ink blues and subtle muted gold accents, adhering to a modern academic and highly professional aesthetic. The lighting is soft and diffuse, creating a clean, legible light-mode visual." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCgtGdvzdyCzgj5mkeZZ_Qcd_Lf32zUunn_XciMBGuYPi-HADXdVBidn0vmXnf8fBhIfNGyno2mlA3UOeTnCEEqZpctzmPHxTjlXU5AFm3vJ1AL8vOJcaKrGWgUBQDbqrOQU4z61ljc3Zi4dqa2WBYf274O6xdTr9cXdEax3NMesGs8v3wChEdVAalxuXyHXbS46GqIbr52SEhyL36EEPTlZ9cQ9_5puOhoSgqFhQtSljtG2TTBZbE3')"></div>
+</div>
+<div class="flex flex-col justify-center">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-wider mb-1">Advanced Path</span>
+<h5 class="font-headline-sm text-headline-sm text-primary text-[18px] group-hover:underline decoration-1 underline-offset-4">Sequence Models & NLP</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">Dive into RNNs, LSTMs, and transformer architectures for language processing.</p>
+</div>
+</a>
+<!-- Trail Card 2 -->
+<a class="group flex gap-4 bg-surface-container-lowest border border-outline-variant p-4 hover:bg-surface-container-low transition-colors duration-200" href="#">
+<div class="w-24 h-24 shrink-0 bg-surface-container border border-outline-variant/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center grayscale group-hover:grayscale-0 transition-all duration-300" data-alt="A clean, modern academic graphic design visualizing natural language processing algorithms. The image shows floating, translucent text layers interacting with precise grid structures and thin connecting pathways. Rendered in a sophisticated color scheme of dark navy ink tones against pristine white and very light gray backgrounds. The style is strictly minimal, institutional, and technical, completely avoiding playful or colorful startup trends." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCgZo5DjEnbIGknojK1Kl_NWzaaJ0oDJf7v1E8_qso40gpJeTeicXFoD9k9h6Vl9I2NKaoLvLCafyraJXBOK-qUhSU4R2loyJNm2Izlj5svGqhd5S0FUEZkqDYcFOAvraYdbw28Cu-yVlzFx1J66QR1bSpcUjgRMh2aR56FusxbuwXllQI_8iAU29-WzhIn5qsweR0QG26NkK1avhasqcQVENPsY5RjoJND29chTcr_ahsxgzpqqm5-')"></div>
+</div>
+<div class="flex flex-col justify-center">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-wider mb-1">Specialization</span>
+<h5 class="font-headline-sm text-headline-sm text-primary text-[18px] group-hover:underline decoration-1 underline-offset-4">Generative Adversarial Networks</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">Master the theory and application of creating synthetic data.</p>
+</div>
+</a>
+</div>
+</div>
+</div>
+</main>
+</body></html>

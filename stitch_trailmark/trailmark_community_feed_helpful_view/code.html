@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trailmark Community Feed</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config injected from instructions -->
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-on-surface": "#f3f0f2",
+                      "on-tertiary-fixed": "#261900",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed-dim": "#f0bf5c",
+                      "secondary-fixed-dim": "#8bd4c3",
+                      "on-primary-fixed": "#101b34",
+                      "on-primary-fixed-variant": "#3c4661",
+                      "primary-fixed": "#d9e2ff",
+                      "on-secondary-fixed": "#00201a",
+                      "outline": "#76777e",
+                      "on-surface-variant": "#45464d",
+                      "on-background": "#1b1b1d",
+                      "on-secondary-container": "#237061",
+                      "outline-variant": "#c6c6ce",
+                      "surface": "#fbf8fb",
+                      "on-primary-container": "#7e88a7",
+                      "surface-bright": "#fbf8fb",
+                      "primary-fixed-dim": "#bbc6e7",
+                      "surface-variant": "#e4e2e4",
+                      "surface-dim": "#dcd9dc",
+                      "secondary-fixed": "#a7f1de",
+                      "secondary": "#1a6a5b",
+                      "tertiary-container": "#2e1f00",
+                      "tertiary-fixed": "#ffdea4",
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#eae7ea",
+                      "inverse-primary": "#bbc6e7",
+                      "on-error-container": "#93000a",
+                      "error": "#ba1a1a",
+                      "on-surface": "#1b1b1d",
+                      "inverse-surface": "#303032",
+                      "primary": "#010a22",
+                      "on-secondary": "#ffffff",
+                      "surface-container-highest": "#e4e2e4",
+                      "on-tertiary": "#ffffff",
+                      "tertiary": "#110a00",
+                      "background": "#fbf8fb",
+                      "surface-tint": "#535e7a",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-low": "#f5f3f5",
+                      "on-tertiary-fixed-variant": "#5d4200",
+                      "error-container": "#ffdad6",
+                      "primary-container": "#16213a",
+                      "on-secondary-fixed-variant": "#005144",
+                      "on-tertiary-container": "#ac8225",
+                      "surface-container": "#f0edf0",
+                      "secondary-container": "#a7f1de"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-desktop": "40px",
+                      "margin-mobile": "16px",
+                      "trail-width": "4px",
+                      "unit": "8px",
+                      "gutter": "24px",
+                      "container-max-width": "1280px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "sourceSerif4"
+                      ],
+                      "body-md": [
+                              "inter"
+                      ],
+                      "headline-sm": [
+                              "sourceSerif4"
+                      ],
+                      "display-lg": [
+                              "sourceSerif4"
+                      ],
+                      "label-md": [
+                              "inter"
+                      ],
+                      "body-sm": [
+                              "inter"
+                      ],
+                      "body-lg": [
+                              "inter"
+                      ],
+                      "headline-md": [
+                              "sourceSerif4"
+                      ],
+                      "headline-lg-mobile": [
+                              "sourceSerif4"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #F3F4EE; /* Level 0 Canvas from style guide */
+        }
+        .learning-trail {
+            width: 4px;
+            background-color: #2F7A6B; /* Deep pine teal */
+        }
+        .ink-surface {
+            background-color: #16213A;
+        }
+    </style>
+</head>
+<body class="h-full flex text-on-surface">
+<!-- TopAppBar (Mobile Only based on intent/layout rules) -->
+<header class="md:hidden flex justify-between items-center w-full px-margin-mobile py-4 bg-surface border-b border-outline-variant flat no shadows docked full-width top-0 z-50">
+<div class="font-headline-md text-headline-md font-bold text-primary">Trailmark Community</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary">notifications</span>
+<span class="material-symbols-outlined text-primary">account_circle</span>
+</div>
+</header>
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col gap-unit p-6 bg-primary-container text-on-primary-container fixed left-0 top-0 h-full w-[280px] border-r border-outline-variant flat no shadows z-40">
+<div class="mb-8">
+<div class="font-headline-sm text-headline-sm text-on-primary-container mb-6">Trailmark Community</div>
+<div class="flex items-center gap-4 mb-4">
+<img class="w-10 h-10 rounded-full object-cover border-2 border-surface-variant" data-alt="A small circular avatar of a student looking focused in a well-lit library, representing the user profile in a clean academic setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqs3yoPqsiPmahiR0LkrZ3-0qlNhF9GkH8gGi24t8a68CM-g4YB-1_mAgxw3XIXQOLm4aNLgozSuMsJ0dLJciKexQ6rQgKSTztaRcFYccKzUYgQ6dqPW40aP1DzdDo4fAQ_WRSsCjQijXkuihLWqGF_hvNmbMLdYfARjlKTije1X71x51YbSpWnDLmpJz5oq0VpQYYM0HoEwmwjsgmSKaAyvoSy5IAj4ipRZ1VCZWml1259AMkDj8I"/>
+<div>
+<div class="font-body-md text-body-md font-bold text-on-primary">Scholar Profile</div>
+<div class="font-label-md text-label-md text-on-primary-container">Contribution Score: 1,240</div>
+</div>
+</div>
+<button class="w-full bg-secondary text-on-secondary rounded-full py-2 px-4 font-label-md text-label-md hover:bg-surface-container-highest transition-colors">Start New Post</button>
+</div>
+<ul class="flex flex-col gap-2 flex-grow">
+<li><a class="flex items-center gap-4 bg-secondary-container text-on-secondary-container rounded-full px-4 py-3 opacity-80 transition-opacity scale-95 transition-transform" href="#"><span class="material-symbols-outlined">forum</span><span class="font-label-md text-label-md">Feed</span></a></li>
+<li><a class="flex items-center gap-4 text-on-primary-container px-4 py-3 hover:bg-primary-fixed-dim transition-all" href="#"><span class="material-symbols-outlined">groups</span><span class="font-label-md text-label-md">Study Groups</span></a></li>
+<li><a class="flex items-center gap-4 text-on-primary-container px-4 py-3 hover:bg-primary-fixed-dim transition-all" href="#"><span class="material-symbols-outlined">military_tech</span><span class="font-label-md text-label-md">Leaderboard</span></a></li>
+<li><a class="flex items-center gap-4 text-on-primary-container px-4 py-3 hover:bg-primary-fixed-dim transition-all" href="#"><span class="material-symbols-outlined">local_library</span><span class="font-label-md text-label-md">Library</span></a></li>
+</ul>
+<div class="mt-auto">
+<a class="flex items-center gap-4 text-on-primary-container px-4 py-3 hover:bg-primary-fixed-dim transition-all" href="#"><span class="material-symbols-outlined">settings</span><span class="font-label-md text-label-md">Settings</span></a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 pt-16 md:pt-0 md:ml-[280px] h-full overflow-hidden">
+<!-- Top Search Bar -->
+<div class="w-full bg-[#F3F4EE] sticky top-0 z-30 px-margin-mobile md:px-margin-desktop py-4 border-b border-[#E2E3D9]">
+<div class="max-w-container-max-width mx-auto flex gap-4 items-center relative">
+<span class="material-symbols-outlined absolute left-4 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-3 rounded-full bg-surface border border-outline-variant focus:outline-none focus:ring-1 focus:ring-secondary font-body-md text-body-md" placeholder="Search discussions, notes, or groups..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop">
+<div class="max-w-container-max-width mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Feed Column -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<header class="mb-2">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Community Feed</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Connect with fellow learners in AI Engineering</p>
+</header>
+<!-- Composer -->
+<div class="bg-surface rounded-xl border border-[#E2E3D9] p-6 hover:shadow-[0_0_12px_rgba(0,0,0,0.08)] transition-shadow">
+<div class="flex gap-4 mb-4">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Small circular avatar of the current user, a student in a bright modern library, representing their profile picture in the post composer." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5S7W2jb3J2Ja-GIHTlQ1I8GS_E_31G5bJeOt5MjuZENmnJpEOIT4sugUeMJFMWc2gm2a2xe112TvIosjK5QCfNIS5zzuIEC2PHe7vmCR6FLfIwggw4V8gyTFD_NmMEOeYf5BXuWJjS8gy5JRrBXa_93f44cmnq2vqiBMnKfSdkmGQ4DrSfFh3f1CG-2Tb6BWowuONyKyFHuwpZ8x42N6q4I9VzB_U_p4sdei7VwaHdtpWK5gDIolr"/>
+<textarea class="w-full bg-transparent border-b border-outline-variant focus:border-secondary focus:ring-0 resize-none font-body-md text-body-md py-2" placeholder="Start a discussion or share a note..." rows="2"></textarea>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex gap-2">
+<button class="text-on-surface-variant hover:text-secondary p-2 rounded-full hover:bg-surface-variant"><span class="material-symbols-outlined">image</span></button>
+<button class="text-on-surface-variant hover:text-secondary p-2 rounded-full hover:bg-surface-variant"><span class="material-symbols-outlined">link</span></button>
+<button class="text-on-surface-variant hover:text-secondary p-2 rounded-full hover:bg-surface-variant"><span class="material-symbols-outlined">code</span></button>
+</div>
+<button class="bg-[#2F7A6B] text-white px-6 py-2 rounded-full font-label-md text-label-md hover:bg-opacity-90">Post</button>
+</div>
+</div>
+<!-- Feed Stream -->
+<div class="flex flex-col gap-6 relative">
+<!-- Learning Trail spine -->
+<div class="absolute left-6 top-0 bottom-0 learning-trail hidden md:block"></div>
+<!-- Post 1 -->
+<article class="bg-surface rounded-xl border border-[#E2E3D9] p-6 ml-0 md:ml-12 hover:shadow-[0_0_12px_rgba(0,0,0,0.08)] transition-shadow relative">
+<div class="absolute -left-12 top-6 w-3 h-3 rounded-full bg-[#2F7A6B] hidden md:block border-2 border-surface"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Avatar of a student studying intently, lit by a laptop screen in a modern academic setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeYK_vGhtiQlSJBduVcLLxw0a4YFQYfgrnobjdV-GkP7jSdNV6Rn9ZEZPk23wkrc3kHTsBvfJ0P0Pl-ZZoZGMV3a774zn942Cjhi3bbMuavhtQzpP_jh8bZroB78Gfh8JsKURiDwbS5k_P0rHpCZffn321EiBbbH8uDOqaxoN5LFVQP8JYjetfBuRqYIuezjKJnRfO1i9vVkQyaHnKQD2sJ3wuCNS90lvpSSTGbc1f5RyQFq7srHgx"/>
+<div>
+<div class="font-body-md text-body-md font-bold text-on-surface">Alex Chen</div>
+<div class="font-label-md text-label-md text-on-surface-variant">2 hours ago</div>
+</div>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-md text-label-md">#AI_Engineering</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm mb-2">How do I optimize this loss function?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">I'm struggling with a custom loss function for a multi-task learning model. The gradients seem to vanish early on. Has anyone dealt with balancing MSE and Cross-Entropy effectively?</p>
+<div class="bg-surface-container-low p-4 rounded-lg font-mono text-sm text-on-surface-variant mb-4 border border-outline-variant">
+<code>def custom_loss(y_true, y_pred):<br/>    # ... implementation details ...</code>
+</div>
+<div class="flex gap-6 border-t border-outline-variant pt-4 mt-4">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-secondary font-label-md text-label-md"><span class="material-symbols-outlined">thumb_up</span> 24</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-secondary font-label-md text-label-md"><span class="material-symbols-outlined">chat_bubble</span> 8</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-secondary font-label-md text-label-md ml-auto text-secondary"><span class="material-symbols-outlined">verified</span> Helpful (3)</button>
+</div>
+<div class="mt-4 p-3 bg-primary-container bg-opacity-10 rounded-lg border border-outline-variant flex flex-col gap-2"><div class="font-label-md text-label-md text-on-surface-variant">Marked helpful by:</div><div class="flex items-center gap-3"><div class="flex -space-x-2"><img alt="Sarah Jenkins" class="w-6 h-6 rounded-full border-2 border-surface object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXOKUyihysi9yuBB4uf2yYmfZSO1aos53msAN9kUFmOddp9uUBB_Vd-DEhkEAMzkH1pBnPZ5P4CWzc1ZoRU-GuEGl8fPwub42D_YfyhQaWGQGc8ptbw355j_qKUxlRk-TuwIs7f7QTXJv892BCxTcQlevPBVVQhqdkezNw2a5LQN30cDJ4qaayPc2-DjcOXTonO2RdbJSjxbrjWQWVLskzKYWUnwH8OeShZLLeCaDNcHyKlGWZYyWA"/><img alt="Marcus Thorne" class="w-6 h-6 rounded-full border-2 border-surface object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5S7W2jb3J2Ja-GIHTlQ1I8GS_E_31G5bJeOt5MjuZENmnJpEOIT4sugUeMJFMWc2gm2a2xe112TvIosjK5QCfNIS5zzuIEC2PHe7vmCR6FLfIwggw4V8gyTFD_NmMEOeYf5BXuWJjS8gy5JRrBXa_93f44cmnq2vqiBMnKfSdkmGQ4DrSfFh3f1CG-2Tb6BWowuONyKyFHuwpZ8x42N6q4I9VzB_U_p4sdei7VwaHdtpWK5gDIolr"/><div class="w-6 h-6 rounded-full border-2 border-surface bg-surface-variant flex items-center justify-center text-[10px] font-bold">ER</div></div><div class="font-body-sm text-body-sm text-on-surface">Sarah Jenkins, Marcus Thorne, and Elena Rossi</div></div></div></article>
+<!-- Post 2 -->
+<article class="bg-surface rounded-xl border border-[#E2E3D9] p-6 ml-0 md:ml-12 hover:shadow-[0_0_12px_rgba(0,0,0,0.08)] transition-shadow relative">
+<div class="absolute -left-12 top-6 w-3 h-3 rounded-full bg-[#2F7A6B] hidden md:block border-2 border-surface"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Avatar of a young professional in a library, wearing glasses and looking thoughtful." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXOKUyihysi9yuBB4uf2yYmfZSO1aos53msAN9kUFmOddp9uUBB_Vd-DEhkEAMzkH1pBnPZ5P4CWzc1ZoRU-GuEGl8fPwub42D_YfyhQaWGQGc8ptbw355j_qKUxlRk-TuwIs7f7QTXJv892BCxTcQlevPBVVQhqdkezNw2a5LQN30cDJ4qaayPc2-DjcOXTonO2RdbJSjxbrjWQWVLskzKYWUnwH8OeShZLLeCaDNcHyKlGWZYyWA"/>
+<div>
+<div class="font-body-md text-body-md font-bold text-on-surface">Sarah Jenkins</div>
+<div class="font-label-md text-label-md text-on-surface-variant">5 hours ago</div>
+</div>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-md text-label-md">#Math_for_ML</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm mb-2">Found this great visualization for backprop</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">If anyone is struggling to intuitively grasp the chain rule in backpropagation, this interactive resource completely changed how I see it.</p>
+<div class="w-full h-48 bg-surface-container-high rounded-lg mb-4 flex items-center justify-center border border-outline-variant relative overflow-hidden" data-alt="Abstract geometrical visualization of a neural network with glowing nodes and connecting lines, demonstrating backpropagation in a high-tech academic style.">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-fixed-dim to-secondary-fixed-dim opacity-20"></div>
+<span class="material-symbols-outlined text-4xl text-on-surface-variant opacity-50">play_circle</span>
+</div>
+<div class="flex gap-6 border-t border-outline-variant pt-4 mt-4">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-secondary font-label-md text-label-md"><span class="material-symbols-outlined">thumb_up</span> 156</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-secondary font-label-md text-label-md"><span class="material-symbols-outlined">chat_bubble</span> 22</button>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-secondary font-label-md text-label-md ml-auto"><span class="material-symbols-outlined">bookmark</span> Save</button>
+</div>
+</article>
+</div>
+</div>
+<!-- Right Sidebar Column -->
+<div class="lg:col-span-4 hidden lg:flex flex-col gap-6">
+<!-- Contribution Card -->
+<div class="bg-surface rounded-xl border border-[#E2E3D9] p-6">
+<h3 class="font-headline-sm text-headline-sm mb-4 border-b border-outline-variant pb-2">Your Contribution</h3>
+<div class="flex items-end gap-2 mb-2">
+<span class="font-display-lg text-display-lg text-[#2F7A6B]">1,240</span>
+<span class="font-label-md text-label-md text-on-surface-variant mb-2">pts</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Top 5% in AI Engineering cohort.</p>
+<div class="mt-4 w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-[#2F7A6B] h-full w-[85%]"></div>
+</div>
+</div>
+<!-- Trending Topics -->
+<div class="bg-surface rounded-xl border border-[#E2E3D9] p-6">
+<h3 class="font-headline-sm text-headline-sm mb-4 border-b border-outline-variant pb-2">Trending Topics</h3>
+<ul class="flex flex-col gap-3">
+<li class="flex justify-between items-center group cursor-pointer">
+<span class="font-body-md text-body-md group-hover:text-secondary transition-colors">#Transformers</span>
+<span class="font-label-md text-label-md text-on-surface-variant">1.2k posts</span>
+</li>
+<li class="flex justify-between items-center group cursor-pointer">
+<span class="font-body-md text-body-md group-hover:text-secondary transition-colors">#PyTorch</span>
+<span class="font-label-md text-label-md text-on-surface-variant">856 posts</span>
+</li>
+<li class="flex justify-between items-center group cursor-pointer">
+<span class="font-body-md text-body-md group-hover:text-secondary transition-colors">#LinearAlgebra</span>
+<span class="font-label-md text-label-md text-on-surface-variant">432 posts</span>
+</li>
+</ul>
+</div>
+<!-- Active Study Groups -->
+<div class="bg-surface rounded-xl border border-[#E2E3D9] p-6">
+<h3 class="font-headline-sm text-headline-sm mb-4 border-b border-outline-variant pb-2">Active Study Groups</h3>
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<div>
+<div class="font-body-md text-body-md font-bold">Deep Learning Fundamentals</div>
+<div class="font-label-md text-label-md text-on-surface-variant">45 members active</div>
+</div>
+<button class="border border-outline hover:border-secondary text-secondary px-4 py-1 rounded-full font-label-md text-label-md transition-colors">Join</button>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<div class="font-body-md text-body-md font-bold">Paper Reading Club</div>
+<div class="font-label-md text-label-md text-on-surface-variant">12 members active</div>
+</div>
+<button class="border border-outline hover:border-secondary text-secondary px-4 py-1 rounded-full font-label-md text-label-md transition-colors">Join</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only based on intent/layout rules) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface border-t border-outline-variant shadow-lg">
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-6 py-2 scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-label-md text-label-md mt-1">Feed</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-2 hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md mt-1">Groups</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-2 hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined">workspace_premium</span>
+<span class="font-label-md text-label-md mt-1">Score</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-2 hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

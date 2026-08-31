@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trailmark - Conversational Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "surface-tint": "#535e7a",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-primary": "#bbc6e7",
+                        "on-secondary-fixed-variant": "#005144",
+                        "surface-bright": "#fbf8fb",
+                        "on-tertiary-container": "#ac8225",
+                        "secondary-fixed-dim": "#8bd4c3",
+                        "primary": "#010a22",
+                        "surface-dim": "#dcd9dc",
+                        "on-surface-variant": "#45464d",
+                        "primary-container": "#16213a",
+                        "secondary-fixed": "#a7f1de",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#2e1f00",
+                        "outline-variant": "#c6c6ce",
+                        "on-secondary-fixed": "#00201a",
+                        "on-primary-fixed": "#101b34",
+                        "on-tertiary-fixed": "#261900",
+                        "surface-container-low": "#f5f3f5",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "surface": "#fbf8fb",
+                        "on-primary-fixed-variant": "#3c4661",
+                        "tertiary-fixed": "#ffdea4",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#f0edf0",
+                        "outline": "#76777e",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f3f0f2",
+                        "background": "#fbf8fb",
+                        "secondary-container": "#a7f1de",
+                        "primary-fixed-dim": "#bbc6e7",
+                        "on-primary-container": "#7e88a7",
+                        "surface-container-highest": "#e4e2e4",
+                        "surface-container-high": "#eae7ea",
+                        "secondary": "#1a6a5b",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#303032",
+                        "on-secondary-container": "#237061",
+                        "tertiary": "#110a00",
+                        "surface-variant": "#e4e2e4",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1b1b1d",
+                        "primary-fixed": "#d9e2ff",
+                        "on-background": "#1b1b1d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max-width": "1280px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "trail-width": "4px",
+                        "unit": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["'Source Serif 4'", "serif"],
+                        "label-md": ["'Inter'", "sans-serif"],
+                        "body-md": ["'Inter'", "sans-serif"],
+                        "headline-sm": ["'Source Serif 4'", "serif"],
+                        "headline-md": ["'Source Serif 4'", "serif"],
+                        "body-sm": ["'Inter'", "sans-serif"],
+                        "display-lg": ["'Source Serif 4'", "serif"],
+                        "headline-lg-mobile": ["'Source Serif 4'", "serif"],
+                        "body-lg": ["'Inter'", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for an institutional feel */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dcd9dc;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c6c6ce;
+        }
+        
+        .pulse-ring {
+            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .5; transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body class="flex h-screen w-full bg-background text-on-background font-body-md text-body-md overflow-hidden selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- Left SideNavBar (Disabled state for onboarding focus) -->
+<nav class="hidden md:flex bg-primary-container text-on-primary font-label-md text-label-md fixed left-0 top-0 h-full w-[280px] flex-col p-6 z-50 overflow-y-auto border-r border-primary-container">
+<!-- Header -->
+<div class="flex items-center gap-4 mb-12">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">route</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-on-primary">Trailmark</h1>
+<p class="font-body-sm text-body-sm text-on-primary-container">Learning Trail</p>
+</div>
+</div>
+<!-- CTA (Disabled) -->
+<button class="w-full py-3 px-4 rounded-lg bg-surface-container-lowest/5 text-on-primary-container font-label-md text-label-md flex items-center justify-center gap-2 mb-8 opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            New Goal
+        </button>
+<!-- Main Nav Links -->
+<div class="flex-1 space-y-2">
+<a class="text-on-primary-container flex items-center gap-3 px-4 py-3 rounded-lg opacity-40 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined text-[20px]">route</span>
+                Roadmap
+            </a>
+<a class="bg-secondary text-on-secondary flex items-center gap-3 px-4 py-3 rounded-lg relative overflow-hidden" href="#">
+<div class="absolute inset-0 bg-white/10 pulse-ring"></div>
+<span class="material-symbols-outlined text-[20px] relative z-10">chat</span>
+<span class="relative z-10">Onboarding</span>
+</a>
+<a class="text-on-primary-container flex items-center gap-3 px-4 py-3 rounded-lg opacity-40 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined text-[20px]">quiz</span>
+                Assessments
+            </a>
+<a class="text-on-primary-container flex items-center gap-3 px-4 py-3 rounded-lg opacity-40 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+                Dashboard
+            </a>
+<a class="text-on-primary-container flex items-center gap-3 px-4 py-3 rounded-lg opacity-40 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+                Community
+            </a>
+<a class="text-on-primary-container flex items-center gap-3 px-4 py-3 rounded-lg opacity-40 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined text-[20px]">workspace_premium</span>
+                Rewards
+            </a>
+</div>
+<!-- Footer Nav -->
+<div class="mt-auto space-y-2 pt-8 border-t border-on-primary-container/20">
+<a class="text-on-primary-container flex items-center gap-3 px-4 py-3 rounded-lg opacity-40 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+                AI Assistant
+            </a>
+<a class="text-on-primary-container flex items-center gap-3 px-4 py-3 rounded-lg opacity-40 cursor-not-allowed" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+                Help
+            </a>
+</div>
+</nav>
+<!-- Center Chat Canvas -->
+<main class="flex-1 flex flex-col md:ml-[280px] bg-background relative h-full">
+<!-- Top ambient gradient representing "Canvas" depth -->
+<div class="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-surface-container-low to-transparent pointer-events-none z-0"></div>
+<!-- Chat History -->
+<div class="flex-1 overflow-y-auto px-margin-mobile md:px-margin-desktop py-12 flex flex-col gap-8 relative z-10 scroll-smooth">
+<div class="max-w-3xl mx-auto w-full flex flex-col gap-8 pb-32">
+<!-- AI Message -->
+<div class="flex gap-4 items-start max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 mt-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-on-primary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="bg-secondary-fixed-dim/20 text-on-surface px-6 py-4 rounded-2xl rounded-tl-sm border border-secondary-fixed/30 font-body-md text-body-md leading-relaxed">
+                        Welcome to Trailmark. I'm your Guide. To curate a syllabus that respects your time, let's start with your objectives. <br/><br/>What career transition or specific skill set are you focusing on?
+                    </div>
+</div>
+<!-- User Message -->
+<div class="flex gap-4 items-start justify-end max-w-[85%] self-end">
+<div class="bg-surface-container-lowest text-on-surface px-6 py-4 rounded-2xl rounded-tr-sm border border-outline font-body-md text-body-md leading-relaxed shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
+                        I'm currently a senior marketing manager, but I want to pivot entirely into data analytics and machine learning over the next 18 months.
+                    </div>
+</div>
+<!-- AI Message -->
+<div class="flex gap-4 items-start max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 mt-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-on-primary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="bg-secondary-fixed-dim/20 text-on-surface px-6 py-4 rounded-2xl rounded-tl-sm border border-secondary-fixed/30 font-body-md text-body-md leading-relaxed">
+                        A rigorous pivot. Transitioning from marketing to ML requires a strong foundation in statistics and Python. <br/><br/>Before we build the roadmap, I need to understand your learning persona. How do you prefer to absorb new technical concepts?
+                    </div>
+</div>
+<!-- Interactive Quiz Snippet -->
+<div class="flex flex-col gap-3 ml-12 max-w-[70%]">
+<button class="group flex items-center justify-between px-5 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-secondary hover:bg-secondary/5 transition-all text-left">
+<div>
+<span class="block font-label-md text-label-md text-primary mb-1 group-hover:text-secondary">Digger Mode</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">I want primary sources, citations, and deep theoretical dives.</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-secondary transition-colors">arrow_forward</span>
+</button>
+<button class="group flex items-center justify-between px-5 py-3 rounded-lg border-2 border-secondary bg-secondary/5 transition-all text-left relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div>
+<span class="block font-label-md text-label-md text-secondary mb-1">Surface Mode</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">Just the core essentials, summaries, and bullet points.</span>
+</div>
+<span class="material-symbols-outlined text-secondary transition-colors" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+<button class="group flex items-center justify-between px-5 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest hover:border-secondary hover:bg-secondary/5 transition-all text-left">
+<div>
+<span class="block font-label-md text-label-md text-primary mb-1 group-hover:text-secondary">Pragmatist</span>
+<span class="block font-body-sm text-body-sm text-on-surface-variant">Project-based only. I learn by building immediately.</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-secondary transition-colors">arrow_forward</span>
+</button>
+</div>
+<!-- AI Message (Response to selection) -->
+<div class="flex gap-4 items-start max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 mt-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-on-primary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="bg-secondary-fixed-dim/20 text-on-surface px-6 py-4 rounded-2xl rounded-tl-sm border border-secondary-fixed/30 font-body-md text-body-md leading-relaxed">
+                        Understood. We will optimize your trail for <strong>Surface Mode</strong>. Assessments will focus on core concept retention rather than extensive reading.<br/><br/>To accelerate this setup, you can upload your current resume so I can map your existing skills, or we can continue discussing your background.
+                    </div>
+</div>
+<!-- Typing Indicator (Ambient) -->
+<div class="flex gap-4 items-start max-w-[85%] opacity-60">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">more_horiz</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Input Area -->
+<div class="absolute bottom-0 left-0 right-0 bg-background/90 backdrop-blur-md border-t border-outline-variant px-margin-mobile md:px-margin-desktop py-6 z-20">
+<div class="max-w-3xl mx-auto w-full">
+<div class="flex flex-col gap-4">
+<!-- Secondary Actions Row -->
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded border border-primary text-primary hover:bg-primary/5 transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">upload_file</span>
+                            Upload Resume
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2 rounded border border-outline-variant text-on-surface-variant hover:bg-surface-variant/50 transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">link</span>
+                            Connect LinkedIn
+                        </button>
+</div>
+<!-- Input Field -->
+<div class="flex items-end gap-4">
+<div class="flex-1 relative">
+<textarea class="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-2 py-3 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 resize-none overflow-hidden block" placeholder="Type your response here..." rows="1" style="min-height: 48px;"></textarea>
+<!-- Skeuomorphic 'notebook line' hint -->
+<div class="absolute bottom-0 left-0 right-0 h-[1px] bg-outline-variant pointer-events-none"></div>
+</div>
+<button class="w-12 h-12 rounded bg-secondary text-on-secondary flex items-center justify-center shrink-0 hover:bg-secondary/90 transition-colors shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Right Sidebar (Live Profile) -->
+<aside class="hidden xl:flex w-[320px] bg-surface-container-lowest border-l border-outline-variant flex-col h-full z-40 relative">
+<!-- Blueprint subtle pattern overlay -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#16213a 1px, transparent 1px); background-size: 16px 16px;"></div>
+<div class="p-8 border-b border-outline-variant relative z-10 bg-surface-container-lowest/80 backdrop-blur-sm">
+<h2 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">architecture</span>
+                Live Profile
+            </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Drafting your academic blueprint...</p>
+</div>
+<div class="flex-1 overflow-y-auto p-8 space-y-8 relative z-10">
+<!-- Persona Module -->
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Detected Persona</h3>
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+</div>
+<div class="bg-tertiary-fixed/30 border border-tertiary-fixed-dim rounded p-4">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-fixed-variant">speed</span>
+<span class="font-label-md text-label-md text-on-tertiary-fixed-variant">Surface Learner</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Optimizes for core concepts, summaries, and speed. Bypasses deep theoretical reading.</p>
+</div>
+</div>
+<!-- Objective Module -->
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Primary Goal</h3>
+<span class="material-symbols-outlined text-[16px] text-secondary">check</span>
+</div>
+<div class="border border-outline-variant rounded p-4 bg-surface relative">
+<!-- The "Trail" visual element -->
+<div class="absolute left-[-1px] top-4 bottom-4 w-[2px] bg-secondary"></div>
+<p class="font-body-md text-body-md text-primary font-semibold ml-2">Transition to Data Analytics &amp; Machine Learning</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2 ml-2">Timeline: 18 Months</p>
+</div>
+</div>
+<!-- Interests Module (TBD State) -->
+<div class="space-y-3 opacity-60">
+<div class="flex items-center justify-between">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Core Interests</h3>
+<span class="material-symbols-outlined text-[16px] text-outline">hourglass_empty</span>
+</div>
+<div class="border border-dashed border-outline-variant rounded p-4 bg-surface-container flex items-center justify-center min-h-[80px]">
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">Awaiting input...</p>
+</div>
+</div>
+<!-- Baseline Skills (TBD State) -->
+<div class="space-y-3 opacity-60">
+<div class="flex items-center justify-between">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Baseline Skills</h3>
+<span class="material-symbols-outlined text-[16px] text-outline">hourglass_empty</span>
+</div>
+<div class="border border-dashed border-outline-variant rounded p-4 bg-surface-container flex flex-col items-center justify-center min-h-[100px] gap-2">
+<span class="material-symbols-outlined text-[24px] text-outline-variant">upload_file</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center leading-tight">Upload resume to auto-populate</p>
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant relative z-10 bg-surface-container-lowest">
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-1/3 rounded-full relative">
+<div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-r from-transparent to-white/50 animate-[pulse_2s_ease-in-out_infinite]"></div>
+</div>
+</div>
+<p class="font-label-md text-label-md text-center text-on-surface-variant mt-3">Syllabus Generation: 33%</p>
+</div>
+</aside>
+</body></html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trail Guide | Academic Assistant</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-container": "#a7f1de",
+                        "tertiary-container": "#2e1f00",
+                        "surface-container-high": "#eae7ea",
+                        "inverse-on-surface": "#f3f0f2",
+                        "on-secondary-fixed-variant": "#005144",
+                        "surface-container-low": "#f5f3f5",
+                        "on-tertiary-fixed": "#261900",
+                        "primary-fixed": "#d9e2ff",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#a7f1de",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#00201a",
+                        "on-primary-fixed": "#101b34",
+                        "inverse-surface": "#303032",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#8bd4c3",
+                        "inverse-primary": "#bbc6e7",
+                        "surface-tint": "#535e7a",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "outline-variant": "#c6c6ce",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "on-secondary-container": "#237061",
+                        "tertiary-fixed": "#ffdea4",
+                        "surface-bright": "#fbf8fb",
+                        "surface-dim": "#dcd9dc",
+                        "on-primary-container": "#7e88a7",
+                        "surface": "#fbf8fb",
+                        "primary-fixed-dim": "#bbc6e7",
+                        "primary": "#010a22",
+                        "surface-container": "#f0edf0",
+                        "surface-container-highest": "#e4e2e4",
+                        "tertiary": "#110a00",
+                        "outline": "#76777e",
+                        "secondary": "#1a6a5b",
+                        "on-surface-variant": "#45464d",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#3c4661",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#ac8225",
+                        "on-background": "#1b1b1d",
+                        "primary-container": "#16213a",
+                        "background": "#f3f4ee", /* Canvas color override from instructions */
+                        "surface-variant": "#e4e2e4",
+                        "on-surface": "#1b1b1d",
+                        "canvas-border": "#e2e3d9" /* Custom for 1px canvas border */
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "container-max-width": "1280px",
+                        "unit": "8px",
+                        "trail-width": "4px"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Source Serif 4", "serif"],
+                        "label-md": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "body-sm": ["Inter", "sans-serif"],
+                        "display-lg": ["Source Serif 4", "serif"],
+                        "headline-md": ["Source Serif 4", "serif"],
+                        "headline-sm": ["Source Serif 4", "serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "headline-lg-mobile": ["Source Serif 4", "serif"]
+                    },
+                    fontSize: {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom styles for academic aesthetic */
+        .academic-border {
+            border: 1px solid theme('colors.canvas-border');
+        }
+        .ink-primary {
+            color: theme('colors.primary-container');
+        }
+        /* Custom scrollbar for conversational area */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.outline-variant');
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline');
+        }
+        /* Digger Mode Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: theme('colors.secondary');
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: theme('colors.secondary');
+        }
+        .ai-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(26, 106, 91, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 4px rgba(26, 106, 91, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(26, 106, 91, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row antialiased">
+<!-- Mobile Top Header (Hidden on md+) -->
+<header class="md:hidden flex justify-between items-center px-margin-mobile h-16 w-full sticky top-0 z-40 bg-surface-lowest border-b border-outline-variant bg-white">
+<div class="font-headline-md text-headline-md font-bold text-primary-container">Trailmark</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</header>
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex flex-col bg-primary-container text-on-primary docked left-0 h-full w-[280px] p-6 z-50 fixed overflow-y-auto">
+<div class="mb-8">
+<h1 class="font-headline-sm text-headline-sm text-on-primary">Trailmark</h1>
+<p class="font-label-md text-label-md text-on-primary-container mt-1 opacity-80">Learning Trail</p>
+</div>
+<button class="w-full bg-secondary text-on-secondary font-label-md text-label-md py-3 px-4 rounded-lg flex items-center justify-center gap-2 mb-8 hover:bg-secondary/90 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            New Goal
+        </button>
+<ul class="flex-1 space-y-2">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant/10 rounded-lg transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="route">route</span>
+                    Roadmap
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant/10 rounded-lg transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+                    Onboarding
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant/10 rounded-lg transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+                    Assessments
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant/10 rounded-lg transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant/10 rounded-lg transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+                    Community
+                </a>
+</li>
+</ul>
+<div class="mt-auto pt-4 border-t border-on-primary-fixed-variant/20">
+<ul class="space-y-2">
+<li>
+<!-- Active State for AI Assistant -->
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary text-on-secondary rounded-lg transition-transform duration-150 scale-[0.97] font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+                        AI Assistant
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant/10 rounded-lg transition-all font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                        Help
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-[280px] h-screen overflow-hidden bg-background">
+<!-- Top App Bar / Header Context -->
+<header class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-white border-b border-canvas-border shrink-0">
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md text-primary-container flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary ai-pulse">smart_toy</span>
+                    Trail Guide <span class="font-body-md text-body-md text-on-surface-variant opacity-70 ml-2 border-l border-outline-variant pl-2">Academic Assistant</span>
+</h2>
+<div class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">my_location</span>
+                    Currently analyzing: <span class="text-secondary font-semibold">Deep Learning Fundamentals</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant">Digger Mode</span>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-outline-variant z-10 transition-all right-5 top-0" id="toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-secondary cursor-pointer" for="toggle"></label>
+</div>
+</div>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Conversational Interface & Sidebar Layout -->
+<div class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
+<!-- Learning Trail Spine (Visual anchor) -->
+<div class="hidden lg:block absolute left-8 top-0 bottom-0 w-trail-width bg-canvas-border z-0"></div>
+<!-- Chat Area -->
+<div class="flex-1 flex flex-col h-full lg:pl-16 relative z-10">
+<!-- Scrollable Messages -->
+<div class="flex-1 overflow-y-auto p-margin-mobile md:p-gutter space-y-8" id="chat-container">
+<!-- AI Message (Welcome) -->
+<div class="flex gap-4 max-w-3xl">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center shrink-0 border border-secondary mt-1">
+<span class="material-symbols-outlined text-[18px] text-on-secondary-container">smart_toy</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Trail Guide</p>
+<div class="bg-white p-6 rounded-xl rounded-tl-none academic-border shadow-sm">
+<p class="font-headline-sm text-headline-sm text-primary-container mb-4">Welcome back. Let's continue exploring Deep Learning Fundamentals.</p>
+<p class="font-body-lg text-body-lg text-on-surface mb-4 leading-relaxed">
+                                    In our last session, we discussed backpropagation. To move forward, we should look at how activation functions introduce non-linearity into the network, allowing it to learn complex patterns.
+                                </p>
+<div class="bg-surface-container-low p-3 rounded border border-canvas-border flex items-start gap-3 mt-4">
+<span class="material-symbols-outlined text-outline">description</span>
+<div>
+<p class="font-label-md text-label-md text-primary-container">Referencing</p>
+<a class="font-body-sm text-body-sm text-secondary hover:underline" href="#">See Week 3 Notes: Activation Functions</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-4 max-w-3xl ml-auto justify-end">
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface-variant mb-1 text-right">You</p>
+<div class="bg-transparent p-4 rounded-xl rounded-tr-none border border-outline-variant text-right">
+<p class="font-body-md text-body-md text-primary-container">
+                                    Can you explain the difference between ReLU and Sigmoid in practical terms? Why is ReLU preferred now?
+                                </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center shrink-0 border border-primary mt-1">
+<span class="material-symbols-outlined text-[18px] text-on-primary">person</span>
+</div>
+</div>
+<!-- AI Message (Detailed / Digger Mode Active) -->
+<div class="flex gap-4 max-w-3xl">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center shrink-0 border border-secondary mt-1">
+<span class="material-symbols-outlined text-[18px] text-on-secondary-container">smart_toy</span>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface-variant mb-1 flex items-center gap-2">
+                                Trail Guide 
+                                <span class="bg-tertiary-fixed-dim text-on-tertiary-fixed-variant px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Digger Mode</span>
+</p>
+<div class="bg-white p-6 rounded-xl rounded-tl-none academic-border shadow-sm border-t-2 border-t-tertiary-fixed-dim">
+<p class="font-body-lg text-body-lg text-on-surface mb-4 leading-relaxed font-headline-lg" style="font-family: 'Source Serif 4', serif;">
+                                    The shift from Sigmoid to ReLU represents a fundamental turning point in modern neural network architecture, primarily solving the vanishing gradient problem.
+                                </p>
+<div class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+<p>
+<strong>Sigmoid</strong> maps input values to a range between 0 and 1. While historically significant for binary classification, its derivative is extremely small for large positive or negative inputs. When chaining many layers together (deep learning), these small derivatives multiply, causing gradients to "vanish" before they reach earlier layers, halting learning.
+                                    </p>
+<p>
+<strong>ReLU (Rectified Linear Unit)</strong> simply outputs the input directly if positive, and zero otherwise <span class="font-mono text-sm bg-surface-container-low px-1">(f(x) = max(0, x))</span>.
+                                    </p>
+</div>
+<!-- Further Reading Block (Digger Mode Feature) -->
+<div class="mt-6 pt-4 border-t border-canvas-border">
+<h4 class="font-label-md text-label-md text-primary-container mb-2 uppercase tracking-wider">Further Reading &amp; Citations</h4>
+<ul class="space-y-2 font-body-sm text-body-sm">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-outline mt-0.5">menu_book</span>
+<span class="text-on-surface-variant">Glorot &amp; Bengio (2010). <a class="text-secondary hover:underline" href="#">Understanding the difficulty of training deep feedforward neural networks.</a></span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-outline mt-0.5">menu_book</span>
+<span class="text-on-surface-variant">Chapter 6.2.2: <a class="text-secondary hover:underline" href="#">Deep Learning Book (Goodfellow et al.)</a></span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-margin-mobile md:p-gutter bg-background border-t border-canvas-border shrink-0 pb-8">
+<div class="max-w-3xl mx-auto">
+<!-- Action Suggestions -->
+<div class="flex gap-2 mb-3 overflow-x-auto pb-2 scrollbar-hide">
+<button class="px-3 py-1.5 rounded-full border border-primary-container text-primary-container font-label-md text-label-md hover:bg-primary-container hover:text-white transition-colors whitespace-nowrap">
+                                Summarize Trail
+                            </button>
+<button class="px-3 py-1.5 rounded-full border border-primary-container text-primary-container font-label-md text-label-md hover:bg-primary-container hover:text-white transition-colors whitespace-nowrap">
+                                Find Research
+                            </button>
+<button class="px-3 py-1.5 rounded-full border border-primary-container text-primary-container font-label-md text-label-md hover:bg-primary-container hover:text-white transition-colors whitespace-nowrap">
+                                Explain as analogy
+                            </button>
+</div>
+<!-- Input Field -->
+<div class="relative flex items-end bg-white rounded-lg academic-border shadow-sm focus-within:ring-1 focus-within:ring-secondary focus-within:border-secondary transition-all">
+<textarea class="w-full bg-transparent border-none focus:ring-0 resize-none font-body-md text-body-md p-4 min-h-[60px] max-h-[200px]" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'" placeholder="Ask a question about your learning trail..." rows="1"></textarea>
+<div class="p-2 shrink-0">
+<button class="w-10 h-10 rounded bg-secondary text-white flex items-center justify-center hover:bg-secondary/90 transition-colors">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<p class="text-center font-label-md text-label-md text-outline mt-2">Trail Guide can make mistakes. Consider verifying important information.</p>
+</div>
+</div>
+</div>
+<!-- Contextual Sidebar Panel (Suggested Next Steps) -->
+<aside class="w-full lg:w-[320px] bg-surface border-l border-canvas-border shrink-0 overflow-y-auto p-6 hidden lg:block">
+<div class="sticky top-0">
+<h3 class="font-headline-sm text-headline-sm text-primary-container mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">explore</span>
+                        Suggested Next Steps
+                    </h3>
+<div class="space-y-4">
+<!-- Next Step Card 1 -->
+<div class="bg-white p-4 rounded-lg academic-border shadow-sm hover:shadow-md transition-shadow cursor-pointer relative group">
+<div class="absolute inset-0 bg-secondary/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-start justify-between mb-2">
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded text-[10px] font-bold uppercase">Assessment</span>
+<span class="material-symbols-outlined text-outline text-[18px]">arrow_forward</span>
+</div>
+<h4 class="font-body-lg text-body-lg font-semibold text-on-surface mb-1">Activation Functions Quiz</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Test your understanding of ReLU, Sigmoid, and Tanh before moving to optimization algorithms.</p>
+<div class="mt-4 flex items-center gap-2 text-secondary font-label-md text-label-md group-hover:underline">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span> Take Quiz
+                            </div>
+</div>
+<!-- Next Step Card 2 -->
+<div class="bg-white p-4 rounded-lg academic-border shadow-sm hover:shadow-md transition-shadow cursor-pointer relative group border-t-2 border-t-tertiary-fixed-dim">
+<div class="absolute inset-0 bg-tertiary-fixed-dim/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-start justify-between mb-2">
+<span class="bg-surface-container-high text-on-surface px-2 py-0.5 rounded text-[10px] font-bold uppercase">Community</span>
+<span class="material-symbols-outlined text-outline text-[18px]">arrow_forward</span>
+</div>
+<h4 class="font-body-lg text-body-lg font-semibold text-on-surface mb-1">Math for Deep Learning</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Join the active study group discussing the calculus behind backpropagation.</p>
+<div class="mt-4 flex items-center gap-2 text-primary-container font-label-md text-label-md group-hover:underline">
+<span class="material-symbols-outlined text-[16px]">group_add</span> Join Study Group
+                            </div>
+</div>
+<!-- Progress Visualizer (Simple) -->
+<div class="mt-8 pt-6 border-t border-canvas-border">
+<h4 class="font-label-md text-label-md text-primary-container mb-3 uppercase tracking-wider">Module Progress</h4>
+<div class="flex items-center gap-2 mb-1">
+<span class="font-body-sm text-body-sm font-semibold">Week 3</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm ml-auto">60%</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 60%"></div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</body></html>

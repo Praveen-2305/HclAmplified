@@ -1,0 +1,465 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Trailmark - Scholar Profile</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#110a00",
+                        "surface-container-high": "#eae7ea",
+                        "surface-tint": "#535e7a",
+                        "inverse-surface": "#303032",
+                        "surface": "#fbf8fb",
+                        "secondary-fixed-dim": "#8bd4c3",
+                        "tertiary-fixed": "#ffdea4",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#ac8225",
+                        "primary-container": "#16213a",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dcd9dc",
+                        "outline-variant": "#c6c6ce",
+                        "secondary-container": "#a7f1de",
+                        "primary-fixed": "#d9e2ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#7e88a7",
+                        "on-secondary-fixed-variant": "#005144",
+                        "primary": "#010a22",
+                        "tertiary-container": "#2e1f00",
+                        "on-secondary-container": "#237061",
+                        "outline": "#76777e",
+                        "on-secondary-fixed": "#00201a",
+                        "surface-container": "#f0edf0",
+                        "primary-fixed-dim": "#bbc6e7",
+                        "secondary": "#1a6a5b",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f5f3f5",
+                        "on-tertiary-fixed": "#261900",
+                        "on-surface": "#1b1b1d",
+                        "surface-container-highest": "#e4e2e4",
+                        "on-primary-fixed-variant": "#3c4661",
+                        "on-background": "#1b1b1d",
+                        "on-surface-variant": "#45464d",
+                        "background": "#fbf8fb",
+                        "tertiary-fixed-dim": "#f0bf5c",
+                        "on-tertiary-fixed-variant": "#5d4200",
+                        "surface-bright": "#fbf8fb",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f3f0f2",
+                        "secondary-fixed": "#a7f1de",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e4e2e4",
+                        "on-primary-fixed": "#101b34",
+                        "inverse-primary": "#bbc6e7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "trail-width": "4px",
+                        "margin-desktop": "40px",
+                        "unit": "8px",
+                        "container-max-width": "1280px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Source Serif 4", "serif"],
+                        "label-md": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "headline-lg-mobile": ["Source Serif 4", "serif"],
+                        "headline-lg": ["Source Serif 4", "serif"],
+                        "body-sm": ["Inter", "sans-serif"],
+                        "headline-sm": ["Source Serif 4", "serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "headline-md": ["Source Serif 4", "serif"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for an academic feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fbf8fb;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c6c6ce;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #76777e;
+        }
+        
+        /* Subtle parchment texture overlay for specific cards */
+        .parchment-texture {
+            position: relative;
+        }
+        .parchment-texture::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(#1b1b1d 0.5px, transparent 0.5px);
+            background-size: 16px 16px;
+            opacity: 0.03;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex selection:bg-tertiary-fixed selection:text-tertiary-container">
+<!-- JSON Component: SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen w-[280px] bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container flex flex-col py-8 px-4 h-full border-r border-outline/10 z-50">
+<!-- Header -->
+<div class="mb-12 px-4">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-[32px] text-tertiary-fixed">menu_book</span>
+<h1 class="font-headline-md text-headline-md text-on-primary font-bold">Trailmark</h1>
+</div>
+<p class="font-label-md text-label-md text-on-primary-container uppercase tracking-wider opacity-80">Modern Academic Learning</p>
+</div>
+<!-- CTA -->
+<button class="mb-8 mx-4 flex items-center justify-center gap-2 bg-on-primary text-primary font-label-md text-label-md py-3 rounded-lg hover:bg-surface-container-high transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            New Goal
+        </button>
+<!-- Main Navigation Tabs -->
+<div class="flex-1 space-y-1">
+<!-- Roadmap -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">map</span>
+                Roadmap
+            </a>
+<!-- Onboarding -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+                Onboarding
+            </a>
+<!-- Assessments -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">quiz</span>
+                Assessments
+            </a>
+<!-- Dashboard (Active for Profile Context) -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary bg-on-primary-fixed-variant rounded-lg font-bold transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                Dashboard
+            </a>
+<!-- Community -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">group</span>
+                Community
+            </a>
+<!-- Rewards -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">military_tech</span>
+                Rewards
+            </a>
+<!-- Leaderboard -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+                Leaderboard
+            </a>
+</div>
+<!-- Footer Navigation Tabs -->
+<div class="mb-8 px-4 space-y-6">
+    <div class="border-t border-on-primary-fixed-variant/30 pt-6">
+        <h3 class="font-label-md text-label-md text-on-primary-container uppercase tracking-widest opacity-60 mb-4">Trail Guide: Personal Growth</h3>
+        
+        <!-- Mastery Gap Visualization -->
+        <div class="space-y-3 mb-6">
+            <div class="flex justify-between items-center">
+                <span class="text-[11px] text-on-primary opacity-80">Mastery Gap: CNNs</span>
+                <span class="text-[10px] text-tertiary-fixed">85%</span>
+            </div>
+            <div class="h-1 w-full bg-on-primary-fixed-variant/30 rounded-full overflow-hidden">
+                <div class="h-full bg-tertiary-fixed w-[85%]"></div>
+            </div>
+            <p class="text-[10px] text-on-primary-container opacity-70 italic">Next: Advanced Certification</p>
+        </div>
+
+        <!-- AI Recommendation -->
+        <div class="bg-on-primary-fixed-variant/20 p-3 rounded border border-on-primary-fixed-variant/30">
+            <div class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-[16px] text-tertiary-fixed">lightbulb</span>
+                <div>
+                    <p class="text-[11px] text-on-primary leading-tight mb-1">AI Recommendation</p>
+                    <p class="text-[10px] text-on-primary-container opacity-80">Your 'Theorist' badge is 80% complete. Contribute 2 more citations to earn it.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><div class="mt-auto space-y-1 pt-6 border-t border-on-primary-fixed-variant/30">
+<!-- Settings -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+<!-- Help -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-70 hover:bg-on-primary-fixed-variant/50 hover:text-on-primary transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">help</span>
+                Help
+            </a>
+</div>
+</nav>
+<!-- Main Canvas (Ink & Canvas Philosophy) -->
+<main class="flex-1 ml-[280px] p-gutter md:p-margin-desktop min-h-screen relative overflow-x-hidden">
+<!-- Max Width Wrapper -->
+<div class="max-w-container-max-width mx-auto space-y-8">
+<!-- Section 1: Header / Profile Summary -->
+<header class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden group">
+<!-- Subtle hover effect ambient shadow -->
+<div class="absolute inset-0 bg-primary-container/0 group-hover:bg-primary-container/[0.02] transition-colors duration-500 pointer-events-none"></div>
+<div class="flex items-center gap-6 z-10">
+<div class="relative">
+<div class="w-24 h-24 rounded-full border-2 border-surface-container-high overflow-hidden bg-surface-variant flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a young academic scholar in a modern, well-lit library. Soft, natural light illuminates the subject's face. The mood is highly focused, intelligent, and serious. The aesthetic is extremely clean, light-mode, with subtle deep navy and crisp white tones dominating the environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4sy_e_P_TbTLY-iA-OWBib9SuRt_tGOcAs6zLqBzDBkDjRQGFpLaw5pqiwM6r7NhtqGtGsGPdh51-BAJ3aSj9lad5bg7RpVkM_Ehir9gP55NsQF8DjTpzjBim4u5TOjIiWexQsxgfIXXeo6u1gSq_1rOcYPJmqBSnavwfhKHJoKeMpgKEevn_qugWgSLK2gRllVKw-dH_-l9m4vbJXMxIjTZY8f0oYSqwMVBTMqU744D20uAgxZIW">
+</div>
+<!-- Digger Mode Indicator -->
+<div class="absolute -bottom-2 -right-2 bg-secondary text-on-secondary font-label-md text-[10px] uppercase tracking-widest px-2 py-1 rounded-full border-2 border-surface-container-lowest shadow-sm flex items-center gap-1" title="Digger Mode Active">
+<span class="material-symbols-outlined text-[12px]">hardware</span>
+                            Digger
+                        </div>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-1">Eleanor Vance</h2>
+<div class="flex items-center gap-3 text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">school</span> Academic Scholar Level IV</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">calendar_today</span> Joined Sept 2023</span>
+</div>
+</div>
+</div>
+<div class="z-10 flex flex-col items-end border-l-0 md:border-l border-outline-variant pl-0 md:pl-8 pt-4 md:pt-0 w-full md:w-auto">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-1">Total Contribution</span>
+<div class="flex items-baseline gap-1">
+<span class="font-display-lg text-display-lg text-primary">1,240</span>
+<span class="font-body-md text-body-md text-tertiary-fixed-dim font-bold">pts</span>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout for Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column (Span 8) -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Section 2: Certification Gallery -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 parchment-texture relative group">
+<div class="absolute inset-0 shadow-[0_0_12px_rgba(0,0,0,0)] group-hover:shadow-[0_0_12px_rgba(22,33,58,0.04)] transition-shadow duration-300 pointer-events-none rounded-xl"></div>
+<div class="flex justify-between items-end mb-8 border-b border-surface-container-high pb-4">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Mastery Certifications</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Validated academic milestones.</p>
+</div>
+<button class="text-secondary font-label-md text-label-md uppercase tracking-wider hover:text-on-secondary-fixed-variant transition-colors flex items-center gap-1">
+                                View All <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<!-- Featured Certificate -->
+<div class="border border-surface-container-highest bg-surface p-8 rounded-lg flex flex-col md:flex-row items-center gap-8 text-center md:text-left relative overflow-hidden">
+<!-- Decorative background lines -->
+<div class="absolute top-0 right-0 w-32 h-32 border-t border-r border-tertiary-fixed opacity-30 rounded-tr-lg"></div>
+<div class="w-24 h-24 flex-shrink-0 relative">
+<div class="absolute inset-0 bg-tertiary-fixed rounded-full blur-md opacity-20"></div>
+<img class="w-full h-full relative z-10 drop-shadow-sm" data-alt="A highly detailed, flat-design vector illustration of a traditional academic wax seal. The seal is rendered in muted gold and deep navy blue ink tones. It features intricate, fine-line geometric patterns representing artificial intelligence and neural networks. Set against a stark white background with no shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeLTdEKBKq8pc-_UYnYOi7ey-3NVC5p-yszfoCTfG_A7xkZmHMiVxcljTPak9_D6CXrkZxl9W1GUnv0joZr6Xoe87kZtFtg2LqeNXvGZHL8ybIigZ-URMfP1fUFoZY9GQ7RkY1a_9RLjpbiI3WMKLdyux7kTB8Fh4WfZehp5dfgLByMy30JJ1QqMmu3R6nWqQfHlZf6I9rdT3BsfY4Ge3ctJ3XD68kSj-L2nN3951q8gv0FGNJ0xTe">
+</div>
+<div class="flex-1">
+<span class="font-label-md text-label-md text-on-tertiary-container uppercase tracking-widest block mb-2">Highest Distinction</span>
+<h4 class="font-display-lg text-[32px] leading-[40px] text-primary mb-2">Deep Learning Fundamentals</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 max-w-lg">Awarded for exceptional theoretical understanding and practical application of multi-layer neural architectures.</p>
+<div class="flex items-center justify-center md:justify-start gap-4">
+<span class="bg-surface-container-high px-3 py-1 rounded font-label-md text-label-md text-on-surface">Issued Oct 12, 2023</span>
+<a class="text-primary hover:text-secondary transition-colors font-label-md text-label-md flex items-center gap-1" href="#">
+                                        Verify Credential <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Achievement Badges -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 relative group">
+<div class="absolute inset-0 shadow-[0_0_12px_rgba(0,0,0,0)] group-hover:shadow-[0_0_12px_rgba(22,33,58,0.04)] transition-shadow duration-300 pointer-events-none rounded-xl"></div>
+<div class="mb-6 border-b border-surface-container-high pb-4">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Scholarly Insignias</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ink-wash badges representing distinct learning modalities.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<!-- Unlocked Badge 1 -->
+<div class="flex flex-col items-center text-center group/badge cursor-pointer">
+<div class="w-20 h-20 mb-3 bg-surface rounded-full flex items-center justify-center border border-outline-variant group-hover/badge:border-primary transition-colors">
+<img class="w-12 h-12 object-contain mix-blend-multiply" data-alt="An elegant ink-wash style digital illustration of an academic compass and astrolabe, representing a 'Methodologist' achievement. Monochromatic artwork using deep navy blues and stark whites, resembling a vintage 19th-century academic sketch. High contrast, highly precise fine lines, clean light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxYUAi9VsTBRNbiax-yWl6PJEYADe-9Osq4_rbbJswM2XVfEllJTXyI1CUrIqfr-XjNFYtlQhnCOzO_HGQeomMjHvCqmVYtwtXjF24_jZ0E6yX0DaPi7w85Dbd0zQUBBtUOHMKBm5W3C5tQBdKUnn4HK_Y3zblHo2ozobsEYZl0XLp3M_REitVBLg3zvygvSVwJx1dBpOCp-cGSYxi0ps0n55u4sq20cchtlGWOLXGNqtqaHVP6oFB">
+</div>
+<span class="font-label-md text-label-md text-primary block">Methodologist</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Tier III</span>
+</div>
+<!-- Unlocked Badge 2 -->
+<div class="flex flex-col items-center text-center group/badge cursor-pointer">
+<div class="w-20 h-20 mb-3 bg-surface rounded-full flex items-center justify-center border border-outline-variant group-hover/badge:border-primary transition-colors">
+<img class="w-12 h-12 object-contain mix-blend-multiply" data-alt="An elegant ink-wash style digital illustration of an open ancient manuscript or ledger, representing an 'Archivist' achievement. Artwork utilizes deep indigo ink tones layered on a crisp white background. Minimalist, academic sketch aesthetic with deliberate ink bleed details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUA7ySfhLPYHoksVHQySjnfJKX53ZOhkkzdN0arutw2LfFxPYlDodyF4bIu6lAotABJq-m0eTCC5jMq3R24OjVsUFp5m_JORRtXpju9GqXIcMffpEMj7kvFy3UlpKvVVaZvjBEWbLtivYvrAbdTcqMqdAEi1ib0dJEg9BrsLYnGea83SQ4jgoo71aFTn4d3CjnayMKoFBmZlWT3AYvBIAkL7IqzbKl1mcVRiRLbwhFqxHeTCNFjpNz">
+</div>
+<span class="font-label-md text-label-md text-primary block">Archivist</span>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Tier II</span>
+</div>
+<!-- Locked Badge 1 -->
+<div class="flex flex-col items-center text-center opacity-50 grayscale transition-all hover:grayscale-0 hover:opacity-100 cursor-help" title="Locked: Requires 5 Theory Modules">
+<div class="w-20 h-20 mb-3 bg-surface-container rounded-full flex items-center justify-center border border-outline border-dashed">
+<img class="w-12 h-12 object-contain mix-blend-multiply" data-alt="A faint, delicate grayscale ink-wash illustration of a complex geometric brain or neural node network, representing a locked 'Theorist' achievement. The image is deliberately faded, washed out, and ghostly, signifying its inaccessible state. Clean, minimalist light-mode academic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOfe5Wur_jl_ke3H3pWb6EkJkWllvPHvHErcJZ28FS6C0a_Fj7oY5Fe4RarReGzd5dahYT1M1IpRducCPwkvDTfcV5AnCb67mAbLfRuY_DZ3di34HI7ZD_Bo63q361SksIs3q078S1BjQgLUXwLBeWWUbMflP4UPEE_MzpmmY6KauUqKIdZQJYPem3LBtbXG2NJVn9aIs7W9y3yP9YORcT4NefIwpspbhzB63Gwf6WJUdWI8cUVhet">
+</div>
+<span class="font-label-md text-label-md text-on-surface block">Theorist</span>
+<span class="font-body-sm text-[11px] text-outline flex items-center justify-center gap-1"><span class="material-symbols-outlined text-[12px]">lock</span> Locked</span>
+</div>
+<!-- Locked Badge 2 -->
+<div class="flex flex-col items-center text-center opacity-50 grayscale transition-all hover:grayscale-0 hover:opacity-100 cursor-help" title="Locked: Requires Community Contribution">
+<div class="w-20 h-20 mb-3 bg-surface-container rounded-full flex items-center justify-center border border-outline border-dashed">
+<img class="w-12 h-12 object-contain mix-blend-multiply" data-alt="A faint, delicate grayscale ink-wash illustration of two overlapping laurel wreaths, representing a locked 'Synthesizer' achievement. The image is deliberately faded and washed out. Clean, minimalist light-mode academic aesthetic with very fine, barely visible line art." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvFwXcF1cbNjELtoet3h4doClWBPxTqT8C_LdzsT9v4ai22bw0QmAELlH81J0MlwPvijojMGOhiEaxVN0cIFu6JlcR9Oy6N5XhX5P4nrt72Fkjxe_G97fCV8nPPIZfB3ZdaVUdyXIlpYmg-oSFGFVbfLwbQNRiwo8OvHr9jHym_lFE6_BgkkXUi3uzLXzwTV3B8WNPxHHNBLZm45fxv6UQVBGk0ne97cGWcF1woRhQ85jyKFYgjYRz">
+</div>
+<span class="font-label-md text-label-md text-on-surface block">Synthesizer</span>
+<span class="font-body-sm text-[11px] text-outline flex items-center justify-center gap-1"><span class="material-symbols-outlined text-[12px]">lock</span> Locked</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column (Span 4) -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Section 3: Mastery Matrix -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 relative group">
+<div class="absolute inset-0 shadow-[0_0_12px_rgba(0,0,0,0)] group-hover:shadow-[0_0_12px_rgba(22,33,58,0.04)] transition-shadow duration-300 pointer-events-none rounded-xl"></div>
+<div class="mb-5 border-b border-surface-container-high pb-3">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">grid_view</span>
+                                Competency Matrix
+                            </h3>
+</div>
+<ul class="space-y-4">
+<!-- Item 1 -->
+<li class="flex flex-col gap-1">
+<div class="flex justify-between items-end">
+<span class="font-body-md text-body-md text-primary font-medium">Neural Architecture</span>
+<span class="font-label-md text-label-md text-on-tertiary-container uppercase tracking-wider">Expert</span>
+</div>
+<!-- minimalist progress indicator (lined notebook feel) -->
+<div class="w-full h-px bg-surface-container-high relative mt-1">
+<div class="absolute top-0 left-0 h-[2px] bg-primary w-[90%]"></div>
+</div>
+</li>
+<!-- Item 2 -->
+<li class="flex flex-col gap-1">
+<div class="flex justify-between items-end">
+<span class="font-body-md text-body-md text-primary font-medium">Backpropagation</span>
+<span class="font-label-md text-label-md text-secondary uppercase tracking-wider">Advanced</span>
+</div>
+<div class="w-full h-px bg-surface-container-high relative mt-1">
+<div class="absolute top-0 left-0 h-[2px] bg-primary w-[75%]"></div>
+</div>
+</li>
+<!-- Item 3 -->
+<li class="flex flex-col gap-1">
+<div class="flex justify-between items-end">
+<span class="font-body-md text-body-md text-primary font-medium">CNNs</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Intermediate</span>
+</div>
+<div class="w-full h-px bg-surface-container-high relative mt-1">
+<div class="absolute top-0 left-0 h-[2px] bg-primary w-[50%]"></div>
+</div>
+</li>
+<!-- Item 4 -->
+<li class="flex flex-col gap-1">
+<div class="flex justify-between items-end">
+<span class="font-body-md text-body-md text-primary font-medium">Transformers</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Novice</span>
+</div>
+<div class="w-full h-px bg-surface-container-high relative mt-1">
+<div class="absolute top-0 left-0 h-[2px] bg-outline-variant w-[20%]"></div>
+</div>
+</li>
+</ul>
+</section>
+<!-- Section 5: Learning Trail Timeline -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 relative group overflow-hidden">
+<div class="absolute inset-0 shadow-[0_0_12px_rgba(0,0,0,0)] group-hover:shadow-[0_0_12px_rgba(22,33,58,0.04)] transition-shadow duration-300 pointer-events-none rounded-xl"></div>
+<div class="mb-6">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Academic Trail</h3>
+<p class="font-body-sm text-[13px] text-on-surface-variant">Recent milestones</p>
+</div>
+<!-- Vertical Spine (The Learning Trail component concept) -->
+<div class="relative pl-6 space-y-6">
+<!-- Spine Line -->
+<div class="absolute top-2 bottom-2 left-[9px] w-trail-width bg-surface-container-high rounded-full z-0">
+<!-- Filled portion -->
+<div class="w-full h-2/3 bg-tertiary-fixed rounded-full"></div>
+</div>
+<!-- Node 1 (Most Recent - Pulse effect logic simulated with styling) -->
+<div class="relative z-10 flex gap-4 items-start">
+<div class="w-5 h-5 rounded-full bg-surface border-[3px] border-tertiary-fixed-dim absolute -left-6 top-0 flex items-center justify-center shadow-[0_0_0_4px_rgba(240,191,92,0.2)]"></div>
+<div>
+<span class="font-label-md text-[10px] text-on-surface-variant uppercase tracking-widest block mb-1">Today</span>
+<h4 class="font-body-md text-body-md text-primary font-medium leading-tight">Mastery Certification Earned</h4>
+<p class="font-body-sm text-[13px] text-on-surface-variant mt-1">Deep Learning Fundamentals</p>
+</div>
+</div>
+<!-- Node 2 -->
+<div class="relative z-10 flex gap-4 items-start">
+<div class="w-5 h-5 rounded-full bg-tertiary-fixed absolute -left-6 top-0 border-2 border-surface-container-lowest"></div>
+<div>
+<span class="font-label-md text-[10px] text-on-surface-variant uppercase tracking-widest block mb-1">Oct 05</span>
+<h4 class="font-body-md text-body-md text-primary font-medium leading-tight">Joined Study Group</h4>
+<p class="font-body-sm text-[13px] text-on-surface-variant mt-1">Advanced Architectures Ensemble</p>
+</div>
+</div>
+<!-- Node 3 -->
+<div class="relative z-10 flex gap-4 items-start">
+<div class="w-5 h-5 rounded-full bg-tertiary-fixed absolute -left-6 top-0 border-2 border-surface-container-lowest"></div>
+<div>
+<span class="font-label-md text-[10px] text-on-surface-variant uppercase tracking-widest block mb-1">Sep 28</span>
+<h4 class="font-body-md text-body-md text-primary font-medium leading-tight">First 100% Assessment</h4>
+<p class="font-body-sm text-[13px] text-on-surface-variant mt-1">Linear Algebra Prereq</p>
+</div>
+</div>
+<!-- Node 4 (Past/Start) -->
+<div class="relative z-10 flex gap-4 items-start">
+<div class="w-5 h-5 rounded-full bg-outline-variant absolute -left-6 top-0 border-2 border-surface-container-lowest"></div>
+<div class="opacity-70">
+<span class="font-label-md text-[10px] text-on-surface-variant uppercase tracking-widest block mb-1">Sep 01</span>
+<h4 class="font-body-md text-body-md text-primary font-medium leading-tight">Trail Commenced</h4>
+<p class="font-body-sm text-[13px] text-on-surface-variant mt-1">AI Foundations Path</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+
+
+</body></html>
