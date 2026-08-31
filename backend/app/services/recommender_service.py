@@ -21,33 +21,35 @@ class RecommenderService:
 
         for r in roles:
             try:
-                skills_data = json.loads(r.skills_json)
+                skills_data = json.loads(str(r.skills_json or "[]"))
             except Exception:
                 skills_data = []
 
             skills_models = [
                 SkillMatchSchema(
-                    name=s.get("name", ""),
-                    matchScore=s.get("matchScore", 80),
-                    status=s.get("status", "strong")
+                    name=str(s.get("name", "")),
+                    matchScore=int(s.get("matchScore", 80)),
+                    status=s.get("status", "strong") if s.get("status") in ["strong", "gap", "emerging"] else "strong"
                 )
                 for s in skills_data
             ]
 
+            tag_val = r.tag if r.tag in ["High Growth", "Strategic Pivot", "Top Match"] else None
+
             results.append(
                 RoleMatchSchema(
-                    id=r.id,
-                    title=r.title,
-                    matchPercentage=r.match_percentage,
-                    salaryRange=r.salary_range,
-                    tag=r.tag,
-                    summary=r.summary,
-                    alignmentReason=r.alignment_reason,
+                    id=str(r.id),
+                    title=str(r.title),
+                    matchPercentage=int(r.match_percentage or 80),
+                    salaryRange=str(r.salary_range or "$150k - $200k"),
+                    tag=tag_val,
+                    summary=str(r.summary),
+                    alignmentReason=str(r.alignment_reason),
                     skills=skills_models,
-                    milestonesCount=r.milestones_count,
-                    estTimeToMastery=r.est_time_to_mastery,
-                    primaryDomain=r.primary_domain,
-                    marketDemand=r.market_demand,
+                    milestonesCount=int(r.milestones_count or 4),
+                    estTimeToMastery=str(r.est_time_to_mastery or "6-8 Months"),
+                    primaryDomain=str(r.primary_domain or "AI"),
+                    marketDemand=str(r.market_demand) if r.market_demand else "High",
                 )
             )
 

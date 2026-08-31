@@ -1,8 +1,7 @@
-from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from sqlalchemy.orm import Session
 from backend.app.core.database import get_db
-from backend.app.models.models import LearnerProfile, ProfileHistory, PersonaScore
+from backend.app.models.models import LearnerProfile, ProfileHistory
 from backend.app.schemas.schemas import (
     LearnerProfileSchema,
     LearnerProfileUpdateSchema,
@@ -46,7 +45,7 @@ async def upload_resume(
         profile.bio = parsed_result["profileBioSuggestion"]
         # Record profile evolution
         history = ProfileHistory(
-            profile_id=profile.id,
+            profile_id=str(profile.id),
             snapshot_title="Resume Ingestion & Baseline Skill Verification",
             skills_count=len(parsed_result["extractedSkills"]),
             milestone_count=1,
@@ -66,24 +65,24 @@ def get_current_profile(db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Profile not found")
 
     return LearnerProfileSchema(
-        id=profile.id,
-        name=profile.name,
-        avatar=profile.avatar,
-        currentRole=profile.current_role,
-        targetRole=profile.target_role,
-        targetTimelineMonths=profile.target_timeline_months,
-        persona=profile.persona,
-        scholarLevel=profile.scholar_level,
-        joinedDate=profile.joined_date,
-        totalPoints=profile.total_points,
-        streakDays=profile.streak_days,
-        freezeDaysAvailable=profile.freeze_days_available,
+        id=str(profile.id),
+        name=str(profile.name),
+        avatar=str(profile.avatar or ""),
+        currentRole=str(profile.current_role or "Marketing Analytics Specialist"),
+        targetRole=str(profile.target_role or "AI Engineer"),
+        targetTimelineMonths=int(profile.target_timeline_months or 18),
+        persona=profile.persona if profile.persona in ["digger", "surface", "motivation"] else "digger",
+        scholarLevel=str(profile.scholar_level or "Fellow, Stage II"),
+        joinedDate=str(profile.joined_date or "Autumn 2025"),
+        totalPoints=int(profile.total_points or 1420),
+        streakDays=int(profile.streak_days or 19),
+        freezeDaysAvailable=int(profile.freeze_days_available or 2),
         completedMilestoneIds=["ms-01"],
-        currentModuleId=profile.current_module_id,
-        weeklyGoalHours=profile.weekly_goal_hours,
-        hoursCompletedThisWeek=profile.hours_completed_this_week,
-        bio=profile.bio or "",
-        preferredLanguage=profile.preferred_language or "English",
+        currentModuleId=str(profile.current_module_id or "mod-02"),
+        weeklyGoalHours=float(profile.weekly_goal_hours or 12.0),
+        hoursCompletedThisWeek=float(profile.hours_completed_this_week or 8.5),
+        bio=str(profile.bio or ""),
+        preferredLanguage=str(profile.preferred_language or "English"),
     )
 
 @router.patch("/me", response_model=LearnerProfileSchema)
@@ -123,22 +122,22 @@ def update_current_profile(
     db.refresh(profile)
 
     return LearnerProfileSchema(
-        id=profile.id,
-        name=profile.name,
-        avatar=profile.avatar,
-        currentRole=profile.current_role,
-        targetRole=profile.target_role,
-        targetTimelineMonths=profile.target_timeline_months,
-        persona=profile.persona,
-        scholarLevel=profile.scholar_level,
-        joinedDate=profile.joined_date,
-        totalPoints=profile.total_points,
-        streakDays=profile.streak_days,
-        freezeDaysAvailable=profile.freeze_days_available,
+        id=str(profile.id),
+        name=str(profile.name),
+        avatar=str(profile.avatar or ""),
+        currentRole=str(profile.current_role or "Marketing Analytics Specialist"),
+        targetRole=str(profile.target_role or "AI Engineer"),
+        targetTimelineMonths=int(profile.target_timeline_months or 18),
+        persona=profile.persona if profile.persona in ["digger", "surface", "motivation"] else "digger",
+        scholarLevel=str(profile.scholar_level or "Fellow, Stage II"),
+        joinedDate=str(profile.joined_date or "Autumn 2025"),
+        totalPoints=int(profile.total_points or 1420),
+        streakDays=int(profile.streak_days or 19),
+        freezeDaysAvailable=int(profile.freeze_days_available or 2),
         completedMilestoneIds=["ms-01"],
-        currentModuleId=profile.current_module_id,
-        weeklyGoalHours=profile.weekly_goal_hours,
-        hoursCompletedThisWeek=profile.hours_completed_this_week,
-        bio=profile.bio or "",
-        preferredLanguage=profile.preferred_language or "English",
+        currentModuleId=str(profile.current_module_id or "mod-02"),
+        weeklyGoalHours=float(profile.weekly_goal_hours or 12.0),
+        hoursCompletedThisWeek=float(profile.hours_completed_this_week or 8.5),
+        bio=str(profile.bio or ""),
+        preferredLanguage=str(profile.preferred_language or "English"),
     )

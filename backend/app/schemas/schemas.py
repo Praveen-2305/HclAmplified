@@ -1,6 +1,9 @@
 from typing import List, Optional, Literal, Dict, Any
-from pydantic import BaseModel, Field
-from datetime import datetime
+from pydantic import BaseModel, Field, ConfigDict
+from datetime import datetime, timezone
+
+def utc_now():
+    return datetime.now(timezone.utc)
 
 # ==========================================
 # 1. Profile & Persona Schemas
@@ -8,15 +11,16 @@ from datetime import datetime
 LearningPersona = Literal["digger", "surface", "motivation"]
 
 class SkillMatchSchema(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, from_attributes=True)
+
     name: str = Field(alias="name", default="")
     matchScore: int
     status: Literal["strong", "gap", "emerging"]
 
-    class Config:
-        populate_by_name = True
-
 
 class PersonaScoresSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     digger_weight: float
     surface_weight: float
     motivation_weight: float
@@ -24,6 +28,8 @@ class PersonaScoresSchema(BaseModel):
 
 
 class LearnerProfileSchema(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, from_attributes=True)
+
     id: str
     name: str
     avatar: str
@@ -42,9 +48,6 @@ class LearnerProfileSchema(BaseModel):
     hoursCompletedThisWeek: float
     bio: Optional[str] = ""
     preferredLanguage: Optional[str] = "English"
-
-    class Config:
-        populate_by_name = True
 
 
 class LearnerProfileUpdateSchema(BaseModel):
@@ -86,6 +89,8 @@ class ResumeUploadResponse(BaseModel):
 # 2. Roles & Recommendations
 # ==========================================
 class RoleMatchSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     title: str
     matchPercentage: int
@@ -109,6 +114,8 @@ class CustomRoleRequest(BaseModel):
 # 3. Roadmap & Curriculum
 # ==========================================
 class SyllabusModuleSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     title: str
     type: Literal["concept", "assessment", "lab", "project"]
@@ -126,6 +133,8 @@ class DiggerDeepDiveSchema(BaseModel):
 
 
 class RoadmapMilestoneSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     number: int
     title: str
@@ -141,6 +150,8 @@ class RoadmapMilestoneSchema(BaseModel):
 
 
 class RoadmapResponseSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     roadmapId: str
     roleId: str
     roleTitle: str
@@ -171,6 +182,8 @@ class QuestionOptionSchema(BaseModel):
 
 
 class AssessmentQuestionSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     questionNumber: int
     totalQuestions: int
@@ -191,6 +204,8 @@ class AssessmentSubmissionRequest(BaseModel):
 
 
 class AssessmentResultSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     topic: str
     scorePercentage: int
@@ -207,6 +222,8 @@ class AssessmentResultSchema(BaseModel):
 
 
 class WeakPointSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     conceptTag: str
     severity: str
@@ -218,6 +235,8 @@ class WeakPointSchema(BaseModel):
 # 5. Certificates & Hands-On Partner Labs
 # ==========================================
 class CertificateDataSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     certificateNumber: str
     recipientName: str
@@ -234,11 +253,13 @@ class CertificateDataSchema(BaseModel):
 class CertificateVerificationResponse(BaseModel):
     isValid: bool
     certificate: Optional[CertificateDataSchema] = None
-    verificationTimestamp: datetime = Field(default_factory=datetime.utcnow)
+    verificationTimestamp: datetime = Field(default_factory=utc_now)
     issuerSignature: str = "VALIDATED_BY_TRAILMARK_BLOCKCHAIN_REGISTRY"
 
 
 class LabSlotSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     labId: str
     date: str
@@ -250,6 +271,8 @@ class LabSlotSchema(BaseModel):
 
 
 class PartnerLabSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     name: str
     location: str
@@ -274,8 +297,10 @@ class LabBookingResponse(BaseModel):
 
 # ==========================================
 # 6. Community & Study Pods
-# ==========================
+# ==========================================
 class HelpfulAnswerSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     author: Dict[str, Any]
     timestamp: str
@@ -285,6 +310,8 @@ class HelpfulAnswerSchema(BaseModel):
 
 
 class CommunityPostSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     author: Dict[str, Any]
     timestamp: str
@@ -312,6 +339,8 @@ class CreateAnswerRequest(BaseModel):
 
 
 class StudyGroupSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     name: str
     domain: str
@@ -327,6 +356,8 @@ class StudyGroupSchema(BaseModel):
 # 7. Gamification & Leaderboard
 # ==========================================
 class RewardItemSchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     title: str
     category: Literal["Recognition", "Mentorship", "Resource", "Badge"]
@@ -345,6 +376,8 @@ class RedeemRewardResponse(BaseModel):
 
 
 class LeaderboardEntrySchema(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     rank: int
     name: str
     avatar: str

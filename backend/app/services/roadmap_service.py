@@ -24,7 +24,7 @@ class RoadmapService:
         role_id: str = "ai-engineer",
         persona: LearningPersona = "digger",
     ) -> RoadmapResponseSchema:
-        roadmap = db.query(Roadmap).filter(Roadmap.profile_id == profile.id).first()
+        roadmap = db.query(Roadmap).filter(Roadmap.profile_id == str(profile.id)).first()
         if not roadmap:
             roadmap = self.generate_roadmap_for_role(db, profile, role_id, persona)
 
@@ -39,7 +39,7 @@ class RoadmapService:
         weekly_hours: float = 12.0,
     ) -> Roadmap:
         # Delete existing roadmaps for this profile if regenerating
-        existing = db.query(Roadmap).filter(Roadmap.profile_id == profile.id).all()
+        existing = db.query(Roadmap).filter(Roadmap.profile_id == str(profile.id)).all()
         for r in existing:
             db.delete(r)
         db.commit()
@@ -54,7 +54,7 @@ class RoadmapService:
 
         new_roadmap = Roadmap(
             id=f"roadmap-{profile.id}",
-            profile_id=profile.id,
+            profile_id=str(profile.id),
             role_id=role_id,
             title=f"Custom Syllabus: {role_title}",
             is_approved=True,
@@ -63,7 +63,7 @@ class RoadmapService:
         db.flush()
 
         # Generate 4 structured milestones
-        milestone_data = [
+        milestone_data: List[Dict[str, Any]] = [
             {
                 "id": "ms-01",
                 "number": 1,
@@ -186,32 +186,33 @@ class RoadmapService:
 
         for m_dict in milestone_data:
             ms = Milestone(
-                id=m_dict["id"],
-                roadmap_id=new_roadmap.id,
-                number=m_dict["number"],
-                title=m_dict["title"],
-                description=m_dict["description"],
-                status=m_dict["status"],
+                id=str(m_dict["id"]),
+                roadmap_id=str(new_roadmap.id),
+                number=int(m_dict["number"]),
+                title=str(m_dict["title"]),
+                description=str(m_dict["description"]),
+                status=str(m_dict["status"]),
                 completed_date=m_dict["completed_date"],
-                estimated_hours=m_dict["estimated_hours"],
-                badge_title=m_dict["badge_title"],
+                estimated_hours=int(m_dict["estimated_hours"]),
+                badge_title=str(m_dict["badge_title"]),
                 surface_summary_json=json.dumps(m_dict["surface_summary"]),
                 digger_reading_list_json=json.dumps(m_dict["digger_reading_list"]),
                 digger_academic_papers_json=json.dumps(m_dict["digger_academic_papers"]),
-                digger_theoretical_foundation=m_dict["digger_foundation"],
-                prerequisite_ids_json=json.dumps([f"ms-0{m_dict['number']-1}"] if m_dict["number"] > 1 else []),
+                digger_theoretical_foundation=str(m_dict["digger_foundation"]),
+                prerequisite_ids_json=json.dumps([f"ms-0{m_dict['number']-1}"] if int(m_dict["number"]) > 1 else []),
             )
             db.add(ms)
             db.flush()
 
-            for mod_dict in m_dict["modules"]:
+            modules_list: List[Dict[str, Any]] = m_dict.get("modules", [])
+            for mod_dict in modules_list:
                 mod = SyllabusModule(
-                    id=mod_dict["id"],
-                    milestone_id=ms.id,
-                    title=mod_dict["title"],
-                    type=mod_dict["type"],
-                    duration=mod_dict["duration"],
-                    completed=mod_dict["completed"],
+                    id=str(mod_dict["id"]),
+                    milestone_id=str(ms.id),
+                    title=str(mod_dict["title"]),
+                    type=str(mod_dict["type"]),
+                    duration=str(mod_dict["duration"]),
+                    completed=bool(mod_dict["completed"]),
                     digger_notes=f"Detailed academic annotations and proofs for {mod_dict['title']}.",
                     citations_json=json.dumps(mod_dict.get("citations", ["Standard Reference"])),
                 )
@@ -231,53 +232,57 @@ class RoadmapService:
             mod_schemas = []
             for mod in ms.modules:
                 try:
-                    cites = json.loads(mod.citations_json)
+                    cites = json.loads(str(mod.citations_json or "[]"))
                 except Exception:
                     cites = []
+                
+                mod_type = mod.type if mod.type in ["concept", "assessment", "lab", "project"] else "concept"
                 mod_schemas.append(
                     SyllabusModuleSchema(
-                        id=mod.id,
-                        title=mod.title,
-                        type=mod.type,
-                        duration=mod.duration,
-                        completed=mod.completed,
-                        diggerNotes=mod.digger_notes if persona == "digger" else None,
+                        id=str(mod.id),
+                        title=str(mod.title),
+                        type=mod_type,
+                        duration=str(mod.duration or "45 min"),
+                        completed=bool(mod.completed),
+                        diggerNotes=str(mod.digger_notes) if persona == "digger" else None,
                         citations=cites if persona == "digger" else None,
                     )
                 )
 
             try:
-                surface_summary = json.loads(ms.surface_summary_json)
+                surface_summary = json.loads(str(ms.surface_summary_json or "[]"))
             except Exception:
                 surface_summary = []
 
             try:
-                reading_list = json.loads(ms.digger_reading_list_json)
-                academic_papers = json.loads(ms.digger_academic_papers_json)
+                reading_list = json.loads(str(ms.digger_reading_list_json or "[]"))
+                academic_papers = json.loads(str(ms.digger_academic_papers_json or "[]"))
             except Exception:
                 reading_list, academic_papers = [], []
 
             deep_dive = DiggerDeepDiveSchema(
                 readingList=reading_list,
                 academicPapers=academic_papers,
-                theoreticalFoundation=ms.digger_theoretical_foundation or "",
+                theoreticalFoundation=str(ms.digger_theoretical_foundation or ""),
             )
 
             # Adapt milestone description based on persona
-            desc = ms.description
+            desc = ms.description or ""
             if persona == "surface" and surface_summary:
                 desc = " ".join(surface_summary[:2])
 
+            ms_status = ms.status if ms.status in ["completed", "in_progress", "locked"] else "in_progress"
+
             milestone_schemas.append(
                 RoadmapMilestoneSchema(
-                    id=ms.id,
-                    number=ms.number,
-                    title=ms.title,
+                    id=str(ms.id),
+                    number=int(ms.number or 1),
+                    title=str(ms.title or ""),
                     description=desc,
-                    status=ms.status,
-                    completedDate=ms.completed_date,
-                    estimatedHours=ms.estimated_hours,
-                    badgeTitle=ms.badge_title,
+                    status=ms_status,
+                    completedDate=str(ms.completed_date) if ms.completed_date else None,
+                    estimatedHours=int(ms.estimated_hours or 24),
+                    badgeTitle=str(ms.badge_title) if ms.badge_title else None,
                     modules=mod_schemas,
                     diggerDeepDive=deep_dive if persona == "digger" else None,
                     surfaceSummary=surface_summary,
@@ -285,10 +290,10 @@ class RoadmapService:
             )
 
         return RoadmapResponseSchema(
-            roadmapId=roadmap.id,
-            roleId=roadmap.role_id,
-            roleTitle=roadmap.title,
-            isApproved=roadmap.is_approved,
+            roadmapId=str(roadmap.id),
+            roleId=str(roadmap.role_id),
+            roleTitle=str(roadmap.title),
+            isApproved=bool(roadmap.is_approved),
             milestones=milestone_schemas,
         )
 

@@ -20,22 +20,22 @@ def get_my_certificate(db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="No certificate found")
 
     try:
-        competencies = json.loads(cert.verified_competencies_json)
+        competencies = json.loads(str(cert.verified_competencies_json or "[]"))
     except Exception:
         competencies = []
 
     return CertificateDataSchema(
-        id=cert.id,
-        certificateNumber=cert.certificate_number,
-        recipientName=cert.recipient_name,
-        recipientTitle=cert.recipient_title,
-        pathTitle=cert.path_title,
-        completionDate=cert.completion_date,
-        grade=cert.grade,
+        id=str(cert.id),
+        certificateNumber=str(cert.certificate_number),
+        recipientName=str(cert.recipient_name),
+        recipientTitle=str(cert.recipient_title),
+        pathTitle=str(cert.path_title),
+        completionDate=str(cert.completion_date),
+        grade=str(cert.grade),
         verifiedCompetencies=competencies,
-        issuer=cert.issuer,
-        verificationHash=cert.verification_hash,
-        honorsDistinction=cert.honors_distinction,
+        issuer=str(cert.issuer),
+        verificationHash=str(cert.verification_hash),
+        honorsDistinction=str(cert.honors_distinction) if cert.honors_distinction else None,
     )
 
 @router.get("/verify/{verification_hash}", response_model=CertificateVerificationResponse)
@@ -54,22 +54,22 @@ def verify_certificate_hash(
         )
 
     try:
-        competencies = json.loads(cert.verified_competencies_json)
+        competencies = json.loads(str(cert.verified_competencies_json or "[]"))
     except Exception:
         competencies = []
 
     cert_data = CertificateDataSchema(
-        id=cert.id,
-        certificateNumber=cert.certificate_number,
-        recipientName=cert.recipient_name,
-        recipientTitle=cert.recipient_title,
-        pathTitle=cert.path_title,
-        completionDate=cert.completion_date,
-        grade=cert.grade,
+        id=str(cert.id),
+        certificateNumber=str(cert.certificate_number),
+        recipientName=str(cert.recipient_name),
+        recipientTitle=str(cert.recipient_title),
+        pathTitle=str(cert.path_title),
+        completionDate=str(cert.completion_date),
+        grade=str(cert.grade),
         verifiedCompetencies=competencies,
-        issuer=cert.issuer,
-        verificationHash=cert.verification_hash,
-        honorsDistinction=cert.honors_distinction,
+        issuer=str(cert.issuer),
+        verificationHash=str(cert.verification_hash),
+        honorsDistinction=str(cert.honors_distinction) if cert.honors_distinction else None,
     )
 
     return CertificateVerificationResponse(

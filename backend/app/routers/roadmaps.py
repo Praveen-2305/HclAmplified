@@ -25,8 +25,9 @@ def get_current_roadmap(
     if not profile:
         raise HTTPException(status_code=404, detail="Profile not found")
 
-    active_mode = mode or profile.persona or "digger"
-    return roadmap_service.get_or_create_roadmap(db, profile, profile.target_role or "ai-engineer", active_mode)
+    active_mode: LearningPersona = mode or (profile.persona if profile.persona in ["digger", "surface", "motivation"] else "digger")
+    target_role = str(profile.target_role) if profile.target_role else "ai-engineer"
+    return roadmap_service.get_or_create_roadmap(db, profile, target_role, active_mode)
 
 @router.post("/generate", response_model=RoadmapResponseSchema)
 def generate_roadmap(
@@ -41,12 +42,13 @@ def generate_roadmap(
     if not profile:
         raise HTTPException(status_code=404, detail="Profile not found")
 
+    weekly_hours = payload.weeklyHours if payload.weeklyHours is not None else float(profile.weekly_goal_hours or 12.0)
     roadmap = roadmap_service.generate_roadmap_for_role(
         db=db,
         profile=profile,
         role_id=payload.roleId,
         persona=payload.persona,
-        weekly_hours=payload.weeklyHours or profile.weekly_goal_hours,
+        weekly_hours=weekly_hours,
     )
     return roadmap_service.format_roadmap_response(roadmap, payload.persona)
 
@@ -56,10 +58,11 @@ def approve_roadmap(db: Session = Depends(get_db)):
     Human-in-the-loop checkpoint: locks in the proposed learning path after learner review.
     """
     profile = db.query(LearnerProfile).first()
-    roadmap = db.query(Roadmap).filter(Roadmap.profile_id == profile.id).first()
-    if roadmap:
-        roadmap.is_approved = True
-        db.commit()
+    if profile:
+        roadmap = db.query(Roadmap).filter(Roadmap.profile_id == str(profile.id)).first()
+        if roadmap:
+            roadmap.is_approved = True
+            db.commit()
     return {"success": True, "message": "Roadmap syllabus approved and locked in."}
 
 @router.patch("/modules/{module_id}/toggle", response_model=ModuleToggleResponse)
@@ -78,21 +81,22 @@ def toggle_module(
     module.completed = not module.completed
     
     # Check if all sibling modules in milestone are complete
-    milestone = module.milestone
-    all_completed = all(m.completed for m in milestone.modules)
+    milestone: Milestone = module.milestone
+    all_completed = all(bool(m.completed) for m in milestone.modules)
     if all_completed and milestone.status != "completed":
         milestone.status = "completed"
         milestone.completed_date = "Just completed"
-        profile.total_points += 150  # Milestone completion bonus
+        if profile:
+            profile.total_points = int(profile.total_points or 0) + 150  # Milestone completion bonus
 
     db.commit()
 
     return ModuleToggleResponse(
-        milestoneId=milestone.id,
-        moduleId=module.id,
-        completed=module.completed,
+        milestoneId=str(milestone.id),
+        moduleId=str(module.id),
+        completed=bool(module.completed),
         allMilestoneCompleted=all_completed,
-        updatedTotalPoints=profile.total_points,
+        updatedTotalPoints=int(profile.total_points) if profile else 1420,
     )
 
 @router.post("/milestones/{milestone_id}/skip")

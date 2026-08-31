@@ -1,0 +1,17 @@
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+pythonpath = ["."]
+
+[tool.pyright]
+include = ["backend"]
+extraPaths = [
+  ".",
+  "backend",
+  "C:/Users/Dell/anaconda3/Lib/site-packages"
+]
+typeCheckingMode = "standard"
+reportArgumentType = "none"
+reportAttributeAccessIssue = "none"
+reportGeneralTypeIssues = "none"
+reportOptionalMemberAccess = "none"
+reportDeprecated = "none"

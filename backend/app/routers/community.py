@@ -36,44 +36,44 @@ def get_posts(
     results = []
     for p in posts:
         try:
-            tags = json.loads(p.tags_json)
+            tags = json.loads(str(p.tags_json or "[]"))
         except Exception:
-            tags = [p.domain_tag]
+            tags = [str(p.domain_tag)]
 
         answers = [
             HelpfulAnswerSchema(
-                id=a.id,
+                id=str(a.id),
                 author={
-                    "name": a.author_name,
-                    "avatar": a.author_avatar,
-                    "role": a.author_role,
-                    "badge": a.badge,
+                    "name": str(a.author_name),
+                    "avatar": str(a.author_avatar or ""),
+                    "role": str(a.author_role or "Peer Reviewer"),
+                    "badge": str(a.badge or "Peer Reviewer"),
                 },
-                timestamp=a.timestamp_str,
-                content=a.content,
-                upvotes=a.upvotes,
-                isAccepted=a.is_accepted,
+                timestamp=str(a.timestamp_str or "Just now"),
+                content=str(a.content),
+                upvotes=int(a.upvotes or 1),
+                isAccepted=bool(a.is_accepted),
             )
             for a in p.answers
         ]
 
         results.append(
             CommunityPostSchema(
-                id=p.id,
+                id=str(p.id),
                 author={
-                    "name": p.author_name,
-                    "avatar": p.author_avatar,
-                    "role": p.author_role,
-                    "scholarLevel": p.author_scholar_level,
+                    "name": str(p.author_name),
+                    "avatar": str(p.author_avatar or ""),
+                    "role": str(p.author_role or "Scholar"),
+                    "scholarLevel": str(p.author_scholar_level or "Fellow, Stage II"),
                 },
-                timestamp=p.timestamp_str,
-                domainTag=p.domain_tag,
-                title=p.title,
-                content=p.content,
-                codeSnippet=p.code_snippet,
-                upvotes=p.upvotes,
+                timestamp=str(p.timestamp_str or "Just now"),
+                domainTag=str(p.domain_tag or "Deep Learning"),
+                title=str(p.title),
+                content=str(p.content),
+                codeSnippet=str(p.code_snippet) if p.code_snippet else None,
+                upvotes=int(p.upvotes or 1),
                 repliesCount=len(p.answers),
-                isHelpfulAnswered=p.is_helpful_answered,
+                isHelpfulAnswered=bool(p.is_helpful_answered),
                 answers=answers,
                 tags=tags,
             )
@@ -95,39 +95,39 @@ def create_post(
 
     new_post = CommunityPost(
         id=post_id,
-        author_name=profile.name if profile else "Eleanor Vance",
-        author_avatar=profile.avatar if profile else "",
-        author_role=profile.target_role if profile else "AI Scholar",
-        author_scholar_level=profile.scholar_level if profile else "Fellow, Stage II",
+        author_name=str(profile.name) if profile else "Eleanor Vance",
+        author_avatar=str(profile.avatar) if profile else "",
+        author_role=str(profile.target_role) if profile else "AI Scholar",
+        author_scholar_level=str(profile.scholar_level) if profile else "Fellow, Stage II",
         timestamp_str="Just now",
         domain_tag=payload.domainTag,
         title=payload.title,
         content=payload.content,
-        codeSnippet=payload.codeSnippet,
+        code_snippet=payload.codeSnippet,
         upvotes=1,
         replies_count=0,
         tags_json=json.dumps(tags),
     )
     db.add(new_post)
     if profile:
-        profile.total_points += 20  # Contribution reward
+        profile.total_points = int(profile.total_points or 0) + 20  # Contribution reward
     db.commit()
     db.refresh(new_post)
 
     return CommunityPostSchema(
-        id=new_post.id,
+        id=str(new_post.id),
         author={
-            "name": new_post.author_name,
-            "avatar": new_post.author_avatar,
-            "role": new_post.author_role,
-            "scholarLevel": new_post.author_scholar_level,
+            "name": str(new_post.author_name),
+            "avatar": str(new_post.author_avatar or ""),
+            "role": str(new_post.author_role or "Scholar"),
+            "scholarLevel": str(new_post.author_scholar_level or "Fellow, Stage II"),
         },
-        timestamp=new_post.timestamp_str,
-        domainTag=new_post.domain_tag,
-        title=new_post.title,
-        content=new_post.content,
-        codeSnippet=new_post.code_snippet,
-        upvotes=new_post.upvotes,
+        timestamp=str(new_post.timestamp_str or "Just now"),
+        domainTag=str(new_post.domain_tag),
+        title=str(new_post.title),
+        content=str(new_post.content),
+        codeSnippet=str(new_post.code_snippet) if new_post.code_snippet else None,
+        upvotes=int(new_post.upvotes or 1),
         repliesCount=0,
         isHelpfulAnswered=False,
         answers=[],
@@ -143,7 +143,7 @@ def upvote_post(post_id: str, db: Session = Depends(get_db)):
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
 
-    post.upvotes += 1
+    post.upvotes = int(post.upvotes or 0) + 1
     db.commit()
     return {"success": True, "upvotes": post.upvotes}
 
@@ -166,9 +166,9 @@ def add_answer(
     ans = PostAnswer(
         id=answer_id,
         post_id=post.id,
-        author_name=profile.name if profile else "Eleanor Vance",
-        author_avatar=profile.avatar if profile else "",
-        author_role=profile.target_role if profile else "AI Scholar",
+        author_name=str(profile.name) if profile else "Eleanor Vance",
+        author_avatar=str(profile.avatar) if profile else "",
+        author_role=str(profile.target_role) if profile else "AI Scholar",
         badge="Peer Reviewer",
         timestamp_str="Just now",
         content=payload.content,
@@ -176,24 +176,24 @@ def add_answer(
         is_accepted=False,
     )
     db.add(ans)
-    post.replies_count += 1
+    post.replies_count = int(post.replies_count or 0) + 1
     if profile:
-        profile.total_points += 35  # Higher contribution points for answering
+        profile.total_points = int(profile.total_points or 0) + 35  # Higher contribution points for answering
     db.commit()
     db.refresh(ans)
 
     return HelpfulAnswerSchema(
-        id=ans.id,
+        id=str(ans.id),
         author={
-            "name": ans.author_name,
-            "avatar": ans.author_avatar,
-            "role": ans.author_role,
-            "badge": ans.badge,
+            "name": str(ans.author_name),
+            "avatar": str(ans.author_avatar or ""),
+            "role": str(ans.author_role or "Peer Reviewer"),
+            "badge": str(ans.badge or "Peer Reviewer"),
         },
-        timestamp=ans.timestamp_str,
-        content=ans.content,
-        upvotes=ans.upvotes,
-        isAccepted=ans.is_accepted,
+        timestamp=str(ans.timestamp_str or "Just now"),
+        content=str(ans.content),
+        upvotes=int(ans.upvotes or 1),
+        isAccepted=bool(ans.is_accepted),
     )
 
 @router.get("/study-groups", response_model=List[StudyGroupSchema])
@@ -204,15 +204,15 @@ def get_study_groups(db: Session = Depends(get_db)):
     groups = db.query(StudyGroup).all()
     return [
         StudyGroupSchema(
-            id=g.id,
-            name=g.name,
-            domain=g.domain,
-            description=g.description,
-            activeMembersCount=g.active_members_count,
-            currentTopic=g.current_topic,
-            nextSyncTime=g.next_sync_time,
-            isLive=g.is_live,
-            roomUrl=g.room_url,
+            id=str(g.id),
+            name=str(g.name),
+            domain=str(g.domain),
+            description=str(g.description or ""),
+            activeMembersCount=int(g.active_members_count or 0),
+            currentTopic=str(g.current_topic or ""),
+            nextSyncTime=str(g.next_sync_time or ""),
+            isLive=bool(g.is_live),
+            roomUrl=str(g.room_url) if g.room_url else None,
         )
         for g in groups
     ]

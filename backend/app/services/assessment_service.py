@@ -49,23 +49,23 @@ class AssessmentService:
         results = []
         for q in questions:
             try:
-                opts = json.loads(q.options_json)
+                opts = json.loads(str(q.options_json or "[]"))
             except Exception:
                 opts = []
 
             results.append(
                 AssessmentQuestionSchema(
-                    id=q.id,
-                    questionNumber=q.question_number,
-                    totalQuestions=q.total_questions,
-                    level=q.level,
-                    prompt=q.prompt,
-                    codeSnippet=q.code_snippet,
-                    options=[QuestionOptionSchema(id=o["id"], text=o["text"]) for o in opts],
-                    correctOptionId=q.correct_option_id,
-                    explanation=q.explanation,
-                    citation=q.citation or "",
-                    conceptTag=q.concept_tag or "",
+                    id=str(q.id),
+                    questionNumber=int(q.question_number or 1),
+                    totalQuestions=int(q.total_questions or 5),
+                    level=q.level if q.level in ["Beginner", "Intermediate", "Advanced"] else "Intermediate",
+                    prompt=str(q.prompt),
+                    codeSnippet=str(q.code_snippet) if q.code_snippet else None,
+                    options=[QuestionOptionSchema(id=str(o.get("id", "")), text=str(o.get("text", ""))) for o in opts],
+                    correctOptionId=str(q.correct_option_id),
+                    explanation=str(q.explanation),
+                    citation=str(q.citation or ""),
+                    conceptTag=str(q.concept_tag or ""),
                 )
             )
         return results
@@ -120,7 +120,7 @@ class AssessmentService:
         submission_id = f"sub-{uuid.uuid4().hex[:8]}"
         submission = AssessmentSubmission(
             id=submission_id,
-            profile_id=profile.id,
+            profile_id=str(profile.id),
             topic=topic,
             score_percentage=score_pct,
             correct_count=correct_count,
@@ -137,12 +137,12 @@ class AssessmentService:
         db.add(submission)
 
         # Update profile points
-        profile.total_points += awarded_points
+        profile.total_points = int(profile.total_points or 0) + awarded_points
 
         # Record weak points for remedial loop
         for tag in areas_for_refinement:
             wp = WeakPoint(
-                profile_id=profile.id,
+                profile_id=str(profile.id),
                 concept_tag=tag,
                 severity="Moderate" if passed else "High",
                 remedial_recommended=True,
@@ -171,10 +171,10 @@ class AssessmentService:
         points = db.query(WeakPoint).filter(WeakPoint.profile_id == profile_id).all()
         return [
             WeakPointSchema(
-                id=p.id,
-                conceptTag=p.concept_tag,
-                severity=p.severity,
-                remedialRecommended=p.remedial_recommended,
+                id=int(p.id),
+                conceptTag=str(p.concept_tag),
+                severity=str(p.severity),
+                remedialRecommended=bool(p.remedial_recommended),
                 createdAt=p.created_at,
             )
             for p in points
@@ -185,30 +185,30 @@ class AssessmentService:
         results = []
         for lab in labs:
             try:
-                facilities = json.loads(lab.facilities_json)
+                facilities = json.loads(str(lab.facilities_json or "[]"))
             except Exception:
                 facilities = []
 
             slots = [
                 LabSlotSchema(
-                    id=s.id,
-                    labId=s.lab_id,
-                    date=s.date,
-                    startTime=s.start_time,
-                    endTime=s.end_time,
-                    capacity=s.capacity,
-                    bookedCount=s.booked_count,
-                    isAvailable=s.booked_count < s.capacity,
+                    id=str(s.id),
+                    labId=str(s.lab_id),
+                    date=str(s.date),
+                    startTime=str(s.start_time),
+                    endTime=str(s.end_time),
+                    capacity=int(s.capacity or 15),
+                    bookedCount=int(s.booked_count or 0),
+                    isAvailable=int(s.booked_count or 0) < int(s.capacity or 15),
                 )
                 for s in lab.slots
             ]
 
             results.append(
                 PartnerLabSchema(
-                    id=lab.id,
-                    name=lab.name,
-                    location=lab.location,
-                    address=lab.address,
+                    id=str(lab.id),
+                    name=str(lab.name),
+                    location=str(lab.location),
+                    address=str(lab.address),
                     facilities=facilities,
                     availableSlots=slots,
                 )
@@ -223,15 +223,15 @@ class AssessmentService:
         domain: str = "Hardware & Edge AI Practical",
     ) -> LabBookingResponse:
         slot = db.query(LabSlot).filter(LabSlot.id == slot_id).first()
-        if not slot or slot.booked_count >= slot.capacity:
+        if not slot or int(slot.booked_count or 0) >= int(slot.capacity or 15):
             raise ValueError("Selected lab slot is unavailable or fully booked.")
 
-        slot.booked_count += 1
+        slot.booked_count = int(slot.booked_count or 0) + 1
         conf_code = f"LAB-{uuid.uuid4().hex[:6].upper()}"
         booking = LabBooking(
             id=f"book-{uuid.uuid4().hex[:8]}",
-            profile_id=profile.id,
-            slot_id=slot.id,
+            profile_id=str(profile.id),
+            slot_id=str(slot.id),
             domain=domain,
             status="confirmed",
             confirmation_code=conf_code,
@@ -240,11 +240,11 @@ class AssessmentService:
         db.commit()
 
         return LabBookingResponse(
-            bookingId=booking.id,
+            bookingId=str(booking.id),
             status="confirmed",
             confirmationCode=conf_code,
-            labName=slot.lab.name,
-            date=slot.date,
+            labName=str(slot.lab.name),
+            date=str(slot.date),
             time=f"{slot.start_time} - {slot.end_time}",
         )
 
